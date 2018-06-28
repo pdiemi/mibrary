@@ -13,22 +13,18 @@
 	 crossorigin="anonymous"></script>
 	<title>Mibrary</title>
 	<style>
-		* {
-			box-sizing: border-box;
-		}
-
 		/* Style the body */
 
 		body {
-			background-image: url("../images/backgrounds/bg1.jpg");
+			background-image: url("images/backgrounds/bg1.jpg");
 			background-attachment: fixed;
 		}
 
 		/* Style the header */
 
 		.header {
-			background-color: rgba(7, 113, 252, 0.4);
-			padding: 10px;
+			background-color: transparent;
+			padding: 20px;
 			text-align: center;
 			top: 0;
 			width: 100%;
@@ -106,8 +102,24 @@
 			}
 		}
 
-		/* Style the footer */
+		/* Responsive layout - makes the three columns stack on top of each other instead of next to each other on smaller screens (600px wide or less) */
 
+		@media screen and (max-width: 600px) {
+			.column {
+				width: 100%;
+			}
+		}
+
+		/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+
+		@media screen and (max-width: 600px) {
+			.column.side,
+			.column.middle {
+				width: 100%;
+			}
+		}
+
+		/* Style the footer */
 		.footer {
 			background-color: rgba(7, 113, 252, 0.4);
 			text-align: center;
@@ -120,27 +132,32 @@
 <body>
 	<div class="container ">
 		<div class="header">
-			<a target="blank" href="../index.html">
-				<img src="../images/logos/logo7.png " class="img-responsive " alt="logo7 ">
+			<a target="blank" href="index.html">
+				<img src="images/logos/logo7.png " class="img-responsive " alt="logo7 ">
 			</a>
-			<div class="topnav ">
-				<a href="../index.html ">Home</a>
-				<a href="../models/books.html ">Books</a>
-				<a href="../models/courses.html ">Courses</a>
-				<a href="../models/users.html ">Users</a>
-				<a href="../about.html ">About</a>
-			</div>
+		</div>
+
+		<div class="topnav ">
+			<a href="index.html ">Home</a>
+			<a href="models/books.html ">Books</a>
+			<a href="models/courses.html ">Courses</a>
+			<a href="models/users.html ">Users</a>
+			<a href="about.html ">About</a>
 		</div>
 	</div>
 	<div class="container">
-		<ul>
-	<li><a href="courses/course1.html">CS373 Software Engineering</a></li>
-	<li><a href="courses/course2.html">M325 Discrete Mathematics</a></li>
-	<li><a href="courses/course3.html">CS429 Computer Organization and Architecture</a></li>
-</ul>
+		<div class="card bg-dark text-white">
+			<img class="card-img" src="images/covers/cover1.jpg" alt="Card image">
+			<div class="card-img-overlay">
+				<h1 class="card-title" style="color:rgb(8, 8, 8); text-shadow: 4px 4px 4px black;
+					font-family:georgia; font-size:70px; font-weight:bold; color:rgb(243, 220, 220)">Choose one,
+					<br />and go!
+				</h1>
+			</div>
+		</div>
 	</div>
-	<div class="container">
-		<div class="footer" style="font-weight:bold;">Copyright &copy; 2018 SWE-IDB5-SUMMER2018</div>
+	<div class="footer">
+		<div class="container" style="font-weight:bold;">Copyright &copy; 2018 SWE-IDB5-SUMMER2018</div>
 	</div>
 
 </body>
