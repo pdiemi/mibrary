@@ -1,21 +1,74 @@
 <!DOCTYPE html>
+
 <head>
-<!--Complete CSS-->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-<!--Complete Javascript-->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-<!--Complete Javascript Bundle-->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js" integrity="sha384-u/bQvRA/1bobcXlcEYpsEdFVK/vJs3+T+nXLsBYJthmdBuavHvAW6UsmqO2Gd/F9" crossorigin="anonymous"></script>
-<title>About Mibrary</title>
+    <!--Complete CSS-->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <!--Complete Javascript-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+    <!--Complete Javascript Bundle-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js" integrity="sha384-u/bQvRA/1bobcXlcEYpsEdFVK/vJs3+T+nXLsBYJthmdBuavHvAW6UsmqO2Gd/F9"
+        crossorigin="anonymous"></script>
+
+    <style>
+        div.gallery {
+            border: 1px solid #ccc;
+        }
+
+        div.gallery:hover {
+            border: 1px solid #777;
+        }
+
+        div.gallery img {
+            width: 100%;
+            height: auto;
+        }
+
+        div.desc {
+            padding: 15px;
+            text-align: center;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .responsive {
+            padding: 0 6px;
+            float: left;
+            width: 33%;
+        }
+
+        @media only screen and (max-width: 700px) {
+            .responsive {
+                width: 49.99999%;
+                margin: 6px 0;
+            }
+        }
+
+        @media only screen and (max-width: 500px) {
+            .responsive {
+                width: 100%;
+            }
+        }
+
+        .clearfix:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+
+    <title>About Mibrary</title>
 </head>
+
 <body>
     <main class="container">
         <h2>What is Mibrary</h2>
         <div>
-            <p class="text-justify">Mibrary is an open library to provide an avenue for 
-                students to donate or exchange their textbooks. This will help students 
-                who have a financial barrier to their education, and in turn be of community 
-                service. </p>
+            <p class="text-justify">Mibrary is an open library to provide an avenue for students to donate or exchange their textbooks. This will
+                help students who have a financial barrier to their education, and in turn be of community service. </p>
         </div>
         <br />
         <h2>How it was built</h2>
@@ -42,7 +95,71 @@
                 </li>
             </p>
         </div>
-        <br />
+        <ul>
+            <!--Aaron Saldana profile-->
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="images/AaronSaldana.ipeg">
+                        <img src="images/AaronSaldana.jpeg" alt="Aaron Saldana" width="600" height="400">
+                    </a>
+                    <div class="desc">Aaron Saldana</div>
+                </div>
+            </div>
+
+            <!--Austin Mager profile-->
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="images/AustinMager.jpg">
+                        <img src="images/AustinMager.jpg" alt="Austin Mager" width="600" height="400">
+                    </a>
+                    <div class="desc">Austin Mager</div>
+                </div>
+            </div>
+
+            <!--Debarshi Kundu profile-->
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="images/DebarshiKundu.png">
+                        <img src="images/DebarshiKundu.png" alt="Debarshi Kundu" width="600" height="400">
+                    </a>
+                    <div class="desc">Debarshi Kundu</div>
+                </div>
+            </div>
+
+            <!--Diemi Pham profile-->
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="images/DiemiPham.png">
+                        <img src="images/DiemiPham.png" alt="Diemi Pham" width="600" height="400">
+                    </a>
+                    <div class="desc">Diemi Pham</div>
+                </div>
+            </div>
+
+            <!--Edwin Gutierreza profile-->
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="images/EdwinGutierrez.jpg">
+                        <img src="images/EdwinGutierrez.jpg" alt="Edwin Gutierreza" width="600" height="400">
+                    </a>
+                    <div class="desc">Edwin Gutierreza</div>
+                </div>
+            </div>
+
+            <!--Lucy Liu profile-->
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="images/LucyLiu.png">
+                        <img src="images/LucyLiu.png" alt="Lucy Liu" width="600" height="400">
+                    </a>
+                    <div class="desc">Lucy Liu</div>
+                </div>
+            </div>
+
+            <br />
+
+            <div class="clearfix"></div>
+        </ul>
         <h2>What we have done</h2>
         <div>
             <p>
