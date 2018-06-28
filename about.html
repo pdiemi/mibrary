@@ -12,6 +12,49 @@
         crossorigin="anonymous"></script>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Create two unequal columns that floats next to each other */
+
+        .column {
+            float: left;
+            padding: 10px;
+        }
+
+        /* Left and right column */
+
+        .column.side {
+            width: 35%;
+            border-left-style: solid;
+        }
+
+        /* Middle column */
+
+        .column.middle {
+            width: 65%;
+        }
+
+        /* Clear floats after the columns */
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+
+        @media (max-width: 600px) {
+            .column.side,
+            .column.middle {
+                width: 100%;
+            }
+        }
+
+        /* Style the image gallery */
+
         div.gallery {
             border: 1px solid #ccc;
         }
@@ -28,10 +71,6 @@
         div.desc {
             padding: 15px;
             text-align: center;
-        }
-
-        * {
-            box-sizing: border-box;
         }
 
         .responsive {
@@ -58,163 +97,176 @@
             display: table;
             clear: both;
         }
+
+        }
     </style>
 
     <title>About Mibrary</title>
 </head>
 
-<body style="background-image:url(images/backgrounds/bg1.jpg)">
-    <main class="container">
-        <h2>What is Mibrary</h2>
-        <div>
-            <p class="text-justify">Mibrary is an open library to provide an avenue for students to donate or exchange their textbooks. This will
-                help students who have a financial barrier to their education, and in turn be of community service. </p>
-        </div>
-        <br />
-        <h2>How it was built</h2>
-        <div>
-            <p>
-                <li>explanation of the interesting result of integrating disparate data</li>
-            </p>
-        </div>
-        <br />
-        <h2>Who we are</h2>
-        <div>
-            <p>
-                <li>
-                    <del>the group members</del>
-                </li>
-                <li>for each member
-                    <ul>
+<body>
+    <main class="row">
+        <!-- Left Column -->
+        <div class="column middle">
+            <ul>
+                <h2>What is Mibrary</h2>
+                <div>
+                    <p class="text-justify">Mibrary is an open library to provide an avenue for students to donate or exchange their textbooks. This
+                        will help students who have a financial barrier to their education, and in turn be of community service.
+                    </p>
+                </div>
+                <br />
+                <h2>How it was built</h2>
+                <div>
+                    <p>
+                        <li>explanation of the interesting result of integrating disparate data</li>
+                    </p>
+                </div>
+                <br />
+                <h2>Who we are</h2>
+                <div>
+                    <p>
                         <li>
-                            <del>name</del>
+                            <del>the group members</del>
                         </li>
-                        <li>
-                            <del>photo</del>
+                        <li>for each member
+                            <ul>
+                                <li>
+                                    <del>name</del>
+                                </li>
+                                <li>
+                                    <del>photo</del>
+                                </li>
+                                <li>bio</li>
+                                <li>major responsibilities</li>
+                                <li>no. of commits</li>
+                                <li>no. of issues</li>
+                                <li>no. of unit tests</li>
+                            </ul>
                         </li>
-                        <li>bio</li>
-                        <li>major responsibilities</li>
-                        <li>no. of commits</li>
-                        <li>no. of issues</li>
-                        <li>no. of unit tests</li>
-                    </ul>
-                </li>
-            </p>
+                    </p>
+                </div>
+                <ul>
+                    <!--Aaron Saldana profile-->
+                    <div class="responsive">
+                        <div class="gallery">
+                            <a target="_blank" href="images/AaronSaldana.ipeg">
+                                <img src="images/AaronSaldana.jpeg" alt="Aaron Saldana" width="600" height="400">
+                            </a>
+                            <div class="desc">Aaron Saldana</div>
+                        </div>
+                    </div>
+
+                    <!--Austin Mager profile-->
+                    <div class="responsive">
+                        <div class="gallery">
+                            <a target="_blank" href="images/AustinMager.jpg">
+                                <img src="images/AustinMager.jpg" alt="Austin Mager" width="600" height="400">
+                            </a>
+                            <div class="desc">Austin Mager</div>
+                        </div>
+                    </div>
+
+                    <!--Debarshi Kundu profile-->
+                    <div class="responsive">
+                        <div class="gallery">
+                            <a target="_blank" href="images/DebarshiKundu.png">
+                                <img src="images/DebarshiKundu.png" alt="Debarshi Kundu" width="600" height="400">
+                            </a>
+                            <div class="desc">Debarshi Kundu</div>
+                        </div>
+                    </div>
+
+                    <!--Diemi Pham profile-->
+                    <div class="responsive">
+                        <div class="gallery">
+                            <a target="_blank" href="images/DiemiPham.png">
+                                <img src="images/DiemiPham.png" alt="Diemi Pham" width="600" height="400">
+                            </a>
+                            <div class="desc">Diemi Pham</div>
+                        </div>
+                    </div>
+
+                    <!--Edwin Gutierreza profile-->
+                    <div class="responsive">
+                        <div class="gallery">
+                            <a target="_blank" href="images/EdwinGutierrez.jpg">
+                                <img src="images/EdwinGutierrez.jpg" alt="Edwin Gutierreza" width="600" height="400">
+                            </a>
+                            <div class="desc">Edwin Gutierreza</div>
+                        </div>
+                    </div>
+
+                    <!--Lucy Liu profile-->
+                    <div class="responsive">
+                        <div class="gallery">
+                            <a target="_blank" href="images/LucyLiu.png">
+                                <img src="images/LucyLiu.png" alt="Lucy Liu" width="600" height="400">
+                            </a>
+                            <div class="desc">Lucy Liu</div>
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="clearfix"></div>
+                </ul>
+            </ul>
         </div>
-        <ul>
-            <!--Aaron Saldana profile-->
-            <div class="responsive">
-                <div class="gallery">
-                    <a target="_blank" href="images/AaronSaldana.ipeg">
-                        <img src="images/AaronSaldana.jpeg" alt="Aaron Saldana" width="600" height="400">
-                    </a>
-                    <div class="desc">Aaron Saldana</div>
-                </div>
-            </div>
-
-            <!--Austin Mager profile-->
-            <div class="responsive">
-                <div class="gallery">
-                    <a target="_blank" href="images/AustinMager.jpg">
-                        <img src="images/AustinMager.jpg" alt="Austin Mager" width="600" height="400">
-                    </a>
-                    <div class="desc">Austin Mager</div>
-                </div>
-            </div>
-
-            <!--Debarshi Kundu profile-->
-            <div class="responsive">
-                <div class="gallery">
-                    <a target="_blank" href="images/DebarshiKundu.png">
-                        <img src="images/DebarshiKundu.png" alt="Debarshi Kundu" width="600" height="400">
-                    </a>
-                    <div class="desc">Debarshi Kundu</div>
-                </div>
-            </div>
-
-            <!--Diemi Pham profile-->
-            <div class="responsive">
-                <div class="gallery">
-                    <a target="_blank" href="images/DiemiPham.png">
-                        <img src="images/DiemiPham.png" alt="Diemi Pham" width="600" height="400">
-                    </a>
-                    <div class="desc">Diemi Pham</div>
-                </div>
-            </div>
-
-            <!--Edwin Gutierreza profile-->
-            <div class="responsive">
-                <div class="gallery">
-                    <a target="_blank" href="images/EdwinGutierrez.jpg">
-                        <img src="images/EdwinGutierrez.jpg" alt="Edwin Gutierreza" width="600" height="400">
-                    </a>
-                    <div class="desc">Edwin Gutierreza</div>
-                </div>
-            </div>
-
-            <!--Lucy Liu profile-->
-            <div class="responsive">
-                <div class="gallery">
-                    <a target="_blank" href="images/LucyLiu.png">
-                        <img src="images/LucyLiu.png" alt="Lucy Liu" width="600" height="400">
-                    </a>
-                    <div class="desc">Lucy Liu</div>
-                </div>
-            </div>
-
-            <br />
-
-            <div class="clearfix"></div>
-        </ul>
-        <h2>What we have done</h2>
-        <div>
-            <p>
-                <li>Stat from Gitlab goes here
-                    <ul>
-                        <li>total no. of commits</li>
-                        <li>total no. of issues</li>
-                        <li>total no. of unit tests</li>
-                    </ul>
-                </li>
-            </p>
-        </div>
-        <br />
-        <h2>Sources</h2>
-        <div>
-            <p>
-                <li>data
-                    <ul>
-                        <li>links to the data
-                            <b>sources</b>
+        <!-- Right Column -->
+        <div class="column side">
+            <ul>
+                <h2>What we have done</h2>
+                <div>
+                    <p>
+                        <li>Stat from Gitlab goes here
+                            <ul>
+                                <li>total no. of commits</li>
+                                <li>total no. of issues</li>
+                                <li>total no. of unit tests</li>
+                            </ul>
                         </li>
-                        <li>description of
-                            <b>how</b> each was
-                            <b>scraped</b>
+                    </p>
+                </div>
+                <br />
+                <h2>Sources</h2>
+                <div>
+                    <p>
+                        <li>data
+                            <ul>
+                                <li>links to the data
+                                    <b>sources</b>
+                                </li>
+                                <li>description of
+                                    <b>how</b> each was
+                                    <b>scraped</b>
+                                </li>
+                            </ul>
                         </li>
-                    </ul>
-                </li>
-            </p>
+                    </p>
+                </div>
+                <br />
+                <h2>Tools</h2>
+                <div>
+                    <p>
+                        <li>tools used</li>
+                        <li>describe their use</li>
+                        <li>special focus on optional tools that were
+                            <b>not</b> required</li>
+                    </p>
+                </div>
+                <br />
+                <h2>GitLab</h2>
+                <div>
+                    <a href="https://gitlab.com/pdiemi/mibrary">Visit our GitLab repos</a>
+                </div>
+                <br />
+                <h2>Postman</h2>
+                <div>
+                    <a href="https://documenter.getpostman.com/view/4703640/RWEjqJFc">Checkout our Postman API</a>
+                </div>
+            </ul>
         </div>
-        <br />
-        <h2>Tools</h2>
-        <div>
-            <p>
-                <li>tools used</li>
-                <li>describe their use</li>
-                <li>special focus on optional tools that were
-                    <b>not</b> required</li>
-            </p>
-        </div>
-        <br />
-        <h2>GitLab</h2>
-        <div>
-            <a href="https://gitlab.com/pdiemi/mibrary">Visit our GitLab repos</a>
-        </div>
-        <br />
-        <h2>Postman</h2>
-        <div>
-            <a href="https://documenter.getpostman.com/view/4703640/RWEjqJFc">Checkout our Postman API</a>
-        </div>
-        <br />
+
     </main>
 </body>

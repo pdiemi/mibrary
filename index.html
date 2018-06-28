@@ -13,25 +13,34 @@
 	 crossorigin="anonymous"></script>
 	<title>Mibrary</title>
 	<style>
+		/* Style the body */
+
+		body {
+			background-image: url("images/backgrounds/bg1.jpg");
+			background-attachment: fixed;
+		}
+
 		/* Style the header */
 
 		.header {
-			background-color: #f1f1f100;
+			background-color: transparent;
 			padding: 20px;
 			text-align: center;
+			top: 0;
+			width: 100%;
 		}
 
 		/* The navbar container */
 
 		.topnav {
 			overflow: hidden;
-			background-color: rgba(0, 0, 0, 0);
+			background-color: transparent;
 		}
 
 		/* Navbar links */
 
 		.topnav a {
-			float: right;
+			float: left;
 			display: block;
 			color: black;
 			text-align: center;
@@ -45,7 +54,7 @@
 		/* Links - change color on hover */
 
 		.topnav a:hover {
-			background-color: rgb(4, 217, 255);
+			background-color: rgba(7, 113, 252);
 			color: black;
 		}
 
@@ -110,49 +119,47 @@
 			}
 		}
 
+		/* Style the footer */
 		.footer {
-			background-color: transparent;
+			background-color: rgba(7, 113, 252, 0.4);
 			text-align: center;
 			padding: 10px;
+			bottom: 0;
 		}
 	</style>
 </head>
 
-<body style="background-image:url(images/backgrounds/bg1.jpg)">
-	<main class="container ">
-		<div class="header ">
-			<img src="images/logos/logo7.png " class="img-responsive " alt="logo7 ">
-		</div>
-
-		<div class="topnav ">
-			<a href="about.html ">About</a>
-			<a href="models/users.html ">Users</a>
-			<a href="models/courses.html ">Courses</a>
-			<a href="models/books.html ">Books</a>
-			<a target="_blank" href="index.html" style="float:left">
-				<img src="images/logos/logo1.png" alt="logo1" width="70" height="20">
+<body>
+	<div class="container ">
+		<div class="header">
+			<a target="blank" href="index.html">
+				<img src="images/logos/logo7.png " class="img-responsive " alt="logo7 ">
 			</a>
 		</div>
 
+		<div class="topnav ">
+			<a href="index.html ">Home</a>
+			<a href="models/books.html ">Books</a>
+			<a href="models/courses.html ">Courses</a>
+			<a href="models/users.html ">Users</a>
+			<a href="about.html ">About</a>
+		</div>
+	</div>
+	<div class="container">
 		<div class="card bg-dark text-white">
 			<img class="card-img" src="images/covers/cover1.jpg" alt="Card image">
 			<div class="card-img-overlay">
-				<h1 class="card-title" style="color:rgb(8, 8, 8);
-					font-family:georgia; font-size:70px; font-weight:bold">
-					<mark style="background-color:rgba(7, 113, 252, 0.4); color:rgb(216, 186, 186)">Choose one,</mark>
-				</h1>
-				<br />
-				<h1 class="card-title" style="color:rgb(8, 8, 8);
-					font-family:georgia; font-size:70px; font-weight:bold">
-					<mark style="background-color:rgba(7, 113, 252, 0.4); color:rgb(216, 186, 186)">and go!</mark>
+				<h1 class="card-title" style="color:rgb(8, 8, 8); text-shadow: 4px 4px 4px black;
+					font-family:georgia; font-size:70px; font-weight:bold; color:rgb(243, 220, 220)">Choose one,
+					<br />and go!
 				</h1>
 			</div>
 		</div>
+	</div>
+	<div class="footer">
+		<div class="container" style="font-weight:bold;">Copyright &copy; 2018 SWE-IDB5-SUMMER2018</div>
+	</div>
 
-		<div class="footer">
-			<h2>SWE-IDB5-SUMMER2018</h2>
-		</div>
-	</main>
 </body>
 
 </html>
