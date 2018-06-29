@@ -23,8 +23,8 @@
 		/* Style the header */
 
 		.header {
-			background-color: rgba(7, 113, 252, 0.4);
-			padding: 20px;
+			background-color: rgb(252, 220, 41);
+			padding-top: 20px;
 			text-align: center;
 			top: 0;
 			width: 100%;
@@ -54,7 +54,7 @@
 		/* Links - change color on hover */
 
 		.topnav a:hover {
-			background-color: rgba(7, 113, 252);
+			background-color: rgb(177, 203, 236);
 			color: black;
 		}
 
@@ -122,11 +122,17 @@
 		/* Style the footer */
 
 		.footer {
-			background-color: rgba(7, 113, 252, 0.4);
+			background-color: rgb(252, 220, 41);
 			text-align: center;
 			padding: 10px;
 			bottom: 0;
 		}
+
+		.clearfix:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
 	</style>
 </head>
 
@@ -145,17 +151,21 @@
 			</div>
 		</div>
 	</div>
+	<div class="clearfix" style="padding-top: 20px;"></div>
+
 	<div class="container">
-		<div class="card bg-dark text-white">
+		<div class="card" style="padding: 20px; background-color: rgba(7, 113, 252, 0.3);">
 			<img class="card-img" src="images/covers/cover1.jpg" alt="Card image">
 			<div class="card-img-overlay">
 				<h1 class="card-title" style="color:rgb(8, 8, 8); text-shadow: 4px 4px 4px black;
-					font-family:georgia; font-size:70px; font-weight:bold; color:rgb(243, 220, 220)">Choose one,
+					font-family:georgia; font-size:60px; font-weight:bold; color:rgb(252, 220, 41)">Choose one,
 					<br />and go!
 				</h1>
 			</div>
 		</div>
 	</div>
+	<div class="clearfix" style="padding-top: 20px;"></div>
+
 	<div class="container">
 		<div class="footer" style="font-weight:bold;">Copyright &copy; 2018 SWE-IDB5-SUMMER2018</div>
 	</div>

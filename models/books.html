@@ -27,8 +27,8 @@
 		/* Style the header */
 
 		.header {
-			background-color: rgba(7, 113, 252, 0.4);
-			padding: 10px;
+			background-color: rgb(252, 220, 41);
+			padding-top: 20px;
 			text-align: center;
 			top: 0;
 			width: 100%;
@@ -109,10 +109,16 @@
 		/* Style the footer */
 
 		.footer {
-			background-color: rgba(7, 113, 252, 0.4);
+			background-color: rgb(252, 220, 41);
 			text-align: center;
 			padding: 10px;
 			bottom: 0;
+		}
+
+		.clearfix:after {
+			content: "";
+			display: table;
+			clear: both;
 		}
 	</style>
 </head>
@@ -132,8 +138,10 @@
 			</div>
 		</div>
 	</div>
+	<div class="clearfix" style="padding-top: 20px;"></div>
 	<div class="container">
-		<ul>
+		<div class="card" style="background-color: rgba(7, 113, 252, 0.3); padding: 20px;">
+			<h2 class="card-title"><b>Books</b></h2>
 			<li>
 				<a href="books/book1.html">Extreme Programming Installed</a>
 			</li>
@@ -143,8 +151,9 @@
 			<li>
 				<a href="books/book3.html">Computer Systems: A Programmer’s Perspective</a>
 			</li>
-		</ul>
+		</div>
 	</div>
+	<div class="clearfix" style="padding-top: 20px;"></div>
 	<div class="container">
 		<div class="footer" style="font-weight:bold;">Copyright &copy; 2018 SWE-IDB5-SUMMER2018</div>
 	</div>
