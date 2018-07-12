@@ -9,7 +9,7 @@ class Book extends Component
     super();
     this.state = 
     {
-        models : ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p"],
+        models : [],
         currentPage : 1,
         pageModelCount : 5
     };
@@ -23,6 +23,7 @@ class Book extends Component
 
   Model()
   {
+
       var listModelsJson = JSON.parse("{ \"books\" : [\"one\", \"two\", \"three\", \"four\", \"five\", \"six\", \"seven\", \"eight\", \"nine\", \"ten\", \"eleven\"] }");
       var newModels = []
       for(var i = 0; i<listModelsJson.books.length; i++){
