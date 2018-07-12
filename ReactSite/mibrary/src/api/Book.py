@@ -11,7 +11,7 @@
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '../..'))
-from src.app import db
+from db import db
 
 from sqlalchemy import Column, String, Integer, ForeignKey, Numeric, Date
 from sqlalchemy.orm import relationship
@@ -49,9 +49,9 @@ class Book(db.Model):
     # End additional attributes
     '''
     fk_image_isbn = db.Column(db.String(10), db.ForeignKey('books.isbn'), nullable=False)
-    covers = db.Relationship("images")
-    authors = db.Relationship("Author")
-    reviews = db.Relationship("Review")
+    covers = db.relationship("images")
+    authors = db.relationship("Author")
+    reviews = db.relationship("Review")
 
     #
     # METHODS

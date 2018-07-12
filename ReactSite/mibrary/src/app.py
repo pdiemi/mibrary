@@ -11,20 +11,17 @@ import os
 import sys
 from flask import Flask
 from flask_cors import CORS
-from flask_sqlalchemy import SQLAlchemy
-from flask_marshmallow import Marshmallow
-
+from api.mibraryapi import api_page
+from db import app
 
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '..'))
 
 
-
-app = Flask(__name__)
+# app = Flask(__name__)
+app.register_blueprint(api_page)
 CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://mibrary:mibraryaadelm@mibrarydb.cgjjkbdulbzo.us-east-2.rds.amazonaws.com:3306/mibrarydb'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-db = SQLAlchemy(app)
-ma = Marshmallow(app)
 
 
 if __name__ == '__main__':

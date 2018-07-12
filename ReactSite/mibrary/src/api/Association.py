@@ -11,7 +11,7 @@
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '../..'))
-from src.app import app, db
+from db import db
 from src.api.User import User
 from src.api.Book import Book
 from src.api.Course import Course

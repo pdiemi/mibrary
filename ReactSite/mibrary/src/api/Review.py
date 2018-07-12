@@ -11,7 +11,7 @@
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '../..'))
-from src.app import db
+from db import db
 from src.api import User, Book
 
 from sqlalchemy import Column, String, Integer, ForeignKey, Numeric, Date
