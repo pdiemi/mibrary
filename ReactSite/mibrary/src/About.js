@@ -67,9 +67,9 @@ class About extends Component
                 </a>
                 <div class="topnav ">
                     <Link to='/'>Home</Link>
-                    <Link to='/model'>Books</Link>
-                    <Link to='/model'>Courses</Link>
-                    <Link to='/model'>Users</Link>
+                    <Link to='/book'>Books</Link>
+                    <Link to='/course'>Courses</Link>
+                    <Link to='/user'>Users</Link>
                     <Link to='/about'>About</Link>
                 </div>
             </div>

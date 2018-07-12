@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Link } from 'react-router-dom'
 import './Model.css';
 
-class Book extends Component 
+class Course extends Component 
 {
   constructor()
   {
@@ -50,7 +50,7 @@ class Book extends Component
 
     const renderModels = currentDisplayModels.map((model, index) => {
       const link = model + ".html"; 
-      return <Link to='/bookdetail'><p key={index}>{model}</p></Link>;});
+      return <a href={link}> <p key={index}>{model}</p></a>;});
 
     const pageNumbers = [];
     for(let i = 1; i <= Math.ceil(models.length/pageModelCount); i++)
@@ -92,4 +92,4 @@ class Book extends Component
   }
 }
 
-export default Book;
+export default Course;
