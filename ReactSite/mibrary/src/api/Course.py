@@ -24,14 +24,14 @@ from pyld import jsonld
 
 class Course(db.Model):
     __tablename__ = "courses"
-    course_id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
-    course_number = Column(String(10), nullable=False)
-    course_name = Column(String(500), nullable=False)
-    textbooks = relationship("Book")
-    fk_course_institution = Column(Integer, 
-                                    ForeignKey('institutions.institution.id'),
+    course_id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
+    course_number = db.Column(db.String(10), nullable=False)
+    course_name = db.Column(db.String(500), nullable=False)
+    textbooks = db.relationship("Book")
+    fk_course_institution = db.Column(db.Integer, 
+                                    db.ForeignKey('institutions.institution.id'),
                                     nullable=False)    
-    institution = relationship("Institution", backref="courses")
+    institution = db.relationship("Institution", backref="courses")
 
     #
     # METHODS

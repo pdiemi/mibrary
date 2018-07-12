@@ -25,11 +25,11 @@ from pyld import jsonld
 
 class Image(db.Model):
     __tablename__ = "images"
-    id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
-    image_url = Column(String(200))
+    id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
+    image_url = db.Column(db.String(200))
 
-    fk_image_isbn = Column(String(10), ForeignKey('books.isbn'), nullable=False)
-    isbn = relationship("Book", backref="images")
+    fk_image_isbn = db.Column(db.String(10), db.ForeignKey('books.isbn'), nullable=False)
+    isbn = db.relationship("Book", backref="images")
 
     def __init__(self, image):
         self.image_url = image

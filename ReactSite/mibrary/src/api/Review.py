@@ -25,12 +25,12 @@ from pyld import jsonld
 
 class Review(db.Model):
     __tablename__ = "reviews"
-    review_id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
-    content = Column(String(1000), nullable=False)
-    fk_review_isbn = Column(String(10), ForeignKey('books.isbn'), nullable=False)
-    review_book = relationship("Book", backref="reviews")
-    fk_review_user = Column(Integer, ForeignKey('user.user_id'), nullable=False)
-    user = relationship("User", backref="reviews")
+    review_id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
+    content = db.Column(db.String(1000), nullable=False)
+    fk_review_isbn = db.Column(db.String(10), ForeignKey('books.isbn'), nullable=False)
+    review_book = db.relationship("Book", backref="reviews")
+    fk_review_user = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    user = db.relationship("User", backref="reviews")
 
     #
     # METHODS

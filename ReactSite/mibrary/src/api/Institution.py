@@ -24,9 +24,9 @@ from pyld import jsonld
 
 class Institution(db.Model):
     __tablename__ = "institutions"
-    institution_id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
-    institutiom_code = Column(String(10), nullable=False)
-    institution_name = Column(String(200), nullable=False)
+    institution_id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
+    institutiom_code = db.Column(db.String(10), nullable=False)
+    institution_name = db.Column(db.String(200), nullable=False)
 
     #
     # METHODS

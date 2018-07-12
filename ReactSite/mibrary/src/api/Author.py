@@ -24,9 +24,9 @@ from pyld import jsonld
 
 class Author(db.Model):
     __tablename__ = "authors"
-    author_id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
-    name = Column(String(200), nullable=False)
-    author_url = Column(String(500), nullable=True)
+    author_id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
+    name = db.Column(db.String(200), nullable=False)
+    author_url = db.Column(String(500), nullable=True)
     
     #
     # METHODS

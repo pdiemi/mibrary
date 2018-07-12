@@ -32,15 +32,15 @@ from pyld import jsonld
 
 class Request(db.Model):
     __tablename__ = "requests"
-    date = Column(Date, nullable=True)
+    date = db.Column(Date, nullable=True)
         
-    fk_request_isbn = Column(String(10), ForeignKey('books.isbn'), primary_key=True, nullable=False)
-    book = relationship("Book", back_populates="books")
-    fk_request_user = Column(Integer, ForeignKey('users.user_id'), primary_key=True, nullable=False)
-    user = relationship("User", back_populates="users")
+    fk_request_isbn = db.Column(db.String(10), db.ForeignKey('books.isbn'), primary_key=True, nullable=False)
+    book = db.relationship("Book", back_populates="books")
+    fk_request_user = db.Column(db.Integer, db.ForeignKey('users.user_id'), primary_key=True, nullable=False)
+    user = db.relationship("User", back_populates="users")
 
-    fk_request_meeting = Column(Integer, ForeignKey('meetings.meeting_id'), nullable=False)
-    meeting = relationship("Meeting", backref="requests")
+    fk_request_meeting = db.Column(db.Integer, db.ForeignKey('meetings.meeting_id'), nullable=False)
+    meeting = db.relationship("Meeting", backref="requests")
 
     def __init__(self, date, book, user):
         self.date = date
@@ -50,15 +50,15 @@ class Request(db.Model):
 
 class Offer(db.Model):
     __tablename__ = "offers" 
-    date = Column(Date, nullable=True) 
+    date = db.Column(Date, nullable=True) 
         
-    fk_offer_isbn = Column(String(10), ForeignKey('books.isbn'), primary_key=True, nullable=False)
-    book = relationship("Book", back_populates="books")
-    fk_offer_user = Column(Integer, ForeignKey('users.user_id'), primary_key=True, nullable=False)
-    user = relationship("User", back_populates="users")
+    fk_offer_isbn = db.Column(db.String(10), db.ForeignKey('books.isbn'), primary_key=True, nullable=False)
+    book = db.relationship("Book", back_populates="books")
+    fk_offer_user = db.Column(db.Integer, ForeignKey('users.user_id'), primary_key=True, nullable=False)
+    user = db.relationship("User", back_populates="users")
 
-    fk_offer_meeting = Column(Integer, ForeignKey('meetings.meeting_id'), nullable=False)
-    meeting = relationship("Meeting", backref="offers")
+    fk_offer_meeting = db.Column(db.Integer, db.ForeignKey('meetings.meeting_id'), nullable=False)
+    meeting = db.relationship("Meeting", backref="offers")
 
     def __init__(self, date, book, user):
         self.date = date
@@ -68,12 +68,12 @@ class Offer(db.Model):
 
 class Report(db.Model):
     __tablename__ = "reports" 
-    date = Column(Date, nullable=True) 
+    date = db.Column(Date, nullable=True) 
         
-    fk_report_isbn = Column(String(10), ForeignKey('books.isbn'), primary_key=True, nullable=False)
-    book = relationship("Book", back_populates="books")
-    fk_report_user = Column(Integer, ForeignKey('users.user_id'), primary_key=True, nullable=False)
-    user = relationship("User", back_populates="users")
+    fk_report_isbn = db.Column(db.String(10), db.ForeignKey('books.isbn'), primary_key=True, nullable=False)
+    book = db.relationship("Book", back_populates="books")
+    fk_report_user = db.Column(db.Integer, db.ForeignKey('users.user_id'), primary_key=True, nullable=False)
+    user = db.relationship("User", back_populates="users")
 
     def __init__(self, date, book, user):
         self.date = date
@@ -83,14 +83,14 @@ class Report(db.Model):
 
 class Work(db.Model):
     __tablename__ = "works"
-    date = Column(Date, nullable=True)
+    date = db.Column(Date, nullable=True)
         
-    fk_work_isbn = Column(String(10), ForeignKey('books.isbn'), 
+    fk_work_isbn = db.Column(db.String(10), db.ForeignKey('books.isbn'), 
                             primary_key=True, nullable=False)
-    book = relationship("Book", back_populates="books")
-    fk_work_author = Column(Integer, ForeignKey('authors.author_id'), 
+    book = db.relationship("Book", back_populates="books")
+    fk_work_author = db.Column(db.Integer, db.ForeignKey('authors.author_id'), 
                             primary_key=True, nullable=False)
-    author = relationship("Author", back_populates="authors")
+    author = db.relationship("Author", back_populates="authors")
 
     def __init__(self, date, book, author):
         self.date = date
@@ -101,9 +101,9 @@ class Work(db.Model):
 class Course_Book(db.Model):
     __tablename__ = "course_book"
         
-    fk_cb_isbn = Column(String(10), ForeignKey('books.isbn'), 
+    fk_cb_isbn = db.Column(db.String(10), db.ForeignKey('books.isbn'), 
                         primary_key=True, nullable=False)
-    book = relationship("Book", back_populates="books")
-    fk_cb_course = Column(Integer, ForeignKey('courses.course_id'), 
+    book = db.relationship("Book", back_populates="books")
+    fk_cb_course = db.Column(db.Integer, db.ForeignKey('courses.course_id'), 
                             primary_key=True, nullable=False)
-    author = relationship("Course", back_populates="courses")
+    author = db.relationship("Course", back_populates="courses")

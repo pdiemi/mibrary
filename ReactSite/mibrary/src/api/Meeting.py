@@ -24,11 +24,11 @@ from pyld import jsonld
 
 class Meeting(db.Model):
     __tablename__ = "meetings"
-    meeting_id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
-    time = Column(String(50), nullable=False)
-    location = Column(String(500), nullable=False)
-    users = relationship("User")
-    books = relationship("Book")
+    meeting_id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
+    time = db.Column(db.String(50), nullable=False)
+    location = db.Column(db.String(500), nullable=False)
+    users = db.relationship("User")
+    books = db.relationship("Book")
 
     #
     # METHODS

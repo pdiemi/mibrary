@@ -24,34 +24,34 @@ from pyld import jsonld
 
 class Book(db.Model):
     __tablename__ = 'books'
-    isbn = Column(String(10), primary_key=True, nullable=False)
-    publisher =Column(String(500), nullable=False)
-    identifiers = Column(String(200), nullable=True)
-    classcifications = Column(String(500), nullable=True)
-    links = Column(String(500), nullable=True)
-    title = Column(String(1000), nullable=False)
-    subtitle = Column(String(500), nullable=False)  
-    url = Column(String(500), nullable=False)
-    pages = Column(Integer, nullable=False)
-    subjects = Column(String(1000), nullable=True)
-    date_published = Column(Date, nullable=False)
-    excerpt = Column(String(1000), nullable=True)
+    isbn = db.Column(db.String(10), primary_key=True, nullable=False)
+    publisher =db.Column(db.String(500), nullable=False)
+    identifiers = db.Column(db.String(200), nullable=True)
+    classcifications = db.Column(db.String(500), nullable=True)
+    links = db.Column(db.String(500), nullable=True)
+    title = db.Column(db.String(1000), nullable=False)
+    subtitle = db.Column(db.String(500), nullable=False)  
+    url = db.Column(db.String(500), nullable=False)
+    pages = db.Column(db.Integer, nullable=False)
+    subjects = db.Column(db.String(1000), nullable=True)
+    date_published = db.Column(Date, nullable=False)
+    excerpt = db.Column(db.String(1000), nullable=True)
     '''    
     # Additional attributes
-    isbn13 = Column(String(13), nullable=False)
-    dewey_decimal = Column(String(3), nullable=True)
-    format_type = Column(String(20), nullable=False)
-    language = Column(String(200), nullable=False)
-    edition = Column(String(50), nullable=False)
-    dimensions = Column(String(100), nullable=True)
-    overview = Column(String(1000), nullable=True)
-    synopsys = Column(String(1000), nullable=True)
+    isbn13 = db.Column(db.String(13), nullable=False)
+    dewey_decimal = db.Column(db.String(3), nullable=True)
+    format_type = db.Column(db.String(20), nullable=False)
+    language = db.Column(db.String(200), nullable=False)
+    edition = db.Column(db.String(50), nullable=False)
+    dimensions = db.Column(db.String(100), nullable=True)
+    overview = db.Column(db.String(1000), nullable=True)
+    synopsys = db.Column(db.String(1000), nullable=True)
     # End additional attributes
     '''
-    fk_image_isbn = Column(String(10), ForeignKey('books.isbn'), nullable=False)
-    covers = relationship("images")
-    authors = relationship("Author")
-    reviews = relationship("Review")
+    fk_image_isbn = db.Column(db.String(10), db.ForeignKey('books.isbn'), nullable=False)
+    covers = db.Relationship("images")
+    authors = db.Relationship("Author")
+    reviews = db.Relationship("Review")
 
     #
     # METHODS

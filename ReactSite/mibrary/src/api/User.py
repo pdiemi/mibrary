@@ -26,11 +26,11 @@ from pyld import jsonld
 
 class User(db.Model):
     __tablename__ = "users"
-    user_id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
-    username = Column(String(20), nullable=False, unique=True)
-    password = Column(String(24), nullable=False)
-    email = Column(String(50), nullable=False, unique=True)
-    requested_books = relationship("Book")
+    user_id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
+    username = db.Column(db.String(20), nullable=False, unique=True)
+    password = db.Column(db.String(24), nullable=False)
+    email = db.Column(db.String(50), nullable=False, unique=True)
+    requested_books = db.relationship("Book")
 
     #
     # METHODS
