@@ -142,6 +142,26 @@ def add_report():
 # api for Course
 # --------------------------------------
 
+class CourseSchema(ma.Schema):
+    class Meta:
+        # Fields to expose
+        fields = ('number', 'name', 'institution', 'textbook')
+
+
+course_schema = CourseSchema()
+courses_schema = CourseSchema(many=True)
+
+# endpoint to show all courses of an isntitution 
+@app.route("/course/<institution>", methods=["GET"])
+def get_course(institution):
+    all_courses =User.query.get(institution)
+    return course_schema.jsonify(all_courses)
+
+# endpoint to get user detail by username
+@app.route("/user/<course_number>", methods=["GET"])
+def course_detail(course_number):
+    course = User.query.get(course_number)
+    return user_schema.jsonify(course)
 
 # --------------------------------------
 # api for Review 
@@ -156,3 +176,22 @@ def add_report():
 # --------------------------------------
 # api for Book
 # --------------------------------------
+
+class BookSchema(ma.Schema):
+    class Meta:
+        # Fields to expose
+        fields = ('title', 'author')
+
+
+book_schema = BookSchema()
+books_schema = BookSchema(many=True)
+
+
+# endpoint to show all users
+@app.route("/book", methods=["GET"])
+def get_book():
+    all_books = Book.query.all()
+    result = books_schema.dump(all_books)
+    return jsonify(result.data)
+
+
