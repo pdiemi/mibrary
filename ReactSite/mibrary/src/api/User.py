@@ -24,7 +24,6 @@ from sqlalchemy.orm import relationship
 #
 from pyld import jsonld
 
-
 class User(db.Model):
     __tablename__ = "users"
     user_id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)

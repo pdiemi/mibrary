@@ -85,9 +85,11 @@ class Work(db.Model):
     __tablename__ = "works"
     date = Column(Date, nullable=True)
         
-    fk_work_isbn = Column(String(10), ForeignKey('books.isbn'), primary_key=True, nullable=False)
+    fk_work_isbn = Column(String(10), ForeignKey('books.isbn'), 
+                            primary_key=True, nullable=False)
     book = relationship("Book", back_populates="books")
-    fk_work_author = Column(Integer, ForeignKey('authors.author_id'), primary_key=True, nullable=False)
+    fk_work_author = Column(Integer, ForeignKey('authors.author_id'), 
+                            primary_key=True, nullable=False)
     author = relationship("Author", back_populates="authors")
 
     def __init__(self, date, book, author):
@@ -99,9 +101,9 @@ class Work(db.Model):
 class Course_Book(db.Model):
     __tablename__ = "course_book"
         
-    fk_cb_isbn = Column(String(10), ForeignKey('books.isbn'), primary_key=True, nullable=False)
+    fk_cb_isbn = Column(String(10), ForeignKey('books.isbn'), 
+                        primary_key=True, nullable=False)
     book = relationship("Book", back_populates="books")
-    fk_cb_course = Column(Integer, ForeignKey('courses.course_id'), primary_key=True, nullable=False)
+    fk_cb_course = Column(Integer, ForeignKey('courses.course_id'), 
+                            primary_key=True, nullable=False)
     author = relationship("Course", back_populates="courses")
-
-

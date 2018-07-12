@@ -14,12 +14,6 @@ sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '../..'))
 from src.app import app, db, ma
 from src.api.User import User
 from src.api.Book import Book
-from src.api.Course import Course
-from src.api.Review import Review
-from src.api.Meeting import Meeting
-from src.api.Author import Author
-from src.api.Image import Image
-from src.api.Institution import Institution
 
 from src.api.Association import Request
 from src.api.Association import Offer
@@ -64,12 +58,31 @@ def add_user():
 
     return jsonify(new_user)
 
+
 # endpoint to show all users
 @app.route("/user", methods=["GET"])
 def get_user():
     all_users = User.query.all()
     result = users_schema.dump(all_users)
     return jsonify(result.data)
+
+# endpoint to get user detail by username
+@app.route("/user/<username>", methods=["GET"])
+def user_detail(username):
+    user = User.query.get(username)
+    return user_schema.jsonify(user)
+
+# endpoint to update user
+@app.route("/user/<username>", methods=["PUT"])
+def user_update(username):
+    user = User.query.get(username)
+    email = request.json['email']
+
+    user.email = email
+
+    db.session.commit()
+    
+    return user_schema.jsonify(user)
 
 # --------------------------------------
 # api for Offer
