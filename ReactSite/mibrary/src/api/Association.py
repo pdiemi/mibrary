@@ -11,8 +11,15 @@
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '../..'))
-from src.app import db
-from src.api import Book, User, Course, Review, Meeting, Author, Image, Institution
+from src.app import app, db
+from src.api.User import User
+from src.api.Book import Book
+from src.api.Course import Course
+from src.api.Review import Review
+from src.api.Meeting import Meeting
+from src.api.Author import Author
+from src.api.Image import Image
+from src.api.Institution import Institution
 
 from sqlalchemy import Column, String, Integer, ForeignKey, Numeric, Date
 from sqlalchemy.orm import relationship
@@ -35,6 +42,11 @@ class Request(db.Model):
     fk_request_meeting = Column(Integer, ForeignKey('meetings.meeting_id'), nullable=False)
     meeting = relationship("Meeting", backref="requests")
 
+    def __init__(self, date, book, user):
+        self.date = date
+        self.book = book
+        self.user = user
+
 
 class Offer(db.Model):
     __tablename__ = "offers" 
@@ -48,6 +60,11 @@ class Offer(db.Model):
     fk_offer_meeting = Column(Integer, ForeignKey('meetings.meeting_id'), nullable=False)
     meeting = relationship("Meeting", backref="offers")
 
+    def __init__(self, date, book, user):
+        self.date = date
+        self.book = book
+        self.user = user
+
 
 class Report(db.Model):
     __tablename__ = "reports" 
@@ -57,6 +74,11 @@ class Report(db.Model):
     book = relationship("Book", back_populates="books")
     fk_report_user = Column(Integer, ForeignKey('users.user_id'), primary_key=True, nullable=False)
     user = relationship("User", back_populates="users")
+
+    def __init__(self, date, book, user):
+        self.date = date
+        self.book = book
+        self.user = user
 
 
 class Work(db.Model):
@@ -68,6 +90,11 @@ class Work(db.Model):
     fk_work_author = Column(Integer, ForeignKey('authors.author_id'), primary_key=True, nullable=False)
     author = relationship("Author", back_populates="authors")
 
+    def __init__(self, date, book, author):
+        self.date = date
+        self.book = book
+        self.author = author
+
 
 class Course_Book(db.Model):
     __tablename__ = "course_book"
@@ -76,3 +103,5 @@ class Course_Book(db.Model):
     book = relationship("Book", back_populates="books")
     fk_cb_course = Column(Integer, ForeignKey('courses.course_id'), primary_key=True, nullable=False)
     author = relationship("Course", back_populates="courses")
+
+

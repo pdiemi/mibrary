@@ -24,26 +24,30 @@ from sqlalchemy.orm import relationship
 #
 from pyld import jsonld
 
+
 class User(db.Model):
     __tablename__ = "users"
     user_id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
-    username = Column(String(20), nullable=False)
+    username = Column(String(20), nullable=False, unique=True)
     password = Column(String(24), nullable=False)
+    email = Column(String(50), nullable=False, unique=True)
     requested_books = relationship("Book")
 
     #
     # METHODS
     #
 
-    def __init__(self, username, password):
+    def __init__(self, username, password, email):
         self.username = username
         self.password = password
-
+        self.email = email
+    
     def serialize(self):
         compacted_json = jsonld.compact({
             "http://schema.org/user_id": self.user_id,
             "http://schema.org/username": self.username,
             "http://schema.org/password": self.password,
+            "http://schema.org/email": self.email,
             "http://schema.org/requested_books": self.requested_books
 
         }, self.get_context())
@@ -59,6 +63,7 @@ class User(db.Model):
             "user_id": "http://schema.org/user_id",
             "username": "http://schema.org/username",
             "password": "http://schema.org/password",
+            "email": "http://schema.org/email",
             "requested_books": "http://schema.org/requested_books"
 
             }
