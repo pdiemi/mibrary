@@ -36,6 +36,7 @@ class Book(db.Model):
     subjects = Column(String(1000), nullable=True)
     date_published = Column(Date, nullable=False)
     excerpt = Column(String(1000), nullable=True)
+    '''    
     # Additional attributes
     isbn13 = Column(String(13), nullable=False)
     dewey_decimal = Column(String(3), nullable=True)
@@ -46,6 +47,7 @@ class Book(db.Model):
     overview = Column(String(1000), nullable=True)
     synopsys = Column(String(1000), nullable=True)
     # End additional attributes
+    '''
     covers = relationship("images")
     authors = relationship("Author")
     reviews = relationship("Review")
@@ -68,6 +70,7 @@ class Book(db.Model):
             "http://schema.org/nr_of_subjects": self.subjects,
             "http://schema.org/date_published": self.date_published,
             "http://schema.org/excerpt": self.excerpt,
+'''
             # Additional attributes
             "http://schema.org/isbn13": self.isbn13,
             "http://schema.org/dewey_decimal": self.dewey_decimal,
@@ -78,6 +81,7 @@ class Book(db.Model):
             "http://schema.org/overview": self.overview,
             "http://schema.org/synopsys": self.synopsys,
             # End additional attributes
+'''
             "http://schema.org/covers": self.covers,
             "http://schema.org/authors": self.authors,
             "http://schema.org/nr_of_reviews": self.reviews
