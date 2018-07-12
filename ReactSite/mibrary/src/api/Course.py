@@ -28,7 +28,8 @@ class Course(db.Model):
     course_number = Column(String(10), nullable=False)
     course_name = Column(String(500), nullable=False)
     textbooks = relationship("Book")
-    institution = relationship("Institution")
+    fk_course_institution = Column(Integer, ForeignKey('institutions.institution.id'), nullable=False)    
+    institution = relationship("Institution", backref="courses")
 
     #
     # METHODS

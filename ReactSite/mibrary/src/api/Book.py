@@ -48,6 +48,7 @@ class Book(db.Model):
     synopsys = Column(String(1000), nullable=True)
     # End additional attributes
     '''
+    fk_image_isbn = Column(String(10), ForeignKey('books.isbn'), nullable=False)
     covers = relationship("images")
     authors = relationship("Author")
     reviews = relationship("Review")
@@ -55,6 +56,39 @@ class Book(db.Model):
     #
     # METHODS
     #
+
+    def __init__(self,
+                isbn,
+                publishers = None,
+                identifiers = None,
+                classifications = None,
+                links = None,
+                title = None,
+                subtitle = None,
+                url = None,
+                pages = None,
+                subjects = None,
+                date_published = None,
+                excerpts = None,
+                covers = None,
+                authors = None,
+                reviews = None):
+
+        self.isbn = isbn
+        self.publishers = publishers
+        self.identifiers = identifiers
+        self.classifications = classifications
+        self.links = links
+        self.title = title
+        self.subtitle = subtitle
+        self.url = url
+        self.pages = pages
+        self.subjects = subjects
+        self.date_published = date_published
+        self.excerpts = excerpts
+        self.covers = covers
+        self.authors = authors
+        self.reviews = reviews
 
     def serialize(self):
         compacted_json = jsonld.compact({

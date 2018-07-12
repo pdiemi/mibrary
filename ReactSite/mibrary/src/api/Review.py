@@ -12,6 +12,7 @@ import os
 import sys
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '../..'))
 from src.app import db
+from src.api import User, Book
 
 from sqlalchemy import Column, String, Integer, ForeignKey, Numeric, Date
 from sqlalchemy.orm import relationship
@@ -26,8 +27,10 @@ class Review(db.Model):
     __tablename__ = "reviews"
     review_id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
     content = Column(String(1000), nullable=False)
-    review_book = relationship("Book")
-    user = relationship("User")
+    fk_review_isbn = Column(String(10), ForeignKey('books.isbn'), nullable=False)
+    review_book = relationship("Book", backref="reviews")
+    fk_review_user = Column(Integer, ForeignKey('user.user_id'), nullable=False)
+    user = relationship("User", backref="reviews")
 
     #
     # METHODS

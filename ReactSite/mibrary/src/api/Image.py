@@ -28,7 +28,7 @@ class Image(db.Model):
     id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
     image_url = Column(String(200))
 
-    fk_book_isbn = Column(String(10), ForeignKey('books.isbn'), nullable=False)
+    fk_image_isbn = Column(String(10), ForeignKey('books.isbn'), nullable=False)
     isbn = relationship("Book", backref="images")
 
     def __init__(self, image):

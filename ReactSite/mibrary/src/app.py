@@ -43,8 +43,7 @@ def serve(path):
             return send_from_directory(REACT_FILES, 'index.html')
 """
 
-from src.api import mibraryapi, Book, User, Course, Review, Meeting, Author, Image, Institution
-#from src import api
+from src.api import mibraryapi, Book, User, Course, Review, Meeting, Author, Image, Institution, Association
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, use_reloader=True, threaded=True)

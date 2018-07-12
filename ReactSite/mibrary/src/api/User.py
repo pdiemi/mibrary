@@ -31,11 +31,13 @@ class User(db.Model):
     password = Column(String(24), nullable=False)
     requested_books = relationship("Book")
 
-
-
     #
     # METHODS
     #
+
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
 
     def serialize(self):
         compacted_json = jsonld.compact({
