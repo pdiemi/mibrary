@@ -8,19 +8,9 @@
 # api/Meeting.py
 # --------------------------------------
 
-import os
-import sys
-sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '../..'))
-from src.api.User import User
-#from src.api.Book import Book
+from models import User, Book
 
-from src.api.Association import Request
-from src.api.Association import Offer
-from src.api.Association import Report
-from src.api.Association import Work
-from src.api.Association import Course_Book
-
-from src.db import app, db
+from db import app, db
 
 from flask import Flask, send_from_directory, render_template, jsonify, request, abort, Blueprint
 from flask_sqlalchemy import SQLAlchemy
@@ -78,7 +68,7 @@ def user_detail(username):
 # api for Report
 # --------------------------------------
 
-'''
+
 # --------------------------------------
 # api for Course
 # --------------------------------------
@@ -121,7 +111,9 @@ def course_detail(course_number):
 class BookSchema(ma.Schema):
     class Meta:
         # Fields to expose
-        fields = ('title', 'author')
+        fields = ('isbn', 'publishers', 'identifiers', 'classifications', 'links',
+                    'title', 'subtitle', 'url', 'pages', 'subjects', 'date_published',
+                    'excerpts', 'authors')
 
 
 book_schema = BookSchema()
@@ -135,4 +127,6 @@ def get_book():
     result = books_schema.dump(all_books)
     return jsonify(result.data)
 
-'''
+@api_page.route("/")
+def hello():
+    return "Hello Mibrary!"
