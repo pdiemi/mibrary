@@ -272,6 +272,18 @@ class About extends Component
                         <b>Tools</b>
                     </h2>
                     <div>
+                        <ul>
+                            <li>Postman</li>
+                            <li>Bootstrap</li>
+                            <li>MySQL</li>
+                            <li>Flask</li>
+                            <li>React</li>
+                            <li>Docker</li>
+                            <li>Mocha</li>
+                            <li>unittest</li>
+                            <li>Selenium</li>
+                            <li>PlantUML</li>
+                        </ul>
                         <a href="https://gitlab.com/pdiemi/mibrary/blob/master/TechnicalReportPhase1_v3.pdf">
                             <b>Checkout our documentation</b>
                         </a>
