@@ -11,7 +11,7 @@
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '../..'))
-from db import db
+from src.db import db
 from src.api import User, Book
 
 from sqlalchemy import Column, String, Integer, ForeignKey, Numeric, Date
@@ -29,7 +29,7 @@ class Review(db.Model):
     content = db.Column(db.String(1000), nullable=False)
     fk_review_isbn = db.Column(db.String(10), ForeignKey('books.isbn'), nullable=False)
     review_book = db.relationship("Book", backref="reviews")
-    fk_review_user = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    fk_review_user = db.Column(db.Integer, ForeignKey('user.user_id'), nullable=False)
     user = db.relationship("User", backref="reviews")
 
     #
