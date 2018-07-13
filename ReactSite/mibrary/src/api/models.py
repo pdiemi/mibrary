@@ -10,7 +10,7 @@
 
 from sqlalchemy import Column, String, Integer, ForeignKey, Numeric, Date
 from sqlalchemy.orm import relationship
-from db import db
+from bridge import db
 
 #
 # to use jsonld, we should install pyLD using:
@@ -167,7 +167,7 @@ class User(db.Model):
         self.password = password
         self.email = email
 
-#---------- Associations ----------
+#---------- Association Classes ----------
 
 class Request(db.Model):
     __tablename__ = "requests"

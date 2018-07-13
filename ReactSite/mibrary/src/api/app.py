@@ -11,7 +11,7 @@
 from flask import Flask
 from flask_cors import CORS
 import  pymysql
-from db import app
+from bridge import app
 from mibraryapi import api_page
 
 
