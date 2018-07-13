@@ -11,7 +11,8 @@
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '../..'))
-from db import db
+
+from src.db import db
 from src.api.User import User
 from src.api.Book import Book
 from src.api.Course import Course
@@ -34,12 +35,12 @@ class Request(db.Model):
     __tablename__ = "requests"
     date = db.Column(Date, nullable=True)
         
-    fk_request_isbn = db.Column(db.String(10), db.ForeignKey('books.isbn'), primary_key=True, nullable=False)
+    fk_request_isbn = db.Column(db.String(10), ForeignKey('books.isbn'), primary_key=True, nullable=False)
     book = db.relationship("Book", back_populates="books")
-    fk_request_user = db.Column(db.Integer, db.ForeignKey('users.user_id'), primary_key=True, nullable=False)
+    fk_request_user = db.Column(db.Integer, ForeignKey('users.user_id'), primary_key=True, nullable=False)
     user = db.relationship("User", back_populates="users")
 
-    fk_request_meeting = db.Column(db.Integer, db.ForeignKey('meetings.meeting_id'), nullable=False)
+    fk_request_meeting = db.Column(db.Integer, ForeignKey('meetings.meeting_id'), nullable=False)
     meeting = db.relationship("Meeting", backref="requests")
 
     def __init__(self, date, book, user):
@@ -52,12 +53,12 @@ class Offer(db.Model):
     __tablename__ = "offers" 
     date = db.Column(Date, nullable=True) 
         
-    fk_offer_isbn = db.Column(db.String(10), db.ForeignKey('books.isbn'), primary_key=True, nullable=False)
+    fk_offer_isbn = db.Column(db.String(10), ForeignKey('books.isbn'), primary_key=True, nullable=False)
     book = db.relationship("Book", back_populates="books")
     fk_offer_user = db.Column(db.Integer, ForeignKey('users.user_id'), primary_key=True, nullable=False)
     user = db.relationship("User", back_populates="users")
 
-    fk_offer_meeting = db.Column(db.Integer, db.ForeignKey('meetings.meeting_id'), nullable=False)
+    fk_offer_meeting = db.Column(db.Integer, ForeignKey('meetings.meeting_id'), nullable=False)
     meeting = db.relationship("Meeting", backref="offers")
 
     def __init__(self, date, book, user):
@@ -70,9 +71,9 @@ class Report(db.Model):
     __tablename__ = "reports" 
     date = db.Column(Date, nullable=True) 
         
-    fk_report_isbn = db.Column(db.String(10), db.ForeignKey('books.isbn'), primary_key=True, nullable=False)
+    fk_report_isbn = db.Column(db.String(10), ForeignKey('books.isbn'), primary_key=True, nullable=False)
     book = db.relationship("Book", back_populates="books")
-    fk_report_user = db.Column(db.Integer, db.ForeignKey('users.user_id'), primary_key=True, nullable=False)
+    fk_report_user = db.Column(db.Integer, ForeignKey('users.user_id'), primary_key=True, nullable=False)
     user = db.relationship("User", back_populates="users")
 
     def __init__(self, date, book, user):
@@ -85,10 +86,10 @@ class Work(db.Model):
     __tablename__ = "works"
     date = db.Column(Date, nullable=True)
         
-    fk_work_isbn = db.Column(db.String(10), db.ForeignKey('books.isbn'), 
+    fk_work_isbn = db.Column(db.String(10), ForeignKey('books.isbn'), 
                             primary_key=True, nullable=False)
     book = db.relationship("Book", back_populates="books")
-    fk_work_author = db.Column(db.Integer, db.ForeignKey('authors.author_id'), 
+    fk_work_author = db.Column(db.Integer, ForeignKey('authors.author_id'), 
                             primary_key=True, nullable=False)
     author = db.relationship("Author", back_populates="authors")
 
@@ -101,9 +102,9 @@ class Work(db.Model):
 class Course_Book(db.Model):
     __tablename__ = "course_book"
         
-    fk_cb_isbn = db.Column(db.String(10), db.ForeignKey('books.isbn'), 
+    fk_cb_isbn = db.Column(db.String(10), ForeignKey('books.isbn'), 
                         primary_key=True, nullable=False)
     book = db.relationship("Book", back_populates="books")
-    fk_cb_course = db.Column(db.Integer, db.ForeignKey('courses.course_id'), 
+    fk_cb_course = db.Column(db.Integer, ForeignKey('courses.course_id'), 
                             primary_key=True, nullable=False)
     author = db.relationship("Course", back_populates="courses")

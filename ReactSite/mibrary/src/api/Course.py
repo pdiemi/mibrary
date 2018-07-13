@@ -11,7 +11,7 @@
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '../..'))
-from db import db
+from src.db import db
 
 from sqlalchemy import Column, String, Integer, ForeignKey, Numeric, Date
 from sqlalchemy.orm import relationship
@@ -29,7 +29,7 @@ class Course(db.Model):
     course_name = db.Column(db.String(500), nullable=False)
     textbooks = db.relationship("Book")
     fk_course_institution = db.Column(db.Integer, 
-                                    db.ForeignKey('institutions.institution.id'),
+                                    ForeignKey('institutions.institution.id'),
                                     nullable=False)    
     institution = db.relationship("Institution", backref="courses")
 
