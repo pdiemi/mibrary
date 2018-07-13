@@ -23,15 +23,20 @@ class Book extends Component
 
   Model()
   {
-
-      var listModelsJson = JSON.parse("{ \"books\" : [\"one\", \"two\", \"three\", \"four\", \"five\", \"six\", \"seven\", \"eight\", \"nine\", \"ten\", \"eleven\"] }");
-      var newModels = []
-      for(var i = 0; i<listModelsJson.books.length; i++){
-        newModels[i] = listModelsJson.books[i];
-      }
-      this.setState({
-          models : newModels
-      });
+  	  fetch('http://localhost:3000/json/test_book_list.json')
+        .then((response) => {
+          return response.json()})
+        .then((responseJson) => {
+          let models = responseJson.results.map((res) => {
+            return (
+                <div key="{res.results}">
+                  {res.title}
+                </div>
+              )//
+          })
+          this.setState({models : models});
+          // console.log("state", this.state.models);
+        })
   }
 
   handleClick(event)
