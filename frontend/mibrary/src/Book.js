@@ -32,6 +32,7 @@ class Book extends Component
       this.setState({
           models : newModels
       });
+      return newModels;
   }
 
   handleClick(event)
