@@ -1,7 +1,7 @@
 ================
  General-Phase 2
 ================
-Git SHA: 
+Git SHA: 50634ee355b4391394b059eca3ee1a1a5e588d6c
 link to website: http://www.mibrary.me/ http://mibrary.me/
 
 ===========
@@ -11,8 +11,8 @@ link to website: http://www.mibrary.me/ http://mibrary.me/
 Name: Aaron Saldana
 EID: as77845
 GitLab ID: aaron.saldana
-Estimated Completion Time: 
-Actual Completion Time: 
+Estimated Completion Time: 20
+Actual Completion Time: 40
 
 ===========
  Member #2
@@ -20,8 +20,13 @@ Actual Completion Time:
 name: Austin Mager 
 EID: am74645
 GitLab ID: magera
+<<<<<<< HEAD
+Estimated Time: 20
+Actual Time: 30
+=======
 Estimated Time: 15 hrs
 Actual Time: 21 hrs
+>>>>>>> d510efd8b854e8c1191c3e4612ffe1a15014e05d
 
 ===========
  Member #3
@@ -30,10 +35,15 @@ Actual Time: 21 hrs
 name: Debarshi Kundu
 EID: dk25677
 GitLab ID: debarshikundu0
+<<<<<<< HEAD
+Estimated Completion Time: 20
+Actual Completion Time: 30
+=======
 Estimated Completion Time for Technical Report (User Story Tables): 20 minutes
 Actual Completion Time for Technical Report (User Story Tables): 1.5+ hours
 Estimated Completion time for setting up Docker, and dealing with technical issues: 20 minutes
 Actual Completion Time for all that: 10 hours 
+>>>>>>> d510efd8b854e8c1191c3e4612ffe1a15014e05d
 
 ===========
  Member #4
@@ -42,8 +52,8 @@ Actual Completion Time for all that: 10 hours
 name: Diemi Pham
 EID: mp43952
 GitLab ID: pdiemmi
-Estimated Completion Time:
-Actual Completion Time: 
+Estimated Completion Time: 20
+Actual Completion Time: 30
 
 ===========
  Member #5
@@ -52,10 +62,8 @@ Actual Completion Time:
 name: Edwin Xeon Gutierrez
 EID: exg63
 GitLab ID: xeongtz
-Estimated Completion Time: Mibrary React frontend: 20 hours
-Estimated Completion Time: pagination: 2 hours
-Estimated Completion Time: Technical Report, Readme, misc: 2 hours
-Actual Completion Time:
+Estimated Completion Time: 20 hours
+Actual Completion Time: 40
 
 ===========
  Member #6
@@ -64,8 +72,8 @@ Actual Completion Time:
 Name: Lucy Liu
 EID: LAL3286
 Gitlab ID: lucyaliu
-estimated completion time:
-actual completion time:
+estimated completion time: 20
+actual completion time: 40
 
 
 
