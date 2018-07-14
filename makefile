@@ -1,6 +1,9 @@
 GitlabID = pdiemi
 RepoName = mibrary
 
+tests:
+	mocha frontend/mibrary/tests
+
 gitlabid:
 	@echo "${GitlabID}"
 
