@@ -9,7 +9,9 @@
 # --------------------------------------
 
 from unittest import main, TestCase
-import requests
+#import requests
+import urllib.parse
+import urllib.request
 from models import Author, Book, Course, Image, Institution, Meeting, Review, User,\
                     Request, Offer, Report, Work, Course_Book
 from bridge import app
