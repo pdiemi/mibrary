@@ -33,7 +33,7 @@ ma = Marshmallow(app)
 class UserSchema(ma.Schema):
     class Meta:
         # Fields to expose
-        fields = ('id', 'username', 'password', 'email')
+        fields = ('id', 'username', 'email')
 
 
 user_schema = UserSchema()
@@ -208,9 +208,9 @@ def meeting_detail(meeting_id):
 class BookSchema(ma.Schema):
     class Meta:
         # Fields to expose
-        fields = ('isbn', 'publishers', 'identifiers', 'classifications',
-                    'title', 'subtitle', 'url', 'pages', 'date_published',
-                    'excerpts', 'authors')
+        fields = ('isbn', 'publisher', 'identifiers', 'classtifications',
+                    'title', 'subtitle', 'url', 'pages', 'subjects',
+                    'publish_date', 'excerpt', 'authors')
 
 book_schema = BookSchema()
 books_schema = BookSchema(many=True)
