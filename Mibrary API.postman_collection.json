@@ -1,0 +1,1371 @@
+{
+	"info": {
+		"_postman_id": "3458bc73-8e7e-4db1-8b0c-521aa8a57923",
+		"name": "Mibrary API",
+		"description": "The API for the Mibrary online textbook exchange site. ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get",
+			"description": null,
+			"item": [
+				{
+					"name": "Book",
+					"description": "",
+					"item": [
+						{
+							"name": "book.getall",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "293ce6ac-811d-48be-b7ab-cf2c49865ff8",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function(){",
+											"    var responseHeaders = pm.response.headers;",
+											"    responseHeaders.has('application/json');",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 200ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);",
+											"});",
+											"",
+											"var schema = {",
+											"    \"type\": \"array\",",
+											"    \"items\": {",
+											"        \"type\": \"object\",",
+											"        \"properties\": {",
+											"            \"isbn\": {",
+											"                \"type\": \"string\",",
+											"            },",
+											"            \"publishers\": {",
+											"                \"type\": \"object\",",
+											"            },",
+											"            \"identifiers\": {",
+											"                \"type\": \"object\",",
+											"            },",
+											"            \"classifications\": {",
+											"                \"type\": \"object\",",
+											"            },",
+											"            \"title\": {",
+											"                \"type\": \"string\",",
+											"            },",
+											"            \"subtitle\": {",
+											"                \"type\": \"string\",",
+											"            },",
+											"            \"url\": {",
+											"                \"type\": \"string\",",
+											"            },",
+											"            \"pages\": {",
+											"                \"type\": \"integer\",",
+											"            },",
+											"            \"date_published\": {",
+											"                \"type\": \"string\",",
+											"            },",
+											"            \"excerpts\": {",
+											"                \"type\": \"object\",",
+											"            },",
+											"            \"authors\": {",
+											"                \"type\": \"object\",",
+											"            }",
+											"        }",
+											"    }",
+											"};",
+											"",
+											"pm.test('Schema is valid', function() {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://mibrary.me/api/books",
+									"protocol": "https",
+									"host": [
+										"mibrary",
+										"me"
+									],
+									"path": [
+										"api",
+										"books"
+									]
+								},
+								"description": "Gets all books available in the database.  \nExample usage:\n~~~\nhttps://mibrary.me/api/books\n~~~"
+							},
+							"response": []
+						},
+						{
+							"name": "book.getbyisbn",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "ef0fabc1-96b4-44a4-b106-a8dc2e5298d6",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 200ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function(){",
+											"    var responseHeaders = pm.response.headers;",
+											"    responseHeaders.has('application/json');",
+											"});",
+											"",
+											"var schema = {",
+											"  \"type\": \"object\",",
+											"  \"properties\": {",
+											"    \"isbn\": {",
+											"      \"type\": \"string\",",
+											"    },",
+											"    \"publishers\": {",
+											"      \"type\": \"object\",",
+											"    },",
+											"    \"identifiers\": {",
+											"      \"type\": \"object\",",
+											"    },",
+											"    \"classifications\": {",
+											"      \"type\": \"object\",",
+											"    },",
+											"    \"title\": {",
+											"      \"type\": \"string\",",
+											"    },",
+											"    \"subtitle\": {",
+											"      \"type\": \"string\",",
+											"    },",
+											"    \"url\": {",
+											"      \"type\": \"string\",",
+											"    },",
+											"    \"pages\": {",
+											"      \"type\": \"integer\",",
+											"    },",
+											"    \"date_published\": {",
+											"      \"type\": \"string\",",
+											"    },",
+											"    \"excerpts\": {",
+											"      \"type\": \"object\",",
+											"    },",
+											"    \"authors\": {",
+											"      \"type\": \"object\",",
+											"    }",
+											"  }",
+											"};",
+											"",
+											"pm.test('Schema is valid', function() {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+											"});",
+											"",
+											"pm.test(\"isbn Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.isbn).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"Title Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.title).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"Publishers Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.publishers).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"Identifiers Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.identifiers).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"classifications Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.classifications).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"subtitle Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.subtitle).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"url Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.url).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"pages Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.pages).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"date_published Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.date_published).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"excerpts Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.excerpts).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"authors Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.authors).toBeTruthy();",
+											"});",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://mibrary.me/api/book/9781934759486",
+									"protocol": "https",
+									"host": [
+										"mibrary",
+										"me"
+									],
+									"path": [
+										"api",
+										"book",
+										"9781934759486"
+									]
+								},
+								"description": "Get the book information by ISBN number.  \nExample usage:\n~~~\nhttps://mibrary.me/api/book/9781934759486\n~~~"
+							},
+							"response": []
+						},
+						{
+							"name": "book.getbyquery",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "26ea4bb6-03b7-4d0c-b89d-80680315cd60",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 200ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function(){",
+											"    var responseHeaders = pm.response.headers;",
+											"    responseHeaders.has('application/json');",
+											"});",
+											"",
+											"var schema = {",
+											"    \"type\": \"array\",",
+											"    \"items\": {",
+											"        \"type\": \"object\",",
+											"        \"properties\": {",
+											"            \"isbn\": {",
+											"                \"type\": \"string\",",
+											"            },",
+											"            \"publishers\": {",
+											"                \"type\": \"object\",",
+											"            },",
+											"            \"identifiers\": {",
+											"                \"type\": \"object\",",
+											"            },",
+											"            \"classifications\": {",
+											"                \"type\": \"object\",",
+											"            },",
+											"            \"title\": {",
+											"                \"type\": \"string\",",
+											"            },",
+											"            \"subtitle\": {",
+											"                \"type\": \"string\",",
+											"            },",
+											"            \"url\": {",
+											"                \"type\": \"string\",",
+											"            },",
+											"            \"pages\": {",
+											"                \"type\": \"integer\",",
+											"            },",
+											"            \"date_published\": {",
+											"                \"type\": \"string\",",
+											"            },",
+											"            \"excerpts\": {",
+											"                \"type\": \"object\",",
+											"            },",
+											"            \"authors\": {",
+											"                \"type\": \"object\",",
+											"            }",
+											"        }",
+											"    }",
+											"};",
+											"",
+											"pm.test('Schema is valid', function() {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+											"});",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://mibrary.me/api/book/9781934759486",
+									"protocol": "https",
+									"host": [
+										"mibrary",
+										"me"
+									],
+									"path": [
+										"api",
+										"book",
+										"9781934759486"
+									]
+								},
+								"description": "Get books by search query.  \nExample usage:\n~~~\nhttps://mibrary.me/api/books/python\n~~~"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Review",
+					"description": "",
+					"item": [
+						{
+							"name": "review.get",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "2ea3d10d-0e19-4b46-be2a-740f01d73ead",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 200ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function(){",
+											"    var responseHeaders = pm.response.headers;",
+											"    responseHeaders.has('application/json');",
+											"});",
+											"",
+											"var schema = {",
+											"  \"type\": \"object\",",
+											"  \"properties\": {",
+											"    \"date\": {",
+											"      \"type\": \"string\",",
+											"    },",
+											"    \"content\": {",
+											"      \"type\": \"string\",",
+											"    },",
+											"    \"book_id\": {",
+											"      \"type\": \"integer\",",
+											"    },",
+											"    \"user_id\": {",
+											"      \"type\": \"integer\",",
+											"    }",
+											"  }",
+											"};",
+											"",
+											"pm.test('Schema is valid', function() {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+											"});",
+											"",
+											"",
+											"pm.test(\"date Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.date).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"content Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.content).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"book_id Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.book_id).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"user_id Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.user_id).toBeTruthy();",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://mibrary.me/api/reviews/9781934759486",
+									"protocol": "https",
+									"host": [
+										"mibrary",
+										"me"
+									],
+									"path": [
+										"api",
+										"reviews",
+										"9781934759486"
+									]
+								},
+								"description": "Get the reviews for a book given an ISBN.  \nExample usage:\n~~~\nhttps://mibrary.me/api/reviews/9781934759486\n~~~"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Meeting",
+					"description": "",
+					"item": [
+						{
+							"name": "meeting.getbyid",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "634c66e4-5fad-4239-9073-933c3a642b9d",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 200ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function(){",
+											"    var responseHeaders = pm.response.headers;",
+											"    responseHeaders.has('application/json');",
+											"});",
+											"",
+											"var schema = {",
+											"  \"type\": \"object\",",
+											"  \"properties\": {",
+											"    \"meeting_id\": {",
+											"      \"type\": \"integer\",",
+											"    },",
+											"    \"time\": {",
+											"      \"type\": \"string\",",
+											"    },",
+											"    \"location\": {",
+											"      \"type\": \"string\",",
+											"    }",
+											"  }",
+											"};",
+											"",
+											"pm.test('Schema is valid', function() {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+											"});",
+											"",
+											"",
+											"pm.test(\"meeting_id Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.meeting_id).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"time Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.time).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"location Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.location).toBeTruthy();",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://mibrary.me/api/meeting/3",
+									"protocol": "https",
+									"host": [
+										"mibrary",
+										"me"
+									],
+									"path": [
+										"api",
+										"meeting",
+										"3"
+									]
+								},
+								"description": "Gets a meeting detail given id of the meeting.  \nExample usage:\n~~~\nhttps://mibrary.me/api/meeting/3\n~~~"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "User",
+					"description": "",
+					"item": [
+						{
+							"name": "user.get",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "5f17f3c4-32dd-4547-9d98-f2f1ef258bd9",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 200ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function(){",
+											"    var responseHeaders = pm.response.headers;",
+											"    responseHeaders.has('application/json');",
+											"});",
+											"",
+											"var schema = {",
+											"  \"type\": \"object\",",
+											"  \"properties\": {",
+											"    \"id\": {",
+											"      \"type\": \"integer\",",
+											"    },",
+											"    \"username\": {",
+											"      \"type\": \"string\",",
+											"    },",
+											"    \"password\": {",
+											"      \"type\": \"string\",",
+											"    },",
+											"    \"email\": {",
+											"      \"type\": \"string\",",
+											"    }",
+											"  }",
+											"};",
+											"",
+											"pm.test('Schema is valid', function() {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+											"});",
+											"",
+											"",
+											"pm.test(\"id Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.id).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"username Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.username).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"password Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.password).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"email Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.email).toBeTruthy();",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://mibrary.me/api/user/pdiemi",
+									"protocol": "https",
+									"host": [
+										"mibrary",
+										"me"
+									],
+									"path": [
+										"api",
+										"user",
+										"pdiemi"
+									]
+								},
+								"description": "Gets profile of a user include username, email, and books requested by the user.  \nExample usage:\n~~~\nhttps://mibrary.me/api/users/pdiemi\n~~~"
+							},
+							"response": []
+						},
+						{
+							"name": "user.getall",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1fdf921f-49ad-496e-99f7-68486688b8da",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 200ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function(){",
+											"    var responseHeaders = pm.response.headers;",
+											"    responseHeaders.has('application/json');",
+											"});",
+											"",
+											"var schema = {",
+											"  \"type\": \"array\",",
+											"  \"items\": {",
+											"      \"type\": \"object\",",
+											"      \"properties\": {",
+											"        \"id\": {",
+											"          \"type\": \"integer\",",
+											"        },",
+											"        \"username\": {",
+											"          \"type\": \"string\",",
+											"        },",
+											"        \"password\": {",
+											"          \"type\": \"string\",",
+											"        },",
+											"        \"email\": {",
+											"          \"type\": \"string\",",
+											"        }",
+											"      }",
+											"  }",
+											"};",
+											"",
+											"pm.test('Schema is valid', function() {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://mibrary.me/api/users",
+									"protocol": "https",
+									"host": [
+										"mibrary",
+										"me"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								},
+								"description": "Gets all users in database.  \nExample usage:\n~~~\nhttps://mibrary.me/api/users\n~~~"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Class",
+					"description": "",
+					"item": [
+						{
+							"name": "class.get",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "5fcdcc27-a6e9-403f-bb6b-90415489f9cb",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 200ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function(){",
+											"    var responseHeaders = pm.response.headers;",
+											"    responseHeaders.has('application/json');",
+											"});",
+											"",
+											"var schema = {",
+											"  \"type\": \"object\",",
+											"  \"properties\": {",
+											"    \"course_number\": {",
+											"      \"type\": \"integer\",",
+											"    },",
+											"    \"course_name\": {",
+											"      \"type\": \"string\",",
+											"    },",
+											"    \"institution_id\": {",
+											"      \"type\": \"integer\",",
+											"    }",
+											"  }",
+											"};",
+											"",
+											"pm.test('Schema is valid', function() {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+											"});",
+											"",
+											"",
+											"pm.test(\"course_number Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.course_number).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"course_name Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.course_name).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"institution_id Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.institution_id).toBeTruthy();",
+											"});",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://mibrary.me/api/course/cs373",
+									"protocol": "https",
+									"host": [
+										"mibrary",
+										"me"
+									],
+									"path": [
+										"api",
+										"course",
+										"cs373"
+									]
+								},
+								"description": "Given a class number, gets data for a class, including class nuber, name, and required textbooks.  \nExample usage:\n~~~\nhttps://mibrary.me/api/course/cs373\n~~~"
+							},
+							"response": []
+						},
+						{
+							"name": "class.getall",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "24e8c1d7-bbb1-403d-be36-6949874bd087",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 200ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function(){",
+											"    var responseHeaders = pm.response.headers;",
+											"    responseHeaders.has('application/json');",
+											"});",
+											"",
+											"var schema = {",
+											"  \"type\": \"array\",",
+											"  \"items\": {",
+											"      \"type\": \"object\",",
+											"      \"properties\": {",
+											"        \"course_number\": {",
+											"          \"type\": \"integer\",",
+											"        },",
+											"        \"course_name\": {",
+											"          \"type\": \"string\",",
+											"        },",
+											"        \"institution_id\": {",
+											"          \"type\": \"integer\",",
+											"        }",
+											"      }",
+											"  }",
+											"};",
+											"",
+											"pm.test('Schema is valid', function() {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+											"});",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://mibrary.me/api/courses/utaustin",
+									"protocol": "https",
+									"host": [
+										"mibrary",
+										"me"
+									],
+									"path": [
+										"api",
+										"courses",
+										"utaustin"
+									]
+								},
+								"description": "Gets all courses at a university.  \nExample usage:\n~~~\nhttps://mibrary.me/api/courses/utaustin\n~~~"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Request",
+					"description": "",
+					"item": [
+						{
+							"name": "request.getbyisbn",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a997efb3-626c-42c9-a32a-cd64ddfb1ef5",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 200ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function(){",
+											"    var responseHeaders = pm.response.headers;",
+											"    responseHeaders.has('application/json');",
+											"});",
+											"",
+											"var schema = {",
+											"  \"type\": \"object\",",
+											"  \"properties\": {",
+											"    \"date\": {",
+											"      \"type\": \"string\",",
+											"    },",
+											"    \"book_id\": {",
+											"      \"type\": \"integer\",",
+											"    },",
+											"    \"user_id\": {",
+											"      \"type\": \"integer\",",
+											"    },",
+											"    \"meeting_id\": {",
+											"      \"type\": \"integer\",",
+											"    }",
+											"  }",
+											"};",
+											"",
+											"pm.test('Schema is valid', function() {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+											"});",
+											"",
+											"",
+											"pm.test(\"date Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.date).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"book_id Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.book_id).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"user_id Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.user_id).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"meeting_id Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.meeting_id).toBeTruthy();",
+											"});",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://mibrary.me/api/request/9781934759486",
+									"protocol": "https",
+									"host": [
+										"mibrary",
+										"me"
+									],
+									"path": [
+										"api",
+										"request",
+										"9781934759486"
+									]
+								},
+								"description": "Gets a request detail given an isbn  \nExample usage:\n~~~\nhttps://mibrary.me/api/request/9781934759486\n~~~"
+							},
+							"response": []
+						},
+						{
+							"name": "request.getall",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "f7d0ef34-8e8a-4615-8efb-42b39f0fbd20",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 200ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function(){",
+											"    var responseHeaders = pm.response.headers;",
+											"    responseHeaders.has('application/json');",
+											"});",
+											"",
+											"var schema = {",
+											"  \"type\": \"array\",",
+											"  \"items\": {",
+											"      \"type\": \"object\",",
+											"      \"properties\": {",
+											"        \"date\": {",
+											"          \"type\": \"string\",",
+											"        },",
+											"        \"book_id\": {",
+											"          \"type\": \"integer\",",
+											"        },",
+											"        \"user_id\": {",
+											"          \"type\": \"integer\",",
+											"        },",
+											"        \"meeting_id\": {",
+											"          \"type\": \"integer\",",
+											"        }",
+											"      }",
+											"  }",
+											"};",
+											"",
+											"pm.test('Schema is valid', function() {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+											"});",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://mibrary.me/api/requests",
+									"protocol": "https",
+									"host": [
+										"mibrary",
+										"me"
+									],
+									"path": [
+										"api",
+										"requests"
+									]
+								},
+								"description": "Gets all request   \nExample usage:\n~~~\nhttps://mibrary.me/api/requests\n~~~"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Offer",
+					"description": "",
+					"item": [
+						{
+							"name": "offer.getbyisbn",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "04a5b998-e974-422e-a9ff-66c47e2470e8",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 200ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function(){",
+											"    var responseHeaders = pm.response.headers;",
+											"    responseHeaders.has('application/json');",
+											"});",
+											"",
+											"var schema = {",
+											"  \"type\": \"object\",",
+											"  \"properties\": {",
+											"    \"date\": {",
+											"      \"type\": \"string\",",
+											"    },",
+											"    \"book_id\": {",
+											"      \"type\": \"integer\",",
+											"    },",
+											"    \"user_id\": {",
+											"      \"type\": \"integer\",",
+											"    },",
+											"    \"meeting_id\": {",
+											"      \"type\": \"integer\",",
+											"    }",
+											"  }",
+											"};",
+											"",
+											"pm.test('Schema is valid', function() {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+											"});",
+											"",
+											"",
+											"pm.test(\"date Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.date).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"book_id Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.book_id).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"user_id Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.user_id).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"meeting_id Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.meeting_id).toBeTruthy();",
+											"});",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://mibrary.me/api/offer/9781934759486",
+									"protocol": "https",
+									"host": [
+										"mibrary",
+										"me"
+									],
+									"path": [
+										"api",
+										"offer",
+										"9781934759486"
+									]
+								},
+								"description": "Gets an offer detail given an isbn  \nExample usage:\n~~~\nhttps://mibrary.me/api/offer/9781934759486\n~~~"
+							},
+							"response": []
+						},
+						{
+							"name": "offer.getall",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "031c183b-022a-4b6a-8aa2-cb752a9a0fc6",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 200ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function(){",
+											"    var responseHeaders = pm.response.headers;",
+											"    responseHeaders.has('application/json');",
+											"});",
+											"",
+											"var schema = {",
+											"  \"type\": \"array\",",
+											"  \"items\": {",
+											"      \"type\": \"object\",",
+											"      \"properties\": {",
+											"        \"date\": {",
+											"          \"type\": \"string\",",
+											"        },",
+											"        \"book_id\": {",
+											"          \"type\": \"integer\",",
+											"        },",
+											"        \"user_id\": {",
+											"          \"type\": \"integer\",",
+											"        },",
+											"        \"meeting_id\": {",
+											"          \"type\": \"integer\",",
+											"        }",
+											"      }",
+											"  }",
+											"};",
+											"",
+											"pm.test('Schema is valid', function() {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+											"});",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://mibrary.me/api/offers",
+									"protocol": "https",
+									"host": [
+										"mibrary",
+										"me"
+									],
+									"path": [
+										"api",
+										"offers"
+									]
+								},
+								"description": "Gets all offers   \nExample usage:\n~~~\nhttps://mibrary.me/api/offers\n~~~"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Report",
+					"description": "",
+					"item": [
+						{
+							"name": "report.getall",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "cc36e872-467b-49c6-8438-a4e5455d6e58",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 200ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function(){",
+											"    var responseHeaders = pm.response.headers;",
+											"    responseHeaders.has('application/json');",
+											"});",
+											"",
+											"var schema = {",
+											"  \"type\": \"array\",",
+											"  \"items\": {",
+											"      \"type\": \"object\",",
+											"      \"properties\": {",
+											"        \"date\": {",
+											"          \"type\": \"string\",",
+											"        },",
+											"        \"book_id\": {",
+											"          \"type\": \"integer\",",
+											"        },",
+											"        \"user_id\": {",
+											"          \"type\": \"integer\",",
+											"        }",
+											"      }",
+											"  }",
+											"};",
+											"",
+											"pm.test('Schema is valid', function() {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+											"});",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://mibrary.me/api/reports",
+									"protocol": "https",
+									"host": [
+										"mibrary",
+										"me"
+									],
+									"path": [
+										"api",
+										"reports"
+									]
+								},
+								"description": "Gets all reporsts  \nExample usage:\n~~~\nhttps://mibrary.me/api/reports\n~~~"
+							},
+							"response": []
+						},
+						{
+							"name": "report.getbyisbn ",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "ec1431d0-efb8-418b-9ea4-7e8ed5275e00",
+										"type": "text/javascript",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 200ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);",
+											"});",
+											"",
+											"pm.test(\"Content-Type is application/json\", function(){",
+											"    var responseHeaders = pm.response.headers;",
+											"    responseHeaders.has('application/json');",
+											"});",
+											"",
+											"var schema = {",
+											"  \"type\": \"object\",",
+											"  \"properties\": {",
+											"    \"date\": {",
+											"      \"type\": \"string\",",
+											"    },",
+											"    \"book_id\": {",
+											"      \"type\": \"integer\",",
+											"    },",
+											"    \"user_id\": {",
+											"      \"type\": \"integer\",",
+											"    }",
+											"  }",
+											"};",
+											"",
+											"pm.test('Schema is valid', function() {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;",
+											"});",
+											"",
+											"",
+											"pm.test(\"date Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.date).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"book_id Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.book_id).toBeTruthy();",
+											"});",
+											"",
+											"pm.test(\"user_id Exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.user_id).toBeTruthy();",
+											"});",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://mibrary.me/api/report/9781934759486",
+									"protocol": "https",
+									"host": [
+										"mibrary",
+										"me"
+									],
+									"path": [
+										"api",
+										"report",
+										"9781934759486"
+									]
+								},
+								"description": "Gets a report detail given an isbn  \nExample usage:\n~~~\nhttps://mibrary.me/api/report/9781934759486\n~~~"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		}
+	]
+}
