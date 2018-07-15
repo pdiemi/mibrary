@@ -152,13 +152,13 @@ courses_schema = CourseSchema(many=True)
 # endpoint to show all courses of an isntitution 
 @api_page.route("/course/<institution>", methods=["GET"])
 def get_course(institution):
-    all_courses =User.query.get(institution)
+    all_courses =Course.query.get(institution)
     return course_schema.jsonify(all_courses)
 
 # endpoint to get course detail by course_number
 @api_page.route("/course/<course_number>", methods=["GET"])
 def course_detail(course_number):
-    course = User.query.get(course_number)
+    course = Course.query.get(course_number)
     return user_schema.jsonify(course)
 
 # --------------------------------------
