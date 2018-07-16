@@ -208,7 +208,7 @@ def meeting_detail(meeting_id):
 class BookSchema(ma.Schema):
     class Meta:
         # Fields to expose
-        fields = ('isbn', 'publisher', 'identifiers', 'classcifications',
+        fields = ('isbn', 'publisher', 'identifiers', 'classifications',
                     'title', 'subtitle', 'url', 'pages', 'subjects',
                     'publish_date', 'excerpt', 'authors')
 
