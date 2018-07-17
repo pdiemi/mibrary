@@ -254,6 +254,39 @@ def get_book():
 
 # endpoint to get book detail by isbn
 @api_page.route("/book/<isbn>", methods=["GET"])
-def book_detail(isbn):
+def book_detail_isbn(isbn):
     book = Book.query.get(isbn)
     return book_schema.jsonify(book)
+
+# endpoint to get book detail by author
+#   or by the first author if there are many
+@api_page.route("/book/<author>", methods=["GET"])
+def book_detail_author(author):
+    book = Book.query.filter_by(authors = author)
+    return book_schema.jsonify(book)
+
+# --------------------------------------
+# api for Work
+# --------------------------------------
+
+class WorkSchema(ma.Schema):
+    class Meta:
+        # Fields to expose
+        fields = ('book_id', 'author_id', 'date')
+
+work_schema = WorkSchema()
+works_schema = WorkSchema(many=True)
+
+
+# endpoint to show all works
+@api_page.route("/works", methods=["GET"])
+def get_work():
+    all_works = Work.query.all()
+    result = works_schema.dump(all_works)
+    return jsonify(result.data)
+
+# endpoint to get work detail by isbn
+@api_page.route("/work/<isbn>", methods=["GET"])
+def work_detail_isbn(isbn):
+    work = Work.query.filter_by(book_id = isbn).all()
+    return work_schema.jsonify(work)
