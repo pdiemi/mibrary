@@ -49,10 +49,15 @@ def get_user():
 
 # endpoint to get user detail by username
 @api_page.route("/user/<user_name>", methods=["GET"])
-def user_detail(user_name):
+def user_detail_username(user_name):
     user = User.query.filter_by(username = user_name).first()
     return user_schema.jsonify(user)
 
+# endpoint to get user detail by email
+@api_page.route("/user/<user_email>", methods=["GET"])
+def user_detail_email(user_email):
+    user = User.query.filter_by(email = user_email).first()
+    return user_schema.jsonify(user)
 
 # --------------------------------------
 # api for Offer
@@ -75,10 +80,16 @@ def get_offer():
     result = offers_schema.dump(all_offers)
     return jsonify(result.data)
 
-# endpoint to get offer detail by book_id
-@api_page.route("/offered-book/<book_id>", methods=["GET"])
-def offer_detail(book_id):
-    offer = Offer.query.get(book_id)
+# endpoint to get offer detail by book_id (isbn)
+@api_page.route("/offered-book/<isbn>", methods=["GET"])
+def offer_detail_isbn(isbn):
+    offer = Offer.query.filter_by(book_id = isbn).all()
+    return offer_schema.jsonify(offer)
+
+# endpoint to get offer detail by username
+@api_page.route("/offered-book/<user_name>", methods=["GET"])
+def offer_detail_user(user_name):
+    offer = Offer.query.filter_by(username = user_name).all()
     return offer_schema.jsonify(offer)
 
 
@@ -104,9 +115,15 @@ def get_request():
     return jsonify(result.data)
 
 # endpoint to get request detail by book_id
-@api_page.route("/requested-book/<book_id>", methods=["GET"])
-def request_detail(book_id):
-    my_request = Request.query.get(book_id)
+@api_page.route("/requested-book/<isbn>", methods=["GET"])
+def request_detail_isbn(isbn):
+    my_request = Request.query.filter_by(book_id = isbn).all()
+    return request_schema.jsonify(my_request)
+
+# endpoint to get request detail by username
+@api_page.route("/requested-book/<user_name>", methods=["GET"])
+def request_detail_user(user_name):
+    my_request = Request.query.filter_by(username = user_name).all()
     return request_schema.jsonify(my_request)
 
 # --------------------------------------
@@ -132,8 +149,14 @@ def get_report():
 
 # endpoint to get report detail by book_id
 @api_page.route("/reported-book/<book_id>", methods=["GET"])
-def report_detail(book_id):
-    report = Report.query.get(book_id)
+def report_detail_isbn(isbn):
+    report = Report.query.filter_by(book_id = isbn).all()
+    return report_schema.jsonify(report)
+
+# endpoint to get report detail by username
+@api_page.route("/reported-book/<user_name>", methods=["GET"])
+def report_detail_user(user_name):
+    report = Report.query.filter_by(username = user_name).all()
     return report_schema.jsonify(report)
 
 # --------------------------------------
@@ -176,9 +199,9 @@ reviews_schema = ReviewSchema(many=True)
 
 
 # endpoint to get review detail by book_id
-@api_page.route("/reviews/<book_id>", methods=["GET"])
-def review_detail(book_id):
-    review = Review.query.get(book_id)
+@api_page.route("/reviews/<isbn>", methods=["GET"])
+def review_detail_isbn(isbn):
+    review = Review.query.filter_by(book_id = isbn).all()
     return review_schema.jsonify(review)
 
 # --------------------------------------

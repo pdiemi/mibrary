@@ -8,7 +8,7 @@
 # models.py
 # --------------------------------------
 
-from sqlalchemy import Column, String, Integer, ForeignKey, Numeric, Date
+from sqlalchemy import Column, String, Integer, ForeignKey, Numeric, Date, or_, and_, text
 from sqlalchemy.orm import relationship
 from bridge import db
 
