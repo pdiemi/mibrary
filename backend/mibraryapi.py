@@ -204,6 +204,12 @@ def review_detail_isbn(isbn):
     review = Review.query.filter_by(book_id = isbn).all()
     return review_schema.jsonify(review)
 
+# endpoint to get review detail by username
+@api_page.route("/reviews/<user_name>", methods=["GET"])
+def review_detail_user(user_name):
+    review = Review.query.filter_by(username = user_name).all()
+    return review_schema.jsonify(review)
+
 # --------------------------------------
 # api for Meeting
 # --------------------------------------
