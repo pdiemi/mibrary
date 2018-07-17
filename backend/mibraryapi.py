@@ -48,9 +48,9 @@ def get_user():
     return jsonify(result.data)
 
 # endpoint to get user detail by username
-@api_page.route("/user/<username>", methods=["GET"])
-def user_detail(username):
-    user = User.query.get(username)
+@api_page.route("/user/<user_name>", methods=["GET"])
+def user_detail(user_name):
+    user = User.query.filter_by(username = user_name).first()
     return user_schema.jsonify(user)
 
 
@@ -149,16 +149,16 @@ class CourseSchema(ma.Schema):
 course_schema = CourseSchema()
 courses_schema = CourseSchema(many=True)
 
-# endpoint to show all courses of an isntitution 
-@api_page.route("/course/<institution>", methods=["GET"])
-def get_course(institution):
-    all_courses =Course.query.get(institution)
+# endpoint to show all courses of an isntitution given its code
+@api_page.route("/course/<institution_code>", methods=["GET"])
+def get_course(institution_code):
+    all_courses =Course.query.filter_by(institution_id = institution_code).first()
     return course_schema.jsonify(all_courses)
 
 # endpoint to get course detail by course_number
-@api_page.route("/course/<course_number>", methods=["GET"])
-def course_detail(course_number):
-    course = Course.query.get(course_number)
+@api_page.route("/course/<coursenumber>", methods=["GET"])
+def course_detail(coursenumber):
+    course = Course.query.filter_by(course_number = coursenumber).all()
     return user_schema.jsonify(course)
 
 # --------------------------------------
