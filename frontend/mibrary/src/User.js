@@ -9,9 +9,9 @@ class User extends Model
     super();
   }
 
-  getModelIdentifier(index)
+  getModelIdentifier(model)
   {
-    return "userdetail";
+    return model.username;
   }
 
   Model()
@@ -21,24 +21,29 @@ class User extends Model
         return response.json();
       })
       .then((responseJson) => {
-        console.log(responseJson);
-        let models = responseJson.map((res) => {
-          return (
-              <div key="{res.results}">
-                {res.username}
-              </div>
-            );
-        })
-        this.setState({models : models});
+        this.setState({models : responseJson});
       })
   }
 
   render()
   {
     const { models, currentPage, pageModelCount} = this.state;
+
+    let modelsList = models.map((res) => {
+      var content = (
+        <div id={res.username}>
+          {res.username}
+        </div>
+      );
+      return({
+        content : content,
+        username : res.username
+      });
+    });
+
     return (
       <PaginatedContainer
-        models={models}
+        models={modelsList}
         currentPage={currentPage}
         modelsPerPage={pageModelCount}
         getModelIdentifier={this.getModelIdentifier}

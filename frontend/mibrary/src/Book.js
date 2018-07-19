@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import {Link } from 'react-router-dom';
 import {PaginatedContainer, Model} from './Model.js';
 
-
-
 class Book extends Model 
 {
   constructor()
@@ -13,7 +11,7 @@ class Book extends Model
 
   getModelIdentifier(model)
   {
-    return "book/"+model.id;
+    return model.isbn;
   }
 
   Model()
@@ -29,10 +27,23 @@ class Book extends Model
 
   render()
   {
-    const { models, isbns, currentPage, pageModelCount} = this.state;
+    const { models, currentPage, pageModelCount} = this.state;
+
+    let modelsList = models.map((res) => {
+      var content = (
+        <div id={res.isbn}>
+          {res.title}
+        </div>
+      );
+      return({
+        content : content,
+        isbn : res.isbn
+      });
+    });
+
     return (
       <PaginatedContainer
-        models={models}
+        models={modelsList}
         currentPage={currentPage}
         modelsPerPage={pageModelCount}
         getModelIdentifier={this.getModelIdentifier}
