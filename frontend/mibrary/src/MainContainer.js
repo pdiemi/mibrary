@@ -5,12 +5,12 @@ import './MainPage.css';
 function Navbar() {
 	return (
         <header>
-        <div class="container ">
-            <div class="header">
+        <div className="container ">
+            <div className="header">
                 <a target="blank" href="index.html">
-                    <img src="images/logos/logo7.png " class="img-responsive " alt="logo7 "></img>
+                    <img src="images/logos/logo7.png " className="img-responsive " alt="logo7 "></img>
                 </a>
-                <div class="topnav ">
+                <div className="topnav ">
                     <Link to='/'>Home</Link>
                     <Link to='/book'>Books</Link>
                     <Link to='/course'>Courses</Link>
@@ -26,20 +26,20 @@ function Navbar() {
 export function MainContainer(content) {
 	return (
       <div className="App">
-        <div class="container ">
-            <div class="header">
+        <div className="container ">
+            <div className="header">
                 <Navbar />
             </div>
         </div>
-        <div class="clearfix"></div>
+        <div className="clearfix"></div>
 
-        <div class="container">
+        <div className="container">
             {content.content}
         </div>
-        <div class="clearfix"></div>
+        <div className="clearfix"></div>
 
-        <div class="container">
-            <div class="footer">Copyright &copy; 2018 SWE-IDB5-SUMMER2018</div>
+        <div className="container">
+            <div className="footer">Copyright &copy; 2018 SWE-IDB5-SUMMER2018</div>
         </div>
 
       </div>

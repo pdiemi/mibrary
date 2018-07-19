@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {Link } from 'react-router-dom';
 import {PaginatedContainer, Model} from './Model.js';
 
+
+
 class Book extends Model 
 {
   constructor()
@@ -9,9 +11,9 @@ class Book extends Model
     super();
   }
 
-  getModelIdentifier(index)
+  getModelIdentifier(model)
   {
-    return "bookdetail";
+    return "book/"+model.id;
   }
 
   Model()
@@ -21,21 +23,13 @@ class Book extends Model
         return response.json();
       })
       .then((responseJson) => {
-        console.log(responseJson);
-        let models = responseJson.map((res) => {
-          return (
-              <div key="{res.results}">
-                {res.title}
-              </div>
-            );
-        })
-        this.setState({models : models});
+        this.setState({models : responseJson});
       })
   }
 
   render()
   {
-    const { models, currentPage, pageModelCount} = this.state;
+    const { models, isbns, currentPage, pageModelCount} = this.state;
     return (
       <PaginatedContainer
         models={models}
