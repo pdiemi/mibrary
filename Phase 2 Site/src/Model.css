@@ -1,8 +1,12 @@
+.App {
+  text-align: center;
+}
 
-		body {
-			/*background-image: url("images/backgrounds/bg1.jpg");*/
-			background-attachment: fixed;
-		}
+#pageNumbers li{
+  display:inline-block;
+  zoom:1;
+  width:20px
+}
 
 		/* Style the header */
 
@@ -101,33 +105,4 @@
 			.column.middle {
 				width: 100%;
 			}
-        }
-        .clearfix{
-            padding-top: 20px;
-        }
-
-        .card{
-            padding: 20px; background-color: rgba(7, 113, 252, 0.3);
-        }
-
-        .card-title
-        {
-            color:rgb(8, 8, 8); text-shadow: 4px 4px 4px black;
-					font-family:georgia; font-size:60px; font-weight:bold; color:rgb(252, 220, 41)
-        }
-
-		/* Style the footer */
-
-		.footer {
-			background-color: rgb(252, 220, 41);
-			text-align: center;
-			padding: 10px;
-            bottom: 0;
-            font-weight:bold;
-		}
-
-		.clearfix:after {
-            content: "";
-            display: table;
-            clear: both;
         }

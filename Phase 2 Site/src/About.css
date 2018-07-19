@@ -1,11 +1,5 @@
-* {
-    box-sizing: border-box;
-}
-
-/* Style the body */
-
 body {
-    /*background-image: url("../../images/backgrounds/bg1.jpg");*/
+    background-image: url("images/backgrounds/bg1.jpg");
     background-attachment: fixed;
 }
 
@@ -43,7 +37,7 @@ body {
 /* Links - change color on hover */
 
 .topnav a:hover {
-    background-color: rgba(7, 113, 252);
+    background-color: rgb(177, 203, 236);
     color: black;
 }
 
@@ -91,6 +85,23 @@ body {
     }
 }
 
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other on smaller screens (600px wide or less) */
+
+@media screen and (max-width: 600px) {
+    .column {
+        width: 100%;
+    }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+
+@media screen and (max-width: 600px) {
+    .column.side,
+    .column.middle {
+        width: 100%;
+    }
+}
+
 /* Style the footer */
 
 .footer {
@@ -101,7 +112,89 @@ body {
     font-weight:bold;
 }
 
-.clearfix {
+* {
+    box-sizing: border-box;
+}
+
+/* Create two unequal columns that floats next to each other */
+
+.column {
+    float: left;
+    padding: 10px;
+}
+
+/* Left and right column */
+
+.column.side {
+    width: 35%;
+    border-left-style: solid;
+}
+
+/* Middle column */
+
+.column.middle {
+    width: 65%;
+}
+
+/* Clear floats after the columns */
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+
+@media (max-width: 600px) {
+    .column.side,
+    .column.middle {
+        width: 100%;
+    }
+}
+
+/* Style the image gallery */
+
+div.gallery {
+    border: 2px solid #ccc;
+    background-color: rgba(7, 113, 252, 0.3);
+}
+
+div.gallery:hover {
+    border: 1px solid #777;
+}
+
+div.gallery img {
+    width: 100%;
+    height: auto;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+}
+
+.responsive {
+    padding: 0 6px;
+    float: left;
+    width: 33%;
+}
+
+@media only screen and (max-width: 700px) {
+    .responsive {
+        width: 49.99999%;
+        margin: 6px 0;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .responsive {
+        width: 100%;
+    }
+}
+
+.clearfix
+{
     padding-top: 20px;
 }
 

@@ -1,0 +1,46 @@
+{
+        "book1": {
+        "isbn": "9781934759486",
+        "publisher": "Oxford",
+        "identifiers": "010-9781934759486",
+        "classifications": "Dewey Decima",
+        "title": "Oxford Dictionaries 1",
+        "subtitle": "English Dictionary, Thesaurus, & grammar help",
+        "url": "https://en.oxforddictionaries.com/",
+        "number_of_pages": "1089",
+        "publish_date": "10/10/2010",
+        "excerpts": "any thing about the book; could be an empty string/text",
+        "authors": "Oxford Uni",
+        "publish_places": "US",
+        },
+        
+        "book2": {
+        "isbn": "32048324329",
+        "publisher": "Oxford",
+        "identifiers": "010-9781934759486",
+        "classifications": "Dewey Decima",
+        "title": "Oxford Dictionaries 2",
+        "subtitle": "English Dictionary, Thesaurus, & grammar help",
+        "url": "https://en.oxforddictionaries.com/",
+        "number_of_pages": "1089",
+        "publish_date": "10/10/2010",
+        "excerpts": "any thing about the book; could be an empty string/text",
+        "authors": "Oxford Uni",
+        "publish_places": "US",
+        },
+        
+        "book3": {
+        "isbn": "120910293092",
+        "publisher": "Oxford",
+        "identifiers": "010-9781934759486",
+        "classifications": "Dewey Decima",
+        "title": "Oxford Dictionaries 3",
+        "subtitle": "English Dictionary, Thesaurus, & grammar help",
+        "url": "https://en.oxforddictionaries.com/",
+        "number_of_pages": "1089",
+        "publish_date": "10/10/2010",
+        "excerpts": "any thing about the book; could be an empty string/text",
+        "authors": "Oxford Uni",
+        "publish_places": "US",
+        }
+}
