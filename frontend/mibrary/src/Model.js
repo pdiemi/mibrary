@@ -44,8 +44,9 @@ export function PaginatedContainer(props)
 
   const renderModels = currentDisplayModels.map((model, index) => {
     const link = props.getModelIdentifier(model);
-    return <a href={link}> <p key={index}>{model.content}</p></a>;});
-
+    return <a href={link}> <p key={index}>{model.content}</p></a>;
+  });
+  
   const pageNumbers = [];
   for(let i = 1; i <= Math.ceil(models.length/pageModelCount); i++)
   {
