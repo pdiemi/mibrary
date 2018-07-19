@@ -1,99 +1,43 @@
 import React, { Component } from 'react';
-import {Link } from 'react-router-dom'
-import './Model.css';
+import {Link } from 'react-router-dom';
+import {PaginatedContainer, Model} from './Model.js';
 
-class Book extends Component 
+
+
+class Book extends Model 
 {
   constructor()
   {
     super();
-    this.state = 
-    {
-        models : [],
-        currentPage : 1,
-        pageModelCount : 5
-    };
-    this.handleClick = this.handleClick.bind(this);
   }
 
-  componentDidMount()
+  getModelIdentifier(model)
   {
-        this.Model();
+    return "book/"+model.id;
   }
 
   Model()
   {
-  	  fetch('http://localhost:3000/json/test_book_list.json')
-        .then((response) => {
-          return response.json()})
-        .then((responseJson) => {
-          let models = responseJson.results.map((res) => {
-            return (
-                <div key="{res.results}">
-                  {res.title}
-                </div>
-              )//
-          })
-          this.setState({models : models});
-          // console.log("state", this.state.models);
-        })
+	  fetch('http://localhost:5000/books')
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseJson) => {
+        this.setState({models : responseJson});
+      })
   }
 
-  handleClick(event)
+  render()
   {
-    this.setState({
-      currentPage : Number(event.target.id)
-    });
-  }
-
-  render() 
-  {
-    const { models, currentPage, pageModelCount} = this.state;
-
-    const indexOfLast = currentPage * pageModelCount;
-    const indexOfFirst = indexOfLast - pageModelCount;
-    const currentDisplayModels = models.slice(indexOfFirst, indexOfLast);
-
-    const renderModels = currentDisplayModels.map((model, index) => {
-      const link = model + ".html"; 
-      return <Link to='/bookdetail'><p key={index}>{model}</p></Link>;});
-
-    const pageNumbers = [];
-    for(let i = 1; i <= Math.ceil(models.length/pageModelCount); i++)
-    {
-      pageNumbers.push(i);
-    }
-
-    const renderPageNumbers = pageNumbers.map(number => 
-    {
-        return (<a href="#"><li key={number} id={number} onClick={this.handleClick}>{number}</li></a>);
-    });
-
+    const { models, isbns, currentPage, pageModelCount} = this.state;
     return (
-      <div className="App">
-        <header>
-        <div class="container ">
-            <div class="header">
-                <a target="blank" href="index.html">
-                    <img src="images/logos/logo7.png " class="img-responsive " alt="logo7 "></img>
-                </a>
-                <div class="topnav ">
-                    <Link to='/'>Home</Link>
-                    <Link to='/book'>Books</Link>
-                    <Link to='/course'>Courses</Link>
-                    <Link to='/user'>Users</Link>
-                    <Link to='/about'>About</Link>
-                </div>
-            </div>
-        </div>
-        </header>
-        <div>
-            {renderModels}
-          <ul id="pageNumbers">
-            {renderPageNumbers}
-          </ul>
-        </div>
-      </div>
+      <PaginatedContainer
+        models={models}
+        currentPage={currentPage}
+        modelsPerPage={pageModelCount}
+        getModelIdentifier={this.getModelIdentifier}
+        handleClick={this.handleClick}
+      />
     );
   }
 }
