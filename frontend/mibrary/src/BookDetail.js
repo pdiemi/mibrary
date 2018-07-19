@@ -17,6 +17,22 @@ class BookDetail extends Component
 
   Model()
   {
+    const url = "http://localhost:5000/book/" + this.props.match.params.isbn;
+    fetch('')
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseJson) => {
+        console.log(responseJson);
+        let models = responseJson.map((res) => {
+          return (
+              <div key="{res.results}">
+                {res.title}
+              </div>
+            );
+        })
+        this.setState({models : models});
+      })
   }
 
 

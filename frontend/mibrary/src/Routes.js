@@ -15,7 +15,7 @@ const Routes = () => (
             <Route path='/course' component={Course}/>
             <Route path='/user' component={User}/>
             <Route path='/about' component={About}/>
-            <Route path='/bookdetail' component={BookDetail}/>
+            <Route path='/book/:isbn' component={BookDetail}/>
         </Switch>
     </main>
 )
