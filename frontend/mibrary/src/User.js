@@ -11,7 +11,16 @@ class User extends Model
 
   getModelIdentifier(model)
   {
-    return model.username;
+    return /user/ + model.user_id;
+  }
+
+  searchCondition(queryText, model)
+  {
+    if(queryText.length == 0 || model.username.toLowerCase().includes(queryText.toLowerCase()))
+    {
+      return true;
+    }
+    return false;
   }
 
   Model()
@@ -23,16 +32,17 @@ class User extends Model
       .then((responseJson) => {
 
         this.setState({models : responseJson});
+        this.setState({searchModels : responseJson});
       })
   }
 
   render()
   {
-    const { models, currentPage, pageModelCount} = this.state;
+    const { models, searchValue, searchModels, currentPage, pageModelCount} = this.state;
 
     let modelsList = models.map((res) => {
       var content = (
-        <div id={res.username}>
+        <div id={res.user_id}>
           {res.username}
         </div>
       );

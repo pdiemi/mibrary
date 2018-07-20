@@ -95,7 +95,7 @@ class Course(db.Model):
     institution_id = db.Column(db.Integer, 
                                     ForeignKey('institutions.institution_id'),
                                     nullable=False, index=True)    
-    deparment = db.Column(db.String(100), nullable=False)
+    department = db.Column(db.String(100), nullable=False)
 
     institution = db.relationship("Institution", backref="courses", foreign_keys=[institution_id])
     book = db.relationship("Course_Book", back_populates="course")
