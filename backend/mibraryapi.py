@@ -54,13 +54,13 @@ def user_detail_username(user_name):
     return user_schema.jsonify(user)
 
 # endpoint to get user detail by email
-@api_page.route("/api/user/<user_email>", methods=["GET"])
+@api_page.route("/api/user/email/<user_email>", methods=["GET"])
 def user_detail_email(user_email):
     user = User.query.filter_by(email = user_email).first()
     return user_schema.jsonify(user)
 
 # endpoint to get user detail by major
-@api_page.route("/api/user/<user_major>", methods=["GET"])
+@api_page.route("/api/user/major/<user_major>", methods=["GET"])
 def user_detail_major(user_major):
     user = User.query.filter_by(major = user_major).all()
     return users_schema.jsonify(user)
