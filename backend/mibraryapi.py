@@ -345,8 +345,10 @@ course_books_schema = Course_BookSchema(many=True)
 # endpoint to get book detail by course_id
 @api_page.route("/api/course-book/book/<course_id>", methods=["GET"])
 def book_detail_course_id(course_id):
-    book = Course_Book.query.filter_by(course_id = course_id).all()
-    return course_books_schema.jsonify(book)
+    #book = Course_Book.query.filter_by(course_id = course_id).all()
+    book = Book.query.join(Course_Book, Book.isbn == Course_Book.book_id)   \
+                .filter(Course_Book.course_id == course_id).all()
+    return books_schema.jsonify(book)
 
 # --------------------------------------
 # api for Book
