@@ -30,7 +30,6 @@ class User extends Model
         return response.json();
       })
       .then((responseJson) => {
-
         this.setState({models : responseJson});
         this.setState({searchModels : responseJson});
       })

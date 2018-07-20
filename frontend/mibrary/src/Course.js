@@ -11,7 +11,7 @@ class Course extends Model
 
   getModelIdentifier(model)
   {
-    return /course/ + model.course_number;
+    return /course/ + model.course_id;
   }
 
   searchCondition(queryText, model)
@@ -46,8 +46,9 @@ class Course extends Model
         </div>
       );
       return({
-        department : res.department,
         content : content,
+        course_id: res.course_id,
+        department : res.department,
         course_number : res.course_number
       });
     });
@@ -59,8 +60,9 @@ class Course extends Model
         </div>
       );
       return({
-        department : res.department,
         content : content,
+        course_id: res.course_id,
+        department : res.department,
         course_number : res.course_number
       });
     });
