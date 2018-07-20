@@ -11,7 +11,7 @@ class User extends Model
 
   getModelIdentifier(model)
   {
-    return /user/ + model.user_id;
+    return /user/ + model.username;
   }
 
   searchCondition(queryText, model)

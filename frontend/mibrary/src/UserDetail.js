@@ -21,7 +21,7 @@ class UserDetail extends Component
 
   Model()
   {
-    const url = "http://localhost:5000/api/users/" + this.props.match.params.user_id;
+    const url = "http://localhost:5000/api/user/" + this.props.match.params.user_id;
     fetch(url)
       .then((response) => {
         return response.json();

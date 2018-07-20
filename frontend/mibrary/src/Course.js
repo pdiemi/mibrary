@@ -11,7 +11,7 @@ class Course extends Model
 
   getModelIdentifier(model)
   {
-    return /book/ + model.course_id;
+    return /course/ + model.course_number;
   }
 
   searchCondition(queryText, model)
