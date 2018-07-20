@@ -47,6 +47,7 @@ class Course extends Model
       );
       return({
         content : content,
+        course_name : res.course_name,
         course_id: res.course_id,
         department : res.department,
         course_number : res.course_number
@@ -61,6 +62,7 @@ class Course extends Model
       );
       return({
         content : content,
+        course_name : res.course_name,
         course_id: res.course_id,
         department : res.department,
         course_number : res.course_number
