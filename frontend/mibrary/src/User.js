@@ -48,17 +48,35 @@ class User extends Model
       );
       return({
         content : content,
-        username : res.username
+        username : res.username,
+        user_id : res.user_id
+      });
+    });
+
+    let searchModelsList = searchModels.map((res) => {
+      var content = (
+        <div id={res.user_id}>
+          {res.username}
+        </div>
+      );
+      return({
+        content : content,
+        username : res.username,
+        user_id : res.user_id
       });
     });
 
     return (
       <PaginatedContainer
         models={modelsList}
+        searchModels={searchModelsList}
+        searchValue={searchValue}
         currentPage={currentPage}
         modelsPerPage={pageModelCount}
         getModelIdentifier={this.getModelIdentifier}
         handleClick={this.handleClick}
+        searchCondition={this.searchCondition}
+        this={this}
       />
     );
   }
