@@ -11,7 +11,7 @@ class Book extends Model
 
   getModelIdentifier(model)
   {
-    return model.isbn;
+    return /book/ + model.isbn;
   }
 
   Model()
