@@ -238,19 +238,19 @@ course_schema = CourseSchema()
 courses_schema = CourseSchema(many=True)
 
 # endpoint to show all courses of an isntitution given its code
-@api_page.route("/api/course/<institution_code>", methods=["GET"])
+@api_page.route("/api/course/institution<institution_code>", methods=["GET"])
 def get_course(institution_code):
     all_courses =Course.query.filter_by(institution_id = institution_code).all()
     return courses_schema.jsonify(all_courses)
 
 # endpoint to get course detail by course_number
-@api_page.route("/api/course/<coursenumber>", methods=["GET"])
+@api_page.route("/api/course/course-number/<coursenumber>", methods=["GET"])
 def course_detail(coursenumber):
     course = Course.query.filter_by(course_number = coursenumber).all()
     return courses_schema.jsonify(course)
 
 # endpoint to get all courses by department
-@api_page.route("/api/course/<department>", methods=["GET"])
+@api_page.route("/api/course/department/<department>", methods=["GET"])
 def get_course_department(department):
     course = Course.query.filter_by(department =department).all()
     return user_schema.jsonify(course)
