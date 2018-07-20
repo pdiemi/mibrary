@@ -16,7 +16,7 @@ class User extends Model
 
   Model()
   {
-    fetch('http://localhost:5000/users')
+    fetch('http://localhost:5000/api/users')
       .then((response) => {
         return response.json();
       })
