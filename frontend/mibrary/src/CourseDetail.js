@@ -21,7 +21,7 @@ class CourseDetail extends Component
 
   Model()
   {
-    const url = "http://localhost:5000/api/users/" + this.props.match.params.user_id;
+    const url = "http://localhost:5000/api/course/institution/3658/" + this.props.match.params.course_id;
     fetch(url)
       .then((response) => {
         return response.json();
@@ -38,9 +38,8 @@ class CourseDetail extends Component
 
     var content = (
       <div className="card">
-        <h1>{model.username}</h1>
-        <p>{model.email}</p>
-        <p>{model.major}</p>
+        <h1>{model.course_name}</h1>
+        <p>{model.department} {model.course_number}</p>
       </div>
     );
 
