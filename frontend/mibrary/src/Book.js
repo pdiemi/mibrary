@@ -16,7 +16,7 @@ class Book extends Model
 
   Model()
   {
-	  fetch('http://localhost:5000/books')
+	  fetch('http://localhost:5000/api/books')
       .then((response) => {
         return response.json();
       })
