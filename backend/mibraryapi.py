@@ -54,13 +54,13 @@ def user_detail_username(user_name):
     return user_schema.jsonify(user)
 
 # endpoint to get user detail by email
-@api_page.route("/api/user/<user_email>", methods=["GET"])
+@api_page.route("/api/user/email/<user_email>", methods=["GET"])
 def user_detail_email(user_email):
     user = User.query.filter_by(email = user_email).first()
     return user_schema.jsonify(user)
 
 # endpoint to get user detail by major
-@api_page.route("/api/user/<user_major>", methods=["GET"])
+@api_page.route("/api/user/major/<user_major>", methods=["GET"])
 def user_detail_major(user_major):
     user = User.query.filter_by(major = user_major).all()
     return users_schema.jsonify(user)
@@ -115,7 +115,7 @@ def offer_detail_user(user_name):
     return offer_schema.jsonify(offer)
 
 # endpoint to add a new offer
-@app.route("/api/offer/add-offer", methods=["POST"])
+@app.route("/api/offered-book/add-offer", methods=["POST"])
 def add_offer():
     date = request.json['date']
     username = request.json['username']
@@ -162,7 +162,7 @@ def request_detail_user(user_name):
     return request_schema.jsonify(my_request)
 
 # endpoint to add a new request
-@app.route("/api/requestr/add-request", methods=["POST"])
+@app.route("/api/requested-book/add-request", methods=["POST"])
 def add_request():
     date = request.json['date']
     username = request.json['username']
@@ -210,7 +210,7 @@ def report_detail_user(user_name):
     return report_schema.jsonify(report)
 
 # endpoint to add a new report
-@app.route("/api/report/add-report", methods=["POST"])
+@app.route("/api/reported-book/add-report", methods=["POST"])
 def add_report():
     date = request.json['date']
     username = request.json['username']
