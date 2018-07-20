@@ -12,7 +12,7 @@ function Navbar() {
                 </a>
                 <div className="topnav ">
                     <Link to='/'>Home</Link>
-                    <Link to='/book'>Books</Link>
+                    <Link to='/books'>Books</Link>
                     <Link to='/course'>Courses</Link>
                     <Link to='/user'>Users</Link>
                     <Link to='/about'>About</Link>

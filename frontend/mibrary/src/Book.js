@@ -14,6 +14,15 @@ class Book extends Model
     return /book/ + model.isbn;
   }
 
+  searchCondition(queryText, model)
+  {
+    if(queryText.length == 0 || model.title.toLowerCase().includes(queryText.toLowerCase()))
+    {
+      return true;
+    }
+    return false;
+  }
+
   Model()
   {
 	  fetch('http://localhost:5000/api/books')
@@ -22,12 +31,13 @@ class Book extends Model
       })
       .then((responseJson) => {
         this.setState({models : responseJson});
+        this.setState({searchModels : responseJson});
       })
   }
 
   render()
   {
-    const { models, currentPage, pageModelCount} = this.state;
+    const { models, searchValue, searchModels, currentPage, pageModelCount} = this.state;
 
     let modelsList = models.map((res) => {
       var content = (
@@ -36,6 +46,20 @@ class Book extends Model
         </div>
       );
       return({
+        title : res.title,
+        content : content,
+        isbn : res.isbn
+      });
+    });
+
+    let searchModelsList = searchModels.map((res) => {
+      var content = (
+        <div id={res.isbn}>
+          {res.title}
+        </div>
+      );
+      return({
+        title : res.title,
         content : content,
         isbn : res.isbn
       });
@@ -44,10 +68,14 @@ class Book extends Model
     return (
       <PaginatedContainer
         models={modelsList}
+        searchModels={searchModelsList}
+        searchValue={searchValue}
         currentPage={currentPage}
         modelsPerPage={pageModelCount}
         getModelIdentifier={this.getModelIdentifier}
         handleClick={this.handleClick}
+        searchCondition={this.searchCondition}
+        this={this}
       />
     );
   }
