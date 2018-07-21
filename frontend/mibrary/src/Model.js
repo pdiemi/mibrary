@@ -92,7 +92,7 @@ export function PaginatedContainer(props)
       return searchCondition(pageThis.state.searchValue, model);
     });
     console.log(newModels);
-    pageThis.setState({searchModels : newModels});
+    pageThis.setState({searchModels : newModels, currentPage : 1});
   }
 
   const handleChange = function (evt) {

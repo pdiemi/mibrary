@@ -23,6 +23,15 @@ class Course extends Model
     return false;
   }
 
+  highlightCourseText(model, searchValue)
+  {
+    return (
+      <div id={model.course_id}>
+        {Model.highlightModelText(model.course_name, searchValue)}
+      </div>
+    );
+  }
+
   Model()
   {
     fetch('http://localhost:5000/api/course/institution/3658')
@@ -79,6 +88,7 @@ class Course extends Model
         getModelIdentifier={this.getModelIdentifier}
         handleClick={this.handleClick}
         searchCondition={this.searchCondition}
+        highlightModelText={this.highlightCourseText}
         this={this}
       />
     );
