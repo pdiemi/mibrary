@@ -24,6 +24,28 @@ export class Model extends Component
         this.Model();
   }
 
+  static highlightModelText(searchString, searchValue)
+  {
+    var n = searchString.toLowerCase().indexOf(searchValue.toLowerCase());
+    if(searchValue.length < 1 | n < 0) {
+      return searchString;
+    }
+    console.log(n);
+    var titleString = [];
+    titleString[0] = searchString.substring(0, n);
+    titleString[1] = searchString.substring(n, n+searchValue.length);
+    titleString[2] = searchString.substring(n+searchValue.length);
+    console.log("------");
+    console.log(titleString[0]);
+    console.log(titleString[1]);
+    console.log(titleString[2]);
+    return (
+      <div>
+        {titleString[0]}<b>{titleString[1]}</b>{titleString[2]}
+      </div>
+    );
+  }
+
   handleClick(event)
   {
     this.setState({

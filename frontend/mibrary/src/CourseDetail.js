@@ -21,7 +21,7 @@ class CourseDetail extends Component
 
   Model()
   {
-    const url = "http://localhost:5000/api/course/institution/3658/" + this.props.match.params.course_id;
+    const url = "http://localhost:5000/api/course/" + this.props.match.params.course_id;
     fetch(url)
       .then((response) => {
         return response.json();

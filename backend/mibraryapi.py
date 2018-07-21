@@ -244,6 +244,12 @@ def get_course(institution_code):
     return courses_schema.jsonify(all_courses)
 
 # endpoint to get course detail by course_number
+@api_page.route("/api/course/<course_id>", methods=["GET"])
+def course_detail_course_id(course_id):
+    course = Course.query.get(course_id)
+    return course_schema.jsonify(course)
+
+# endpoint to get course detail by course_id
 @api_page.route("/api/course/course-number/<coursenumber>", methods=["GET"])
 def course_detail(coursenumber):
     course = Course.query.filter_by(course_number = coursenumber).all()

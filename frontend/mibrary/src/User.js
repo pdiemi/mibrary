@@ -11,7 +11,7 @@ class User extends Model
 
   getModelIdentifier(model)
   {
-    return /user/ + model.user_id;
+    return /user/ + model.username;
   }
 
   searchCondition(queryText, model)
@@ -23,6 +23,15 @@ class User extends Model
     return false;
   }
 
+  highlightUserText(model, searchValue)
+  {
+    return (
+      <div id={model.user_id}>
+        {Model.highlightModelText(model.username, searchValue)}
+      </div>
+    );
+  }
+
   Model()
   {
     fetch('http://localhost:5000/api/users')
@@ -30,7 +39,6 @@ class User extends Model
         return response.json();
       })
       .then((responseJson) => {
-
         this.setState({models : responseJson});
         this.setState({searchModels : responseJson});
       })
@@ -76,6 +84,7 @@ class User extends Model
         getModelIdentifier={this.getModelIdentifier}
         handleClick={this.handleClick}
         searchCondition={this.searchCondition}
+        highlightModelText={this.highlightUserText}
         this={this}
       />
     );
