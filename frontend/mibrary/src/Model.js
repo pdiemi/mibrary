@@ -40,6 +40,7 @@ export function PaginatedContainer(props)
   var currentPage = props.currentPage;
   const pageModelCount = props.modelsPerPage;
   const searchCondition = props.searchCondition;
+  const highlightModelText = props.highlightModelText;
   const pageThis = props.this;
 
   const indexOfLast = currentPage * pageModelCount;
@@ -50,7 +51,7 @@ export function PaginatedContainer(props)
 
   const renderModels = currentDisplayModels.map((model, index) => {
     const link = props.getModelIdentifier(model);
-    return <a href={link}> <p key={index}>{model.content}</p></a>;
+    return <a href={link}> <p key={index}>{highlightModelText(model, pageThis.state.searchValue)}</p></a>;
   });
 
   const pageNumbers = [];
