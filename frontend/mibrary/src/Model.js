@@ -16,6 +16,7 @@ export class Model extends Component
         currentPage : 1,
         pageModelCount : 10
     };
+    this.apiURL = "http://ec2-18-191-216-158.us-east-2.compute.amazonaws.com:5000/api/";
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -97,13 +98,13 @@ export function PaginatedContainer(props)
 
   const handleChange = function (evt) {
     pageThis.setState({searchValue : evt.target.value});
+    search();
   }
 
   const content = (
     <div>
       <div className="input-field">
         <input id="SearchBox" type="text" value={props.searchValue} onChange={handleChange}></input>
-        <input type="submit" value="Search" onClick={search}></input>
       </div>
       {renderModels}
       <ul id="pageNumbers">

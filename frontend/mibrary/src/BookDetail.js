@@ -21,7 +21,7 @@ class BookDetail extends Component
 
   Model()
   {
-    const url = "http://localhost:5000/api/book/" + this.props.match.params.isbn;
+    const url = this.apiURL + "book/" + this.props.match.params.isbn;
     fetch(url)
       .then((response) => {
         return response.json();

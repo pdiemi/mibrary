@@ -34,7 +34,7 @@ class Course extends Model
 
   Model()
   {
-    fetch('http://localhost:5000/api/course/institution/3658')
+    fetch(this.apiURL + 'course/institution/3658')
     .then((response) => {
       return response.json();
     })

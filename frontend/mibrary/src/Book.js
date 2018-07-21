@@ -34,7 +34,8 @@ class Book extends Model
 
   Model()
   {
-	  fetch('http://localhost:5000/api/books')
+    console.log(this.apiURL+'books');
+	  fetch(this.apiURL+'books')
       .then((response) => {
         return response.json();
       })
