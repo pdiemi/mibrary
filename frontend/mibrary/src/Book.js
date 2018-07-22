@@ -56,6 +56,7 @@ class Book extends Model
         </div>
       );
       return({
+        objName : res.title,
         title : res.title,
         content : content,
         isbn : res.isbn
@@ -69,6 +70,7 @@ class Book extends Model
         </div>
       );
       return({
+        objName : res.title,
         title : res.title,
         content : content,
         isbn : res.isbn

@@ -55,6 +55,7 @@ class User extends Model
         </div>
       );
       return({
+        objName : res.username,
         content : content,
         username : res.username,
         user_id : res.user_id
@@ -68,6 +69,7 @@ class User extends Model
         </div>
       );
       return({
+        objName : res.username,
         content : content,
         username : res.username,
         user_id : res.user_id

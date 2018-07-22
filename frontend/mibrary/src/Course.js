@@ -55,6 +55,7 @@ class Course extends Model
         </div>
       );
       return({
+        objName : res.course_name,
         content : content,
         course_name : res.course_name,
         course_id: res.course_id,
@@ -70,6 +71,7 @@ class Course extends Model
         </div>
       );
       return({
+        objName : res.course_name,
         content : content,
         course_name : res.course_name,
         course_id: res.course_id,

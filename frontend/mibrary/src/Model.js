@@ -88,11 +88,74 @@ export function PaginatedContainer(props)
       return (<a href="#"><li key={number} id={number} onClick={props.handleClick}>{number}</li></a>);
   });
 
+  const GetSortMode = function()
+  {
+    const query = document.querySelector('input[name=sortOrder]:checked')
+    var sortMode = "";
+    if(query !== null)
+    {
+      sortMode = query.value;
+    }
+    if(sortMode === "Ascending")
+    {
+      return 0;
+    }
+    else if(sortMode === "Descending")
+    {
+      return 1;
+    }
+    else
+    {
+      return 0;
+    }
+  }
+
+  const AscendingCompare = function(a, b)
+  {
+      if (a.objName < b.objName)
+        return -1;
+      if (a.objName > b.objName)
+        return 1;
+      return 0;
+  }
+
+  const DescendingCompare = function(a, b)
+  {
+      if (a.objName < b.objName)
+        return 1;
+      if (a.objName > b.objName)
+        return -1;
+      return 0;
+  }
+
+  const SortClicked = function(evt)
+  {
+    search();
+  }
+
+  const SortModels = function(models)
+  {
+    const sortOrder = GetSortMode();
+    var newModels = [];
+    if(sortOrder === 0)
+    {
+      newModels = models.sort(AscendingCompare);
+    }
+    else if(sortOrder === 1)
+    {
+      newModels = models.sort(DescendingCompare);
+    }
+    return newModels;
+  }
+
   const search = function () {
+
     let newModels = models.filter((model) => {
       return searchCondition(pageThis.state.searchValue, model);
     });
-    console.log(newModels);
+
+    newModels = SortModels(newModels);
+
     pageThis.setState({searchModels : newModels, currentPage : 1});
   }
 
@@ -105,6 +168,12 @@ export function PaginatedContainer(props)
     <div>
       <div className="input-field">
         <input id="SearchBox" type="text" value={props.searchValue} onChange={handleChange}></input>
+      </div>
+      <div className="sort-box">
+        <input type="radio" name="sortOrder" value="Ascending" onClick={SortClicked}></input><label for="Ascending"> Ascending</label>
+        <br/>
+        <input type="radio" name="sortOrder" value="Descending" onClick={SortClicked}></input><label for="Descending"> Descending</label>
+        <br/>
       </div>
       {renderModels}
       <ul id="pageNumbers">
