@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link } from 'react-router-dom'
 import './Model.css';
-import {MainContainer} from './MainContainer.js'
+import {MainContainer, apiURL} from './MainContainer.js'
 
 class CourseDetail extends Component 
 {
@@ -12,7 +12,6 @@ class CourseDetail extends Component
     {
         model : []
     };
-    this.apiURL = "http://ec2-18-191-216-158.us-east-2.compute.amazonaws.com:5000/api/";
   }
 
   componentDidMount()
@@ -22,7 +21,7 @@ class CourseDetail extends Component
 
   Model()
   {
-    const url = this.apiURL + "course/" + this.props.match.params.course_id;
+    const url = apiURL + "course/" + this.props.match.params.course_id;
     fetch(url)
       .then((response) => {
         return response.json();

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link } from 'react-router-dom'
 import './Model.css';
-import {MainContainer} from './MainContainer.js'
+import {MainContainer, apiURL} from './MainContainer.js'
 
 export class Model extends Component
 {
@@ -16,8 +16,8 @@ export class Model extends Component
         currentPage : 1,
         pageModelCount : 10
     };
-    this.apiURL = "http://ec2-18-191-216-158.us-east-2.compute.amazonaws.com:5000/api/";
     this.handleClick = this.handleClick.bind(this);
+    this.apiURL = apiURL;
   }
 
   componentDidMount()
