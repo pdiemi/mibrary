@@ -36,11 +36,22 @@ class BookDetail extends Component
   {
     const { model } = this.state;
 
+    const twitterShareLink = "https://twitter.com/share?url=http://www.mibrary.me/book/" + model.isbn + "&text=Look at this textbook!";
+    const fbShareLink = "https://facebook.com/sharer/sharer.php?u=http://www.mibrary.me/book/" + model.isbn + "&t=Look at this textbook!";
+
     var content = (
+    <div name="page">
       <div className="card">
         <h1>{model.title}</h1>
         <p>{model.isbn}</p>
         <p>{model.publisher}</p>
+      </div>
+      <br/>
+      <div className="card" id="ShareButton" >
+        <p>Share:</p>
+        <a href={twitterShareLink} target="_blank"><img height="50" width="50" src="/images/icons/twitter_share.png"></img></a>
+        <a href={fbShareLink} target="_blank"><img height="50" width="50" src="/images/icons/fb_share.png"></img></a>
+      </div>
       </div>
     );
 
