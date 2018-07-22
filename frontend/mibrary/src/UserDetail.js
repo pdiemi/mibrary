@@ -41,6 +41,7 @@ class UserDetail extends Component
         <h1>{model.username}</h1>
         <p>{model.email}</p>
         <p>Major: {model.major}</p>
+        <center><img width="160" height="200" src="/images/LucyLiu.png"></img></center>
       </div>
     );
 
