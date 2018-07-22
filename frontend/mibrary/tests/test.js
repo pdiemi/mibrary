@@ -1,7 +1,12 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from '../src/App';
+import Book from '../src/Book';
+
 var assert = require('assert');
 
 
-function Model()
+function ParseJSON()
 {
 
     var listModelsJson = JSON.parse("{ \"books\" : [\"one\", \"two\", \"three\", \"four\", \"five\", \"six\", \"seven\", \"eight\", \"nine\", \"ten\", \"eleven\"] }");
@@ -12,10 +17,41 @@ function Model()
     return newModels;
 }
 
-describe('Model', function() 
+describe('ParseJSON', function() 
 {
     it('test1', function() 
     {
-        assert.notEqual(Model(), 0);
+        assert.notEqual(ParseJSON(), 0);
     });
 });
+
+describe('searchCondition', function() 
+{
+    it('test1', function() 
+    {
+        assert.equal(searchCondition("am", "American History"), true);
+    });
+    it('test2', function() 
+    {
+        assert.equal(searchCondition("a m", "American History"), false);
+    });
+    it('test3', function() 
+    {
+        assert.equal(searchCondition("america", "American History"), true);
+    });
+    it('test4', function() 
+    {
+        assert.equal(searchCondition(" ", "American History"), true);
+    });
+    it('test5', function() 
+    {
+        assert.equal(searchCondition("gram", "Extreme Programming"), true);
+    });
+});
+
+
+it('renders without crashing', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(<App />, div);
+    ReactDOM.unmountComponentAtNode(div);
+  });
