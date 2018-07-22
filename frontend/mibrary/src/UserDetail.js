@@ -12,6 +12,7 @@ class UserDetail extends Component
     {
         model : []
     };
+    this.apiURL = "http://ec2-18-191-216-158.us-east-2.compute.amazonaws.com:5000/api/";
   }
 
   componentDidMount()
