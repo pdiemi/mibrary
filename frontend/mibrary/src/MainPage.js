@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link } from 'react-router-dom'
 import {MainContainer} from './MainContainer.js'
+import MainSearchPage from './MainSearchPage.js';
 
 class MainPage extends Component 
 {
@@ -22,10 +23,11 @@ class MainPage extends Component
                         <br />and go!
                     </h1>
                 </div>
-            </div>
+        </div>
     );
     return (
       <MainContainer content = {card}/>
+      //<MainSearchPage/>
     );
   }
 }
