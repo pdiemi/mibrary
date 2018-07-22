@@ -59,13 +59,19 @@ class Book extends Model
         objName : res.title,
         title : res.title,
         content : content,
-        isbn : res.isbn
+        isbn : res.isbn,
+        authors : res.authors,
+        pages: res.pages,
+        publishes : res.publisher,
+        subject : res.subjects,
+        subtitle : res.subtitle,
+        url: res.url
       });
     });
 
     let searchModelsList = searchModels.map((res) => {
       var content = (
-        <div id={res.isbn}>
+        <div className="card" id={res.isbn}>
           {res.title}
         </div>
       );
@@ -73,7 +79,13 @@ class Book extends Model
         objName : res.title,
         title : res.title,
         content : content,
-        isbn : res.isbn
+        isbn : res.isbn,
+        authors : res.authors,
+        pages: res.pages,
+        publisher : res.publisher,
+        subject : res.subjects,
+        subtitle : res.subtitle,
+        url: res.url
       });
     });
 

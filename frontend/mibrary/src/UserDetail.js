@@ -40,7 +40,7 @@ class UserDetail extends Component
       <div className="card">
         <h1>{model.username}</h1>
         <p>{model.email}</p>
-        <p>{model.major}</p>
+        <p>Major: {model.major}</p>
       </div>
     );
 

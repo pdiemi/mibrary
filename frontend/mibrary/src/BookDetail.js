@@ -43,8 +43,13 @@ class BookDetail extends Component
     <div name="page">
       <div className="card">
         <h1>{model.title}</h1>
-        <p>{model.isbn}</p>
-        <p>{model.publisher}</p>
+        <p>{model.subtitle}</p>
+        <p>Subject: {model.subject}</p>
+        <p>Authors: {model.authors}</p>
+        <p>ISBN: {model.isbn}</p>
+        <p>Publisher: {model.publisher}</p>
+        <p>Pages: {model.pages}</p>
+        <p>External URL: {model.url}</p>
       </div>
       <br/>
       <div className="card" id="ShareButton" >
