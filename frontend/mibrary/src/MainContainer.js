@@ -7,9 +7,9 @@ function Navbar() {
         <header>
         <div className="container ">
             <div className="header">
-                <a target="blank" href="index.html">
-                    <img src="images/logos/logo7.png " className="img-responsive " alt="logo7 "></img>
-                </a>
+                <Link to='/'>
+                    <img src="/images/logos/logo7.png" className="img-responsive " alt="logo7 "></img>
+                </Link>
                 <div className="topnav ">
                     <Link to='/'>Home</Link>
                     <Link to='/books'>Books</Link>
