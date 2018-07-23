@@ -23,6 +23,15 @@ class Course extends Model
     return false;
   }
 
+  filterCondition(filter0, filter1, model)
+  {
+    if((filter0.length == 0 || model.department.toLowerCase().includes(filter0.toLowerCase())) && (filter1.length == 0 || model.course_number.toLowerCase().includes(filter1.toLowerCase())))
+    {
+      return true;
+    }
+    return false;
+  }
+
   highlightCourseText(model, searchValue)
   {
     return (
@@ -42,11 +51,13 @@ class Course extends Model
       this.setState({models : responseJson});
       this.setState({searchModels : responseJson});
     })
+
+    this.setState({filterOptions : ["Department", "Course Number"]});
   }
 
   render()
   {
-    const { models, searchValue, searchModels, currentPage, pageModelCount} = this.state;
+    const { models, searchValue, searchModels, currentPage, pageModelCount, filterOptions} = this.state;
 
     let modelsList = models.map((res) => {
       var content = (
@@ -87,6 +98,8 @@ class Course extends Model
         searchValue={searchValue}
         currentPage={currentPage}
         modelsPerPage={pageModelCount}
+        filterOptions={filterOptions}
+        filterCondition={this.filterCondition}
         getModelIdentifier={this.getModelIdentifier}
         handleClick={this.handleClick}
         searchCondition={this.searchCondition}

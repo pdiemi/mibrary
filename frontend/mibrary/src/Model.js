@@ -12,6 +12,7 @@ export class Model extends Component
     {
         models : [],
         searchModels: [],
+        filterOptions : [],
         searchValue: "",
         currentPage : 1,
         pageModelCount : 10
@@ -65,6 +66,8 @@ export function PaginatedContainer(props)
   const searchCondition = props.searchCondition;
   const highlightModelText = props.highlightModelText;
   const pageThis = props.this;
+  const filterCondition = props.filterCondition;
+  const filterOptions = props.filterOptions;
 
   const indexOfLast = currentPage * pageModelCount;
   const indexOfFirst = indexOfLast - pageModelCount;
@@ -164,10 +167,37 @@ export function PaginatedContainer(props)
     search();
   }
 
+  const onClickFilter = function()
+  {
+    const filterText0 = document.getElementById('filter0Box').value;
+    const filterText1 = document.getElementById('filter1Box').value;
+
+    let newModels = models.filter((model) => {
+      return filterCondition(filterText0, filterText1, model);
+    });
+
+    newModels = SortModels(newModels);
+
+    pageThis.setState({searchModels : newModels, currentPage : 1});
+  }
+
+  const filtersRender = (
+    <div className="filtersDiv">
+    <h6>Filters:</h6>
+      <div className="filterDiv">
+        <input id="filter0Box" name="filter0Box" type="text" placeholder={filterOptions[0]}></input>
+      </div>
+      <div className="filterDiv">
+        <input id="filter1Box" name="filter1Box" type="text" placeholder={filterOptions[1]}></input>
+      </div>
+      <input type="button" height="50" width="50" value="Filter" id="filterButton" onClick={onClickFilter}></input>
+    </div>
+  );
+
   const content = (
     <div>
       <div className="input-field">
-        <input id="SearchBox" type="text" value={props.searchValue} onChange={handleChange}></input>
+        <input id="SearchBox" type="text" placeholder="Search" value={props.searchValue} onChange={handleChange}></input>
       </div>
       <div className="sort-box">
         <input type="radio" name="sortOrder" value="Ascending" onClick={SortClicked}></input><label for="Ascending"> Ascending</label>
@@ -175,6 +205,7 @@ export function PaginatedContainer(props)
         <input type="radio" name="sortOrder" value="Descending" onClick={SortClicked}></input><label for="Descending"> Descending</label>
         <br/>
       </div>
+      {filtersRender}
       {renderModels}
       <ul id="pageNumbers">
         {renderPageNumbers}

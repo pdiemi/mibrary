@@ -32,6 +32,15 @@ class Book extends Model
     return false;
   }
 
+  filterCondition(filter0, filter1, model)
+  {
+    if((filter0.length == 0 || model.subject.toLowerCase().includes(filter0.toLowerCase())) && (filter1.length == 0 || model.authors.toLowerCase().includes(filter1.toLowerCase())))
+    {
+      return true;
+    }
+    return false;
+  }
+
   Model()
   {
     console.log(this.apiURL+'books');
@@ -43,11 +52,13 @@ class Book extends Model
         this.setState({models : responseJson});
         this.setState({searchModels : responseJson});
       })
+
+      this.setState({filterOptions : ["Subject", "Authors"]});
   }
 
   render()
   {
-    const { models, searchValue, searchModels, currentPage, pageModelCount} = this.state;
+    const { models, searchValue, searchModels, currentPage, pageModelCount, filterOptions} = this.state;
 
     let modelsList = models.map((res) => {
       var content = (
@@ -62,7 +73,7 @@ class Book extends Model
         isbn : res.isbn,
         authors : res.authors,
         pages: res.pages,
-        publishes : res.publisher,
+        publisher : res.publisher,
         subject : res.subjects,
         subtitle : res.subtitle,
         url: res.url
@@ -96,8 +107,10 @@ class Book extends Model
         searchValue={searchValue}
         currentPage={currentPage}
         modelsPerPage={pageModelCount}
+        filterOptions={filterOptions}
         getModelIdentifier={this.getModelIdentifier}
         handleClick={this.handleClick}
+        filterCondition={this.filterCondition}
         searchCondition={this.searchCondition}
         highlightModelText={this.highlightBookText}
         this={this}

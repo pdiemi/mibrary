@@ -23,6 +23,15 @@ class User extends Model
     return false;
   }
 
+  filterCondition(filter0, filter1, model)
+  {
+    if((filter0.length == 0 || model.email.toLowerCase().includes(filter0.toLowerCase())) && (filter1.length == 0 || model.major.toLowerCase().includes(filter1.toLowerCase())))
+    {
+      return true;
+    }
+    return false;
+  }
+
   highlightUserText(model, searchValue)
   {
     return (
@@ -42,11 +51,13 @@ class User extends Model
         this.setState({models : responseJson});
         this.setState({searchModels : responseJson});
       })
+
+      this.setState({filterOptions : ["Email", "Major"]});
   }
 
   render()
   {
-    const { models, searchValue, searchModels, currentPage, pageModelCount} = this.state;
+    const { models, searchValue, searchModels, currentPage, pageModelCount, filterOptions} = this.state;
 
     let modelsList = models.map((res) => {
       var content = (
@@ -58,7 +69,9 @@ class User extends Model
         objName : res.username,
         content : content,
         username : res.username,
-        user_id : res.user_id
+        user_id : res.user_id,
+        email : res.email,
+        major : res.major
       });
     });
 
@@ -72,7 +85,9 @@ class User extends Model
         objName : res.username,
         content : content,
         username : res.username,
-        user_id : res.user_id
+        user_id : res.user_id,
+        email : res.email,
+        major : res.major
       });
     });
 
@@ -83,6 +98,8 @@ class User extends Model
         searchValue={searchValue}
         currentPage={currentPage}
         modelsPerPage={pageModelCount}
+        filterOptions={filterOptions}
+        filterCondition={this.filterCondition}
         getModelIdentifier={this.getModelIdentifier}
         handleClick={this.handleClick}
         searchCondition={this.searchCondition}
