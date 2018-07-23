@@ -181,18 +181,22 @@ export function PaginatedContainer(props)
     pageThis.setState({searchModels : newModels, currentPage : 1});
   }
 
-  const filtersRender = (
-    <div className="filtersDiv">
-    <h6>Filters:</h6>
-      <div className="filterDiv">
-        <input id="filter0Box" name="filter0Box" type="text" placeholder={filterOptions[0]}></input>
+  var filtersRender = (<div></div>);
+  if(filterOptions.length > 0)
+  {
+    filtersRender = (
+      <div className="filtersDiv">
+      <h6>Filters:</h6>
+        <div className="filterDiv">
+          <input id="filter0Box" name="filter0Box" type="text" placeholder={filterOptions[0]}></input>
+        </div>
+        <div className="filterDiv">
+          <input id="filter1Box" name="filter1Box" type="text" placeholder={filterOptions[1]}></input>
+        </div>
+        <input type="button" height="50" width="50" value="Filter" id="filterButton" onClick={onClickFilter}></input>
       </div>
-      <div className="filterDiv">
-        <input id="filter1Box" name="filter1Box" type="text" placeholder={filterOptions[1]}></input>
-      </div>
-      <input type="button" height="50" width="50" value="Filter" id="filterButton" onClick={onClickFilter}></input>
-    </div>
-  );
+    );   
+  }
 
   const content = (
     <div>

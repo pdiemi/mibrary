@@ -31,9 +31,8 @@ class MainSearchPage extends Model
         {
             return /user/ + model.username;
         }
-        return "";
     }
-
+    return "";
   }
 
   highlightText(model, searchValue)
@@ -52,6 +51,11 @@ class MainSearchPage extends Model
       return true;
     }
     return false;
+  }
+
+  filterCondition(filter0, filter1, model)
+  {
+    return true;
   }
 
   Model()
@@ -195,7 +199,7 @@ class MainSearchPage extends Model
         });
       });
 
-    let modelsList = bookModelsList.concat(courseModelsList, searchModelsList);
+    let modelsList = bookModelsList.concat(courseModelsList, userModelsList);
     let searchModelsList = bookSearchModelsList.concat(courseSearchModelsList, userSearchModelsList);
 
     return (
@@ -205,8 +209,10 @@ class MainSearchPage extends Model
         searchValue={searchValue}
         currentPage={currentPage}
         modelsPerPage={pageModelCount}
+        filterOptions={[]}
         getModelIdentifier={this.getModelIdentifier}
         handleClick={this.handleClick}
+        filterCondition={this.filterCondition}
         searchCondition={this.searchCondition}
         highlightModelText={this.highlightText}
         this={this}

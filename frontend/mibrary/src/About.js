@@ -67,9 +67,9 @@ class About extends Component
                 </a>
                 <div class="topnav ">
                     <Link to='/'>Home</Link>
-                    <Link to='/book'>Books</Link>
-                    <Link to='/course'>Courses</Link>
-                    <Link to='/user'>Users</Link>
+                    <Link to='/books'>Books</Link>
+                    <Link to='/courses'>Courses</Link>
+                    <Link to='/users'>Users</Link>
                     <Link to='/about'>About</Link>
                 </div>
             </div>
@@ -247,20 +247,12 @@ class About extends Component
                     </h2>
                     <div>
                         <p>
-                            <p>
-                                <i>(Coming soon...)</i>
-                            </p>
-                            <li>data
-                                <ul>
-                                    <li>links to the data
-                                        <b>sources</b>
-                                    </li>
-                                    <li>description of
-                                        <b>how</b> each was
-                                        <b>scraped</b>
-                                    </li>
-                                </ul>
-                            </li>
+                            Links to the data sources:
+                            <ul>
+                                <li>https://isbndb.com/apidocs</li>
+                                <li>https://openlibrary.org/developers/api</li>
+                                <li>https://www.goodreads.com/api </li>
+                            </ul>
                         </p>
                     </div>
                 </div>
