@@ -10,7 +10,10 @@ class UserDetail extends Component
     super();
     this.state = 
     {
-        model : []
+        model : [],
+        reviews: [],
+        offeredBooks: [],
+        requestedBooks: [],
     };
   }
 
@@ -29,19 +32,95 @@ class UserDetail extends Component
       .then((responseJson) => {
         this.setState({model : responseJson});
       })
+
+      const urlReviews = apiURL + "reviews/" + this.props.match.params.username;
+      fetch(urlReviews)
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseJson) => {
+        this.setState({reviews : responseJson});
+      })
+
+      const urlOfferingUsers = apiURL + "offered-book/" + this.props.match.params.username;
+      fetch(urlOfferingUsers)
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseJson) => {
+        this.setState({offeredBooks : responseJson});
+      })
+
+      const urlRequestingUsers = apiURL + "requested-book/" + this.props.match.params.username;
+      fetch(urlRequestingUsers)
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseJson) => {
+        this.setState({requestedBooks : responseJson});
+      })
   }
 
 
   render() 
   {
-    const { model } = this.state;
+    const { model, reviews, offeredBooks, requestedBooks } = this.state;
+
+    let reviewsList = reviews.map((res) => {
+      return({
+        date : res.date,
+        content : res.content,
+      });
+    });
+    const renderReviews = reviewsList.map((model) => {
+      return (
+        <div id={model.username}>
+        <b>{model.date}</b><br/>
+        <p>{model.content}</p>
+        </div>
+      );
+    });
+
+    let offeringList = offeredBooks.map((res) => {
+      return({
+        isbn: res.book_id,
+      });
+    });
+    const renderOffering = offeringList.map((model, index) => {
+      const link =  /book/ + model.isbn;
+      return <a href={link}> <p key={index}>{model.isbn}</p></a>;
+    });
+
+    let requestingList = requestedBooks.map((res) => {
+      return({
+        isbn: res.book_id,
+      });
+    });
+    const renderRequesting = requestingList.map((model, index) => {
+      const link =  /book/ + model.isbn;
+      return <a href={link}> <p key={index}>{model.isbn}</p></a>;
+    });
 
     var content = (
-      <div className="card">
-        <h1>{model.username}</h1>
-        <p>{model.email}</p>
-        <p>Major: {model.major}</p>
-        <center><img width="160" height="200" src="/images/LucyLiu.png"></img></center>
+      <div name="page">
+        <div className="card">
+          <h1>{model.username}</h1>
+          <p>E-mail: {model.email}</p>
+          <p>Major: {model.major}</p>
+          <center><img width="160" height="200" src="/images/LucyLiu.png"></img></center>
+        </div>
+        <div className="card">
+        <h5>Reviews:</h5>
+          {renderReviews}
+        </div>
+        <div className="card">
+        <h5>Books Requesting:</h5>
+          {renderRequesting}
+        </div>
+        <div className="card">
+        <h5>Books Offering:</h5>
+          {renderOffering}
+        </div>
       </div>
     );
 
