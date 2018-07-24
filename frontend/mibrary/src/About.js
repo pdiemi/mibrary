@@ -227,15 +227,13 @@ class About extends Component
                     </h2>
                     <div>
                         <p>
-                            <li>
-                                <b>
-                                    <i>What GitLab says about our work</i></b>
-                                <ul>
-                                    <li id="totalcommits">Total Number of Commits: 0</li>
-                                    <li id="totalissues">Total Number of Issues: 0</li>
-                                    <li id="totaltests">Total Number of Unit Tests: 0</li>
-                                </ul>
-                            </li>
+                            <b>
+                                <i>What GitLab says about our work</i></b>
+                            <ul>
+                                <li id="totalcommits">Total Number of Commits: 0</li>
+                                <li id="totalissues">Total Number of Issues: 0</li>
+                                <li id="totaltests">Total Number of Unit Tests: 0</li>
+                            </ul>
                         </p>
                     </div>
                 </div>
@@ -290,7 +288,7 @@ class About extends Component
                 </h2>
                 <div>
                     <a href="https://gitlab.com/pdiemi/mibrary">
-                        <b>Visit our GitLab repos</b>
+                        <b>Visit our GitLab repository</b>
                     </a>
                 </div>
             </div>
