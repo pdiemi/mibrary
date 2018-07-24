@@ -205,5 +205,6 @@ div.desc {
 }
 
 .card {
+    text-align: left;
     background-color: rgba(7, 113, 252, 0.3); padding: 20px;
 }

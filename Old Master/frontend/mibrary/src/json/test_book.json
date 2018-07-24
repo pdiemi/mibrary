@@ -1,0 +1,16 @@
+{
+    "book": {
+        "isbn": "9781934759486",
+        "publisher": "Oxford",
+        "identifiers": "010-9781934759486",
+        "classifications": "Dewey Decima",
+        "title": "Oxford Dictionaries",
+        "subtitle": "English Dictionary, Thesaurus, & grammar help",
+        "url": "https://en.oxforddictionaries.com/",
+        "number_of_pages": "1089",
+        "publish_date": "10/10/2010",
+        "excerpts": "any thing about the book; could be an empty string/text",
+        "authors": "Oxford Uni",
+        "publish_places": "US",
+    }
+}

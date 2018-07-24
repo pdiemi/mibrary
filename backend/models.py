@@ -8,7 +8,7 @@
 # models.py
 # --------------------------------------
 
-from sqlalchemy import Column, String, Integer, ForeignKey, Numeric, Date
+from sqlalchemy import Column, String, Integer, ForeignKey, Numeric, Date, or_, and_, text
 from sqlalchemy.orm import relationship
 from bridge import db
 
@@ -35,14 +35,13 @@ class Book(db.Model):
     isbn = db.Column(db.String(10), primary_key=True, nullable=False)
     publisher =db.Column(db.String(500), nullable=False)
     identifiers = db.Column(db.String(200), nullable=True)
-    classcifications = db.Column(db.String(500), nullable=True)
-    links = db.Column(db.String(500), nullable=True)
+    classifications = db.Column(db.String(500), nullable=True)
     title = db.Column(db.String(1000), nullable=False)
     subtitle = db.Column(db.String(500), nullable=False)  
     url = db.Column(db.String(500), nullable=False)
     pages = db.Column(db.Integer, nullable=False)
     subjects = db.Column(db.String(1000), nullable=True)
-    date_published = db.Column(Date, nullable=False)
+    publish_date = db.Column(Date, nullable=False)
     excerpt = db.Column(db.String(1000), nullable=True)
     authors = db.Column(db.String(200), nullable=False)
     
@@ -58,7 +57,7 @@ class Book(db.Model):
 
     def __init__(self,
                 isbn,
-                publishers = None,
+                publisher = None,
                 identifiers = None,
                 classifications = None,
                 links = None,
@@ -72,7 +71,7 @@ class Book(db.Model):
                 authors = None,):
 
         self.isbn = isbn
-        self.publishers = publishers
+        self.publisher = publisher
         self.identifiers = identifiers
         self.classifications = classifications
         self.links = links
@@ -96,6 +95,8 @@ class Course(db.Model):
     institution_id = db.Column(db.Integer, 
                                     ForeignKey('institutions.institution_id'),
                                     nullable=False, index=True)    
+    department = db.Column(db.String(100), nullable=False)
+
     institution = db.relationship("Institution", backref="courses", foreign_keys=[institution_id])
     book = db.relationship("Course_Book", back_populates="course")
 
@@ -153,6 +154,7 @@ class User(db.Model):
     username = db.Column(db.String(20), nullable=False, unique=True)
     password = db.Column(db.String(24), nullable=False)
     email = db.Column(db.String(50), nullable=False, unique=True)
+    major = db.Column(db.String(100), nullable=True)
 
     request = db.relationship("Request", back_populates="user_request")
     offer = db.relationship("Offer", back_populates="user_offer")
@@ -162,11 +164,11 @@ class User(db.Model):
     # METHODS
     #
 
-    def __init__(self, username, password, email):
+    def __init__(self, username, password, email, major):
         self.username = username
         self.password = password
         self.email = email
-
+        self.major = major
 #---------- Association Classes ----------
 
 class Request(db.Model):

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link } from 'react-router-dom'
 import {MainContainer} from './MainContainer.js'
+import MainSearchPage from './MainSearchPage.js';
 
 class MainPage extends Component 
 {
@@ -12,7 +13,7 @@ class MainPage extends Component
 
   render() 
   {
-    const card = (
+    /*const card = (
       <div class="card">
               <a target="blank" href="index.html">
                 <img class="card-img" src="images/covers/cover1.jpg" alt="Card image"></img>
@@ -22,10 +23,11 @@ class MainPage extends Component
                         <br />and go!
                     </h1>
                 </div>
-            </div>
-    );
+        </div>
+    );*/
     return (
-      <MainContainer content = {card}/>
+      //<MainContainer content = {card}/>
+      <MainSearchPage/>
     );
   }
 }
