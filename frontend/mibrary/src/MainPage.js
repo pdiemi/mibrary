@@ -13,7 +13,7 @@ class MainPage extends Component
 
   render() 
   {
-    const card = (
+    /*const card = (
       <div class="card">
               <a target="blank" href="index.html">
                 <img class="card-img" src="images/covers/cover1.jpg" alt="Card image"></img>
@@ -24,10 +24,10 @@ class MainPage extends Component
                     </h1>
                 </div>
         </div>
-    );
+    );*/
     return (
-      <MainContainer content = {card}/>
-      //<MainSearchPage/>
+      //<MainContainer content = {card}/>
+      <MainSearchPage/>
     );
   }
 }

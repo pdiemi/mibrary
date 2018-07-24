@@ -7,12 +7,6 @@ class MainSearchPage extends Model
   constructor()
   {
     super();
-    this.bookModels = [];
-    this.userModels = [];
-    this.courseModels = [];
-    this.bookSearchModels = [];
-    this.userSearchModels = [];
-    this.courseSearchModels = [];
   }
 
   getModelIdentifier(model)
@@ -65,59 +59,76 @@ class MainSearchPage extends Model
         return response.json();
       })
       .then((responseJson) => {
-        this.bookModels = responseJson;
-        this.bookSearchModels = responseJson;
-      })
+        this.setState({models : responseJson});
+        this.setState({searchModels : responseJson});
+        
+          fetch(this.apiURL + 'course/institution/3658')
+          .then((response) => {
+            return response.json();
+          })
+          .then((responseJson) => {
+            this.setState({models : this.state.models.concat(responseJson)});
+            this.setState({searchModels : this.state.searchModels.concat(responseJson)});
 
-      fetch(this.apiURL + 'course/institution/3658')
-      .then((response) => {
-        return response.json();
-      })
-      .then((responseJson) => {
-        this.courseModels = responseJson;
-        this.courseSearchModels = responseJson;
-      })
-
-      fetch(this.apiURL+'users')
-      .then((response) => {
-        return response.json();
-      })
-      .then((responseJson) => {
-        this.userModels = responseJson;
-        this.userSearchModels = responseJson;
-      })
-      let newModels = this.bookModels.concat(this.courseModels, this.userModels);
-      let newSearchModels = this.bookSearchModels.concat(this.courseSearchModels, this.userSearchModels);
-      this.setState({models : newModels});
-      this.setState({searchModels : newSearchModels});
+              fetch(this.apiURL+'users')
+              .then((response) => {
+                return response.json();
+              })
+              .then((responseJson) => {
+                this.setState({models : this.state.models.concat(responseJson)});
+                this.setState({searchModels : this.state.searchModels.concat(responseJson)});
+                //alert(this.state.searchModels[60]['title']);
+                //alert(this.state.searchModels[61]['course_name']);
+                //alert(this.state.searchModels[147]['username']);
+              })
+          })
+      });
   }
 
   render()
   {
     const { models, searchValue, searchModels, currentPage, pageModelCount} = this.state;
 
-    let bookModelsList = this.bookModels.map((res) => {
-      var content = (
-        <div id={res.isbn}>
-          {res.title}
-        </div>
-      );
-      return({
-        objName : res.title,
-        title : res.title,
-        content : content,
-        isbn : res.isbn,
-        authors : res.authors,
-        pages: res.pages,
-        publishes : res.publisher,
-        subject : res.subjects,
-        subtitle : res.subtitle,
-        url: res.url
-      });
-    });
-
-    
-    let courseModelsList = this.courseModels.map((res) => {
+    let modelsList = models.map((res) => 
+    {
+      if(res.hasOwnProperty('isbn'))
+      {
+        var content = (
+          <div id={res.title}>
+            {res.title}
+          </div>
+        );
+        return({
+          objName : res.title,
+          title : res.title,
+          content : content,
+          isbn : res.isbn,
+          authors : res.authors,
+          pages: res.pages,
+          publishes : res.publisher,
+          subject : res.subjects,
+          subtitle : res.subtitle,
+          url: res.url
+        });
+      }
+      else if (res.hasOwnProperty('username'))
+      {
+        var content = (
+          <div id={res.user_id}>
+            {res.username}
+          </div>
+        );
+        return({
+          objName : res.username,
+          content : content,
+          username : res.username,
+          user_id : res.user_id,
+          email : res.email,
+          major : res.major
+        });
+      }
+      else if (res.hasOwnProperty('course_name'))
+      {
         var content = (
           <div id={res.course_id}>
             {res.course_name}
@@ -131,76 +142,79 @@ class MainSearchPage extends Model
           department : res.department,
           course_number : res.course_number
         });
-      });
-
-     let userModelsList = this.userModels.map((res) => {
-        var content = (
-          <div id={res.user_id}>
-            {res.username}
-          </div>
-        );
-        return({
-          objName : res.username,
-          content : content,
-          username : res.username,
-          user_id : res.user_id
-        });
-      });
+      }
+      return({});
+    });
   
 
-    let bookSearchModelsList = this.bookSearchModels.map((res) => {
-      var content = (
-        <div id={res.isbn}>
-          {res.title}
-        </div>
-      );
-      return({
-        objName : res.title,
-        title : res.title,
-        content : content,
-        isbn : res.isbn,
-        authors : res.authors,
-        pages: res.pages,
-        publisher : res.publisher,
-        subject : res.subjects,
-        subtitle : res.subtitle,
-        url: res.url
-      });
-    });
-
-        
-    let courseSearchModelsList = this.courseSearchModels.map((res) => {
+    let searchModelsList = searchModels.map((res) => {
+      if(res.hasOwnProperty('isbn'))
+      {
         var content = (
-          <div id={res.course_id}>
-            {res.course_name}
+          <div id={res.title}>
+            {res.title}
           </div>
         );
         return({
-          objName : res.course_name,
+          objName : "Book: " + res.title,
+          title : res.title,
           content : content,
-          course_name : res.course_name,
-          course_id: res.course_id,
-          department : res.department,
-          course_number : res.course_number
+          isbn : res.isbn,
+          authors : res.authors,
+          pages: res.pages,
+          publishes : res.publisher,
+          subject : res.subjects,
+          subtitle : res.subtitle,
+          url: res.url
         });
-      });
-
-      let userSearchModelsList = this.userSearchModels.map((res) => {
+      }
+      else if (res.hasOwnProperty('username'))
+      {
         var content = (
           <div id={res.user_id}>
             {res.username}
           </div>
         );
         return({
-          objName : res.username,
+          objName : "User: " + res.username,
           content : content,
           username : res.username,
-          user_id : res.user_id
+          user_id : res.user_id,
+          email : res.email,
+          major : res.major
         });
-      });
+      }
+      else if (res.hasOwnProperty('course_name'))
+      {
+        var content = (
+          <div id={res.course_id}>
+            {res.course_name}
+          </div>
+        );
+        return({
+          objName : "Course: " + res.course_name,
+          content : content,
+          course_name : res.course_name,
+          course_id: res.course_id,
+          department : res.department,
+          course_number : res.course_number
+        });
+      }
+      return({});
+    });
 
-    let modelsList = bookModelsList.concat(courseModelsList, userModelsList);
-    let searchModelsList = bookSearchModelsList.concat(courseSearchModelsList, userSearchModelsList);
+    const card = (
+      <div class="card">
+              <a target="blank" href="index.html">
+                <img class="card-img" src="images/covers/cover1.jpg" alt="Card image"></img>
+                </a>
+                <div class="card-img-overlay">
+                    <h1 class="card-title">Choose one,
+                        <br />and go!
+                    </h1>
+                </div>
+        </div>
+    );
 
     return (
       <PaginatedContainer
@@ -210,6 +224,7 @@ class MainSearchPage extends Model
         currentPage={currentPage}
         modelsPerPage={pageModelCount}
         filterOptions={[]}
+        extraContent={card}
         getModelIdentifier={this.getModelIdentifier}
         handleClick={this.handleClick}
         filterCondition={this.filterCondition}

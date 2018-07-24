@@ -60,7 +60,8 @@ class Book extends Model
   {
     const { models, searchValue, searchModels, currentPage, pageModelCount, filterOptions} = this.state;
 
-    let modelsList = models.map((res) => {
+    let modelsList = models.map((res) => 
+    {
       var content = (
         <div id={res.isbn}>
           {res.title}

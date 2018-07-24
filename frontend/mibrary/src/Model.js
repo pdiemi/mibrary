@@ -68,6 +68,7 @@ export function PaginatedContainer(props)
   const pageThis = props.this;
   const filterCondition = props.filterCondition;
   const filterOptions = props.filterOptions;
+  const extraContent = props.extraContent;
 
   const indexOfLast = currentPage * pageModelCount;
   const indexOfFirst = indexOfLast - pageModelCount;
@@ -200,6 +201,7 @@ export function PaginatedContainer(props)
 
   const content = (
     <div>
+      {extraContent}
       <div className="input-field">
         <input id="SearchBox" type="text" placeholder="Search" value={props.searchValue} onChange={handleChange}></input>
       </div>
