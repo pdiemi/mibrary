@@ -10,7 +10,8 @@ class BookDetail extends Component
     super();
     this.state = 
     {
-        model : []
+        model : [],
+        reviews: []
     };
   }
 
@@ -29,12 +30,38 @@ class BookDetail extends Component
       .then((responseJson) => {
         this.setState({model : responseJson});
       })
+
+      const urlReviews = apiURL + "reviews/" + this.props.match.params.isbn;
+      fetch(urlReviews)
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseJson) => {
+        this.setState({reviews : responseJson});
+      })
   }
 
 
   render() 
   {
-    const { model } = this.state;
+    const { model, reviews } = this.state;
+
+    let reviewsList = reviews.map((res) => {
+      return({
+        date : res.date,
+        username: res.username,
+        content : res.content,
+      });
+    });
+    const renderReviews = reviewsList.map((model, index) => {
+      return (
+        <div id={model.username}>
+        <b>{model.username} {model.date}</b><br/>
+        <p>{model.content}</p>
+        </div>
+      );
+      
+    });
 
     const twitterShareLink = "https://twitter.com/share?url=http://www.mibrary.me/book/" + model.isbn + "&text=Look at this textbook!";
     const fbShareLink = "https://facebook.com/sharer/sharer.php?u=http://www.mibrary.me/book/" + model.isbn + "&t=Look at this textbook!";
@@ -50,6 +77,10 @@ class BookDetail extends Component
         <p>Publisher: {model.publisher}</p>
         <p>Pages: {model.pages}</p>
         <p>External URL: {model.url}</p>
+      </div>
+      <div className="card">
+      <h5>Reviews:</h5>
+        {renderReviews}
       </div>
       <br/>
       <div className="card" id="ShareButton" >
