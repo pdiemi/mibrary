@@ -11,7 +11,9 @@ class BookDetail extends Component
     this.state = 
     {
         model : [],
-        reviews: []
+        reviews: [],
+        offeringUsers: [],
+        requestingUsers: []
     };
   }
 
@@ -39,12 +41,30 @@ class BookDetail extends Component
       .then((responseJson) => {
         this.setState({reviews : responseJson});
       })
+
+      const urlOfferingUsers = apiURL + "offered-book/" + this.props.match.params.isbn;
+      fetch(urlOfferingUsers)
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseJson) => {
+        this.setState({offeringUsers : responseJson});
+      })
+
+      const urlRequestingUsers = apiURL + "requested-book/" + this.props.match.params.isbn;
+      fetch(urlRequestingUsers)
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseJson) => {
+        this.setState({requestingUsers : responseJson});
+      })
   }
 
 
   render() 
   {
-    const { model, reviews } = this.state;
+    const { model, reviews, offeringUsers, requestingUsers } = this.state;
 
     let reviewsList = reviews.map((res) => {
       return({
@@ -53,14 +73,33 @@ class BookDetail extends Component
         content : res.content,
       });
     });
-    const renderReviews = reviewsList.map((model, index) => {
+    const renderReviews = reviewsList.map((model) => {
       return (
         <div id={model.username}>
         <b>{model.username} {model.date}</b><br/>
         <p>{model.content}</p>
         </div>
       );
-      
+    });
+
+    let offeringList = offeringUsers.map((res) => {
+      return({
+        username: res.username,
+      });
+    });
+    const renderOffering = offeringList.map((model, index) => {
+      const link =  /user/ + model.userName;
+      return <a href={link}> <p key={index}>{model.userName}</p></a>;
+    });
+
+    let requestingList = requestingUsers.map((res) => {
+      return({
+        username: res.username,
+      });
+    });
+    const renderRequesting = requestingList.map((model, index) => {
+      const link =  /user/ + model.userName;
+      return <a href={link}> <p key={index}>{model.userName}</p></a>;
     });
 
     const twitterShareLink = "https://twitter.com/share?url=http://www.mibrary.me/book/" + model.isbn + "&text=Look at this textbook!";
@@ -81,6 +120,14 @@ class BookDetail extends Component
       <div className="card">
       <h5>Reviews:</h5>
         {renderReviews}
+      </div>
+      <div className="card">
+      <h5>Users Requesting <i>{model.title}</i>:</h5>
+        {renderRequesting}
+      </div>
+      <div className="card">
+      <h5>Users Offering <i>{model.title}</i>:</h5>
+        {renderOffering}
       </div>
       <br/>
       <div className="card" id="ShareButton" >
