@@ -274,7 +274,7 @@ class About extends Component
                             <li>Selenium</li>
                             <li>PlantUML</li>
                         </ul>
-                        <a href="https://gitlab.com/pdiemi/mibrary/blob/master/TechnicalReportPhase1_v3.pdf">
+                        <a href="https://gitlab.com/pdiemi/mibrary/blob/master/TechnicalReportPhase4.pdf">
                             <b>Checkout our documentation</b>
                         </a>
                 </div>
