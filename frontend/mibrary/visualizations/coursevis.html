@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<h1>Number of Courses per Department:</h1>
+<svg width="960" height="570"></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+    var models = [];
+    var departmentData = {};
+
+    const apiURL = "http://ec2-18-191-216-158.us-east-2.compute.amazonaws.com:5000/api/";
+    fetch(apiURL+'course/institution/3658')
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (responseJson)
+    {
+      models = responseJson;
+  
+      let modelsList = models.map((res) => 
+      {
+        return({
+          objName : res.course_name,
+          department: res.department
+        });
+      });
+  
+      for(let model of modelsList)
+      {
+          if(departmentData[model.department] === undefined)
+          {
+            departmentData[model.department] = 1;
+          }
+          else
+          {
+            departmentData[model.department] = departmentData[model.department] + 1;
+          }
+      }
+
+      var names = [];
+      var counts = [];
+  
+      for(var key in departmentData)
+      {
+          var value = departmentData[key];
+          names.push(key);
+          counts.push(value);
+      }
+
+
+    var svg = d3.select("svg");
+    svg.selectAll("circle")
+    .data(counts)
+    .enter().append("circle")
+    .style('fill', '#FF6F00')
+    .attr("cy", 90)
+    .attr("cx", function(d, i) { return i * 150 + 30; })
+    .attr("r", function(d) { return Math.sqrt(d * 100); })
+
+    svg.append("text")
+    .selectAll("tspan")
+    .data(names)
+    .enter().append("tspan")
+    .attr("x", function(d, i) { return 13 + i * 135; })
+    .attr("y", 200)
+    .style('fill', '#00D5FF')
+    .text(function(d){return d;})
+
+     svg.append("text")
+    .selectAll("tspan")
+    .data([counts[0], counts[1]])
+    .enter().append("tspan")
+    .attr("x", function(d, i) { return 25 + i * 140; })
+    .attr("y", 100)
+    .style('fill', '#00D5FF')
+    .text(function(d){return d;})
+
+    svg.append("text")
+    .selectAll("tspan")
+    .data([counts[2], counts[3]])
+    .enter().append("tspan")
+    .attr("x", function(d, i) { return 315 + i * 146; })
+    .attr("y", 100)
+    .style('fill', '#00D5FF')
+    .style("font-size", "34px")
+    .text(function(d){return d;})
+
+  });
+
+</script>

@@ -56,6 +56,7 @@ export class Model extends Component
 export function PaginatedContainer(props)
 {
   const models = props.models;
+  const searchModels = props.searchModels;
   var currentPage = props.currentPage;
   const pageModelCount = props.modelsPerPage;
   const searchCondition = props.searchCondition;
