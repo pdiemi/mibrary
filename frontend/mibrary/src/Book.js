@@ -26,16 +26,26 @@ class Book extends Model
   highlightDetailCard(model, searchValue)
   {
     const id = model.isbn + "-card";
+
     return (
       <div id={id}>
-        Test card
+        ISBN: {Model.highlightModelText(model.isbn, searchValue)}<br/>
+        Subject: {Model.highlightModelText(model.subject, searchValue)}<br/>
+        Authors: {Model.highlightModelText(model.authors, searchValue)}<br/>
+        Publisher: {Model.highlightModelText(model.publisher, searchValue)}
       </div>
     );
   }
 
   searchCondition(queryText, model)
   {
-    if(queryText.length == 0 || model.title.toLowerCase().includes(queryText.toLowerCase()))
+    queryText = queryText.toLowerCase();
+    if(queryText.length == 0 | model.title.toLowerCase().includes(queryText)
+      | model.isbn == queryText
+      | model.authors.toLowerCase().includes(queryText)
+      | model.publisher.toLowerCase().includes(queryText)
+      | model.subject.toLowerCase().includes(queryText)
+      )
     {
       return true;
     }
@@ -61,6 +71,10 @@ class Book extends Model
     queryText = queryText.toLowerCase();
     const aTitleIndex = a.title.toLowerCase().indexOf(queryText);
     const bTitleIndex = b.title.toLowerCase().indexOf(queryText);
+    const aAuthorIndex = a.authors.toLowerCase().indexOf(queryText);
+    const bAuthorIndex = b.authors.toLowerCase().indexOf(queryText);
+    const aPubIndex = a.publisher.toLowerCase().indexOf(queryText);
+    const bPubIndex = b.publisher.toLowerCase().indexOf(queryText);
     if(aTitleIndex == 0) {
       return -1;
     } else if(bTitleIndex == 0) {
@@ -72,6 +86,14 @@ class Book extends Model
     } else if (aTitleIndex > 1 && a.title[aTitleIndex - 1] == ' ') {
       return -1;
     } else if (bTitleIndex > 1 && b.title[bTitleIndex - 1] == ' ') {
+      return 1;
+    } else if (aAuthorIndex == 0 | aAuthorIndex > 1 && a.authors[aAuthorIndex - 1] == ' ') {
+      return -1;
+    } else if (bAuthorIndex == 0 | bAuthorIndex > 1 && b.authors[bAuthorIndex - 1] == ' ') {
+      return 1;
+    } else if (aPubIndex == 0 | aPubIndex > 1 && a.publisher[aPubIndex - 1] == ' ') {
+      return -1;
+    } else if (bPubIndex == 0 | bPubIndex > 1 && b.publisher[bPubIndex - 1] == ' ') {
       return 1;
     } else if (aTitleIndex > 0) {
       return -1;

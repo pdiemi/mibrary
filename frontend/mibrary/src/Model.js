@@ -15,7 +15,7 @@ export class Model extends Component
         filterOptions : [],
         searchValue: "",
         currentPage : 1,
-        pageModelCount : 7,
+        pageModelCount : 5,
         sortMode: "Default"
     };
     this.handleClick = this.handleClick.bind(this);
@@ -29,6 +29,7 @@ export class Model extends Component
 
   static highlightModelText(searchString, searchValue)
   {
+    if(searchString == null | searchValue == null) {return;}
     var n = searchString.toLowerCase().indexOf(searchValue.toLowerCase());
     if(searchValue.length < 1 | n < 0) {
       return searchString;
