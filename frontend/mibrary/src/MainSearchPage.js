@@ -127,7 +127,7 @@ class MainSearchPage extends Model
           </div>
         );
         return({
-          objName : res.title,
+          objName : "Book: " +  res.title,
           title : res.title,
           content : content,
           isbn : res.isbn,
@@ -147,7 +147,7 @@ class MainSearchPage extends Model
           </div>
         );
         return({
-          objName : res.username,
+          objName : "User: " + res.username,
           content : content,
           username : res.username,
           user_id : res.user_id,
@@ -163,7 +163,7 @@ class MainSearchPage extends Model
           </div>
         );
         return({
-          objName : res.course_name,
+          objName : "Course: " + res.course_name,
           content : content,
           course_name : res.course_name,
           course_id: res.course_id,
@@ -184,7 +184,7 @@ class MainSearchPage extends Model
           </div>
         );
         return({
-          objName : res.title,
+          objName : "Book: " + res.title,
           title : res.title,
           content : content,
           isbn : res.isbn,
@@ -204,7 +204,7 @@ class MainSearchPage extends Model
           </div>
         );
         return({
-          objName : res.username,
+          objName : "User: " + res.username,
           content : content,
           username : res.username,
           user_id : res.user_id,
@@ -220,7 +220,7 @@ class MainSearchPage extends Model
           </div>
         );
         return({
-          objName : res.course_name,
+          objName : "Course: " + res.course_name,
           content : content,
           course_name : res.course_name,
           course_id: res.course_id,
