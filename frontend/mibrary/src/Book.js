@@ -16,6 +16,17 @@ class Book extends Model
 
   highlightBookText(model, searchValue)
   {
+    // let queries = Model.splitQuery(searchValue);
+    // var modelText = model.title;
+    // for(let query in queries)
+    // {
+    //   let q = Model.highlightModelText(model.title, query);
+    //   if(q != model.title)
+    //   {
+    //     modelText = q;
+    //   }
+    // }
+
     return (
       <div id={model.isbn}>
         {Model.highlightModelText(model.title, searchValue)}
@@ -23,11 +34,36 @@ class Book extends Model
     );
   }
 
+  highlightDetailCard(model, searchValue)
+  {
+    const id = model.isbn + "-card";
+
+    return (
+      <div id={id}>
+        ISBN: {Model.highlightModelText(model.isbn, searchValue)}<br/>
+        Subject: {Model.highlightModelText(model.subject, searchValue)}<br/>
+        Authors: {Model.highlightModelText(model.authors, searchValue)}<br/>
+        Publisher: {Model.highlightModelText(model.publisher, searchValue)}
+      </div>
+    );
+  }
+
   searchCondition(queryText, model)
   {
-    if(queryText.length == 0 || model.title.toLowerCase().includes(queryText.toLowerCase()))
+    const queries = Model.splitQuery(queryText);
+
+    const searchWord = function(queryText, model)
+      {
+        return queryText.length == 0 | model.title.toLowerCase().includes(queryText)
+          | model.isbn == queryText
+          | model.authors.toLowerCase().includes(queryText)
+          | model.publisher.toLowerCase().includes(queryText)
+          | model.subject.toLowerCase().includes(queryText);
+      }
+
+    for(let query of queries)
     {
-      return true;
+      if(searchWord(query, model)) {return true;}
     }
     return false;
   }
@@ -47,29 +83,49 @@ class Book extends Model
     {
       return 0;
     }
-
-    queryText = queryText.toLowerCase();
-    const aTitleIndex = a.title.toLowerCase().indexOf(queryText);
-    const bTitleIndex = b.title.toLowerCase().indexOf(queryText);
-    if(aTitleIndex == 0) {
-      return -1;
-    } else if(bTitleIndex == 0) {
-      return 1;
-    } else if (a.isbn == queryText) {
-      return -1;
-    } else if (b.isbn == queryText) {
-      return 1;
-    } else if (aTitleIndex > 1 && a.title[aTitleIndex - 1] == ' ') {
-      return -1;
-    } else if (bTitleIndex > 1 && b.title[bTitleIndex - 1] == ' ') {
-      return 1;
-    } else if (aTitleIndex > 0) {
-      return -1;
-    } else if (bTitleIndex > 0) {
-      return 1;
-    } else {
-      return 0;
+    const queries = Model.splitQuery(queryText);
+    const getVal = function(queryText, a, b)
+    {
+      const aTitleIndex = a.title.toLowerCase().indexOf(queryText);
+      const bTitleIndex = b.title.toLowerCase().indexOf(queryText);
+      const aAuthorIndex = a.authors.toLowerCase().indexOf(queryText);
+      const bAuthorIndex = b.authors.toLowerCase().indexOf(queryText);
+      const aPubIndex = a.publisher.toLowerCase().indexOf(queryText);
+      const bPubIndex = b.publisher.toLowerCase().indexOf(queryText);
+      if(aTitleIndex == 0) {
+        return -2;
+      } else if(bTitleIndex == 0) {
+        return 2;
+      } else if (a.isbn == queryText) {
+        return -5;
+      } else if (b.isbn == queryText) {
+        return 5;
+      } else if (aTitleIndex > 1 && a.title[aTitleIndex - 1] == ' ') {
+        return -2;
+      } else if (bTitleIndex > 1 && b.title[bTitleIndex - 1] == ' ') {
+        return 2;
+      } else if (aAuthorIndex == 0 | aAuthorIndex > 1 && a.authors[aAuthorIndex - 1] == ' ') {
+        return -2;
+      } else if (bAuthorIndex == 0 | bAuthorIndex > 1 && b.authors[bAuthorIndex - 1] == ' ') {
+        return 2;
+      } else if (aPubIndex == 0 | aPubIndex > 1 && a.publisher[aPubIndex - 1] == ' ') {
+        return -2;
+      } else if (bPubIndex == 0 | bPubIndex > 1 && b.publisher[bPubIndex - 1] == ' ') {
+        return 2;
+      } else if (aTitleIndex > 0) {
+        return -1;
+      } else if (bTitleIndex > 0) {
+        return 1;
+      } else {
+        return 0;
+      }
     }
+    var sum = 0;
+    for(let query of queries)
+    {
+      sum += query.length*1.5*getVal(query, a, b);
+    }
+    return sum;
   }
 
   Model()
@@ -146,6 +202,7 @@ class Book extends Model
         filterCondition={this.filterCondition}
         searchCondition={this.searchCondition}
         highlightModelText={this.highlightBookText}
+        highlightDetailCard={this.highlightDetailCard}
         this={this}
       />
     );

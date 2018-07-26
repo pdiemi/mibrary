@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<h1>Number of Courses per Department:</h1>
+<svg width="960" height="570"></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+    var models = [];
+    var parkRatingData = []
+    var result = "";
+
+    const apiURL = "http://api.societree.me/api/parks";
+    fetch(apiURL)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (responseJson)
+    {
+      models = responseJson.objects;
+      let modelsList = models.map((res) => 
+      {
+        return({
+          objName : res.name,
+          rating: res.rating
+        });
+      });
+
+      for(let model of modelsList)
+      {
+          if(parkRatingData[model.rating] === undefined)
+          {
+            parkRatingData[model.rating] = 1;
+          }
+          else
+          {
+            parkRatingData[model.rating] = parkRatingData[model.rating] + 1;
+          }
+      }
+  
+      ratings = [];
+      counts = [];
+      for(var key in parkRatingData)
+      {
+          var value = parkRatingData[key];
+          ratings.push(key);
+          counts.push(value);
+      }
+
+
+    var svg = d3.select("svg");
+    svg.selectAll("circle")
+    .data(counts)
+    .enter().append("circle")
+    .style('fill', '#FF6F00')
+    .attr("cy", 90)
+    .attr("cx", function(d, i) { return i * 150 + 30; })
+    .attr("r", function(d) { return Math.sqrt(d * 100); })
+
+    svg.append("text")
+    .selectAll("tspan")
+    .data(ratings)
+    .enter().append("tspan")
+    .attr("x", function(d, i) { return 13 + i * 150; })
+    .attr("y", 200)
+    .style('fill', '#00D5FF')
+    .style("font-size", "34px")
+    .text(function(d){return d;})
+
+  });
+
+</script>

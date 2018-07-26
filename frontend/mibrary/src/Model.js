@@ -15,7 +15,7 @@ export class Model extends Component
         filterOptions : [],
         searchValue: "",
         currentPage : 1,
-        pageModelCount : 10,
+        pageModelCount : 5,
         sortMode: "Default"
     };
     this.handleClick = this.handleClick.bind(this);
@@ -27,8 +27,17 @@ export class Model extends Component
         this.Model();
   }
 
+  static splitQuery(queryText)
+  {
+    queryText = queryText.toLowerCase();
+    let queries = queryText.split(' ');
+    queries[queries.length] = queryText;
+    return queries;
+  }
+
   static highlightModelText(searchString, searchValue)
   {
+    if(searchString == null | searchValue == null) {return;}
     var n = searchString.toLowerCase().indexOf(searchValue.toLowerCase());
     if(searchValue.length < 1 | n < 0) {
       return searchString;
@@ -66,6 +75,7 @@ export function PaginatedContainer(props)
   const filterOptions = props.filterOptions;
   const extraContent = props.extraContent;
   const PriorityCompare = props.PriorityCompare;
+  const highlightDetailCard = props.highlightDetailCard;
 
   const indexOfLast = currentPage * pageModelCount;
   const indexOfFirst = indexOfLast - pageModelCount;
@@ -122,17 +132,21 @@ export function PaginatedContainer(props)
   const search = function () {
     if (queryText == "\n") {queryText = pageThis.state.searchValue;}
     if (sortMode == "\n") {sortMode = pageThis.state.sortMode;}
-    let newModels = models.filter((model) => {
+
+    let newModels = models;
+
+    if(document.getElementById('filter0Box') != null) {
+      const filterText0 = document.getElementById('filter0Box').value;
+      const filterText1 = document.getElementById('filter1Box').value;
+
+      newModels = models.filter((model) => {
+        return filterCondition(filterText0, filterText1, model);
+      });
+    }
+
+    newModels = newModels.filter((model) => {
       return searchCondition(queryText, model);
     });
-
-    console.log(models.length);
-    console.log(newModels.length);
-    console.log("sm:"+sortMode);
-    console.log(pageThis.state.sortMode);
-    console.log("q:"+queryText);
-    console.log(pageThis.state.searchValue);
-    console.log("---");
 
     newModels = SortModels(newModels);
 
@@ -145,25 +159,29 @@ export function PaginatedContainer(props)
     search();
   }
 
-  const onClickFilter = function()
-  {
-    const filterText0 = document.getElementById('filter0Box').value;
-    const filterText1 = document.getElementById('filter1Box').value;
-
-    let newModels = models.filter((model) => {
-      return filterCondition(filterText0, filterText1, model);
-    });
-
-    newModels = SortModels(newModels);
-
-    pageThis.setState({searchModels : newModels, currentPage : 1});
-  }
-
   const currentDisplayModels = pageThis.state.searchModels.slice(indexOfFirst, indexOfLast);
 
   const renderModels = currentDisplayModels.map((model, index) => {
     const link = props.getModelIdentifier(model);
-    return <a href={link}> <p key={index}>{highlightModelText(model, pageThis.state.searchValue)}</p></a>;
+    if(highlightDetailCard != null)
+    {
+      return (
+        <div key={index}>
+          <a href={link}>{highlightModelText(model, pageThis.state.searchValue)}</a>
+          <div class="card detailCard">
+            {highlightDetailCard(model, pageThis.state.searchValue)}
+          </div>
+        </div>
+      );
+    } else 
+    {
+      return (
+        <div key={index}>
+          <a href={link}>{highlightModelText(model, pageThis.state.searchValue)}</a>
+        </div>
+      );
+    }
+
   });
 
   const pageNumbers = [];
@@ -189,30 +207,34 @@ export function PaginatedContainer(props)
         <div className="filterDiv">
           <input id="filter1Box" name="filter1Box" type="text" placeholder={filterOptions[1]}></input>
         </div>
-        <input type="button" height="50" width="50" value="Filter" id="filterButton" onClick={onClickFilter}></input>
+        <input type="button" height="50" width="50" value="Filter" id="filterButton" onClick={search}></input>
       </div>
     );   
   }
 
   const content = (
-    <div>
-      {extraContent}
-      <div className="input-field">
-        <input id="SearchBox" type="text" placeholder="Search" value={props.searchValue} onChange={handleChange}></input>
+    <div class="container">
+      <div class="row">
+          {extraContent}
+        <div class="col">
+          <div className="input-field">
+            <input id="SearchBox" type="text" placeholder="Search" value={props.searchValue} onChange={handleChange}></input>
+          </div>
+          <div className="sort-box">
+            <input type="radio" name="sortOrder" value="Default" onClick={SortClicked}></input><label for="Default"> Default</label>
+            <br/>
+            <input type="radio" name="sortOrder" value="Ascending" onClick={SortClicked}></input><label for="Ascending"> Ascending</label>
+            <br/>
+            <input type="radio" name="sortOrder" value="Descending" onClick={SortClicked}></input><label for="Descending"> Descending</label>
+            <br/>
+          </div>
+          {filtersRender}
+          {renderModels}
+          <ul id="pageNumbers">
+            {renderPageNumbers}
+          </ul>
+        </div>
       </div>
-      <div className="sort-box">
-        <input type="radio" name="sortOrder" value="Default" onClick={SortClicked}></input><label for="Default"> Default</label>
-        <br/>
-        <input type="radio" name="sortOrder" value="Ascending" onClick={SortClicked}></input><label for="Ascending"> Ascending</label>
-        <br/>
-        <input type="radio" name="sortOrder" value="Descending" onClick={SortClicked}></input><label for="Descending"> Descending</label>
-        <br/>
-      </div>
-      {filtersRender}
-      {renderModels}
-      <ul id="pageNumbers">
-        {renderPageNumbers}
-      </ul>
     </div>
   );
 

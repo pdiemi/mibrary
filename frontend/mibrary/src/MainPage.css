@@ -107,7 +107,8 @@
         }
 
         .card{
-            padding: 20px; background-color: rgba(7, 113, 252, 0.3);
+            padding: 20px;
+            background-color: rgba(7, 113, 252, 0.3);
         }
 
         .card-title

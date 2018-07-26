@@ -16,9 +16,17 @@ class User extends Model
 
   searchCondition(queryText, model)
   {
-    if(queryText.length == 0 || model.username.toLowerCase().includes(queryText.toLowerCase()))
+    const queries = Model.splitQuery(queryText);
+
+    const searchWord = function(queryText, model)
+      {
+        return queryText.length == 0 | model.username.toLowerCase().includes(queryText)
+          | model.major.toLowerCase().includes(queryText);
+      }
+
+    for(let query of queries)
     {
-      return true;
+      if(searchWord(query, model)) {return true;}
     }
     return false;
   }
@@ -37,6 +45,17 @@ class User extends Model
     return (
       <div id={model.user_id}>
         {Model.highlightModelText(model.username, searchValue)}
+      </div>
+    );
+  }
+
+  highlightDetailCard(model, searchValue)
+  {
+    const id = model.user_id + "-card";
+
+    return (
+      <div id={id}>
+        Major: {Model.highlightModelText(model.major, searchValue)}
       </div>
     );
   }
@@ -132,6 +151,7 @@ class User extends Model
         handleClick={this.handleClick}
         searchCondition={this.searchCondition}
         highlightModelText={this.highlightUserText}
+        highlightDetailCard={this.highlightDetailCard}
         this={this}
       />
     );
