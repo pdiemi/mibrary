@@ -33,32 +33,32 @@ class BookDetail extends Component
         this.setState({model : responseJson});
       })
 
-      // const urlReviews = apiURL + "reviews/" + this.props.match.params.isbn;
-      // fetch(urlReviews)
-      // .then((response) => {
-      //   return response.json();
-      // })
-      // .then((responseJson) => {
-      //   this.setState({reviews : responseJson});
-      // })
+      const urlReviews = apiURL + "reviews/" + this.props.match.params.isbn;
+      fetch(urlReviews)
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseJson) => {
+        this.setState({reviews : responseJson});
+      })
 
-      // const urlOfferingUsers = apiURL + "offered-book/" + this.props.match.params.isbn;
-      // fetch(urlOfferingUsers)
-      // .then((response) => {
-      //   return response.json();
-      // })
-      // .then((responseJson) => {
-      //   this.setState({offeringUsers : responseJson});
-      // })
+      const urlOfferingUsers = apiURL + "offered-book/" + this.props.match.params.isbn;
+      fetch(urlOfferingUsers)
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseJson) => {
+        this.setState({offeringUsers : responseJson});
+      })
 
-      // const urlRequestingUsers = apiURL + "requested-book/" + this.props.match.params.isbn;
-      // fetch(urlRequestingUsers)
-      // .then((response) => {
-      //   return response.json();
-      // })
-      // .then((responseJson) => {
-      //   this.setState({requestingUsers : responseJson});
-      // })
+      const urlRequestingUsers = apiURL + "requested-book/" + this.props.match.params.isbn;
+      fetch(urlRequestingUsers)
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseJson) => {
+        this.setState({requestingUsers : responseJson});
+      })
   }
 
 
