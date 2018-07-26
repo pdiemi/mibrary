@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+<h1>Trees By Type</h1>
 <style>
-
+.h1{
+    justify-content: center;
+}
 .arc text {
   text-anchor: middle;
 }
@@ -32,8 +35,8 @@ var path = d3.arc()
     .innerRadius(0);
 
 var label = d3.arc()
-    .outerRadius(radius - 70)
-    .innerRadius(radius - 70);
+    .outerRadius(radius - 100)
+    .innerRadius(radius - 100);
 
 d3.csv("leafdata.csv", function(d) {
   d.count = +d.count;
@@ -53,8 +56,10 @@ d3.csv("leafdata.csv", function(d) {
   arc.append("text")
       .attr("transform", function(d) { return "translate(" + label.centroid(d) + ")"; })
       .attr("dy", "0.10em")
-      .style("font-size", "18px")
+      .style("font-size", "24px")
+      .style("font-weight","bold")
       .text(function(d) { return d.data.type + " " + d.data.count; });
+
 });
 
 </script>
