@@ -1,7 +1,7 @@
-id,count
-lu,23
-de,7
-ph,33
-aa,0
-xe,27
-au,5
+id,commits,issues
+lu,23,0
+de,7,0
+ph,33,0
+aa,0,0
+xe,27,20
+au,5,0

@@ -25,13 +25,13 @@ var g = svg.append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 d3.csv("gitcommit.csv", function(d) {
-  d.count = +d.count;
+  d.commits = +d.commits;
   return d;
 }, function(error, data) {
   if (error) throw error;
 
   x.domain(data.map(function(d) { return d.id; }));
-  y.domain([0, d3.max(data, function(d) { return d.count; })]);
+  y.domain([0, d3.max(data, function(d) { return d.commits; })]);
 
   g.append("g")
       .attr("class", "axis axis--x")
@@ -43,9 +43,9 @@ d3.csv("gitcommit.csv", function(d) {
     .enter().append("rect")
       .attr("class", "bar")
       .attr("x", function(d) { return x(d.id); })
-      .attr("y", function(d) { return y(d.count); })
+      .attr("y", function(d) { return y(d.commits); })
       .attr("width", x.bandwidth())
-      .attr("height", function(d) { return height - y(d.count); });
+      .attr("height", function(d) { return height - y(d.commits); });
 });
 
 
