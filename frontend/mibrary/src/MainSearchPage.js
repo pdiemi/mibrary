@@ -52,6 +52,33 @@ class MainSearchPage extends Model
     return true;
   }
 
+  PriorityCompare(queryText, a, b)
+  {
+    if(queryText.length == 0)
+    {
+      return 0;
+    }
+
+    queryText = queryText.toLowerCase();
+    const aTitleIndex = a.objName.toLowerCase().indexOf(queryText);
+    const bTitleIndex = b.objName.toLowerCase().indexOf(queryText);
+    if(aTitleIndex == 0) {
+      return -1;
+    } else if(bTitleIndex == 0) {
+      return 1;
+    } else if (aTitleIndex > 1 && a.objName[aTitleIndex - 1] == ' ') {
+      return -1;
+    } else if (bTitleIndex > 1 && b.objName[bTitleIndex - 1] == ' ') {
+      return 1;
+    } else if (aTitleIndex > 0) {
+      return -1;
+    } else if (bTitleIndex > 0) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
   Model()
   {
 	  fetch(this.apiURL+'books')
@@ -221,6 +248,7 @@ class MainSearchPage extends Model
         models={modelsList}
         searchModels={searchModelsList}
         searchValue={searchValue}
+        PriorityCompare={this.PriorityCompare}
         currentPage={currentPage}
         modelsPerPage={pageModelCount}
         filterOptions={[]}
