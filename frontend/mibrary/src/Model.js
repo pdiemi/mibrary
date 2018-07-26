@@ -216,7 +216,7 @@ export function PaginatedContainer(props)
     <div class="container">
       <div class="row">
           {extraContent}
-        <div class="col">
+        <div class="col" id="searchable-content">
           <div className="input-field">
             <input id="SearchBox" type="text" placeholder="Search" value={props.searchValue} onChange={handleChange}></input>
           </div>

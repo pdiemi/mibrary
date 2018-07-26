@@ -24,6 +24,7 @@ class UserDetail extends Component
 
   Model()
   {
+    console.log(this.props);
     const url = apiURL + "user/" + this.props.match.params.user_id;
     fetch(url)
       .then((response) => {
@@ -33,7 +34,7 @@ class UserDetail extends Component
         this.setState({model : responseJson});
       })
 
-      const urlReviews = apiURL + "reviews/" + this.props.match.params.username;
+      const urlReviews = apiURL + "reviews/" + this.props.match.params.user_id;
       fetch(urlReviews)
       .then((response) => {
         return response.json();
@@ -43,17 +44,19 @@ class UserDetail extends Component
         this.setState({reviews : responseJson});
       })
 
-      const urlOfferingUsers = apiURL + "offered-book/" + this.props.match.params.username;
+      const urlOfferingUsers = apiURL + "offered-book/username/" + this.props.match.params.user_id;
+      console.log(urlOfferingUsers);
       fetch(urlOfferingUsers)
       .then((response) => {
         return response.json();
       })
       .catch((error) => {})
       .then((responseJson) => {
+        console.log(responseJson.length);
         this.setState({offeredBooks : responseJson});
       })
 
-      const urlRequestingUsers = apiURL + "requested-book/" + this.props.match.params.username;
+      const urlRequestingUsers = apiURL + "requested-book/username/" + this.props.match.params.user_id;
       fetch(urlRequestingUsers)
       .then((response) => {
         return response.json();
