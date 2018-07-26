@@ -32,9 +32,14 @@ class MainSearchPage extends Model
   highlightText(model, searchValue)
   {
     if(model.objName == null) {return;}
+    let prefix = "";
+    if(model.isbn != null) {prefix = "Book: ";}
+    else if(model.username != null) {prefix = "User: ";}
+    else if(model.course_id != null) {prefix = "Course: ";}
     return (
       <div id={model.objName}>
-        {Model.highlightModelText(model.objName, searchValue)}
+        {prefix}{Model.highlightModelText(model.objName, searchValue)}
+        <br/>
       </div>
     );
   }
