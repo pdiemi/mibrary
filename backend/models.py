@@ -176,7 +176,7 @@ class Request(db.Model):
     date = db.Column(Date, nullable=True)
     book_id = db.Column(db.String(10), ForeignKey('books.isbn'), 
                         primary_key=True, nullable=False)
-    user_id = db.Column(db.Integer, ForeignKey('users.user_id'), 
+    username = db.Column(db.Integer, ForeignKey('users.user_id'), 
                         primary_key=True, nullable=False)
     meeting_id = db.Column(db.Integer, ForeignKey('meetings.meeting_id'), 
                             nullable=False, index=True)
@@ -196,7 +196,7 @@ class Offer(db.Model):
     date = db.Column(Date, nullable=True) 
     book_id = db.Column(db.String(10), ForeignKey('books.isbn'), 
                         primary_key=True, nullable=False)
-    user_id = db.Column(db.Integer, ForeignKey('users.user_id'), 
+    username = db.Column(db.String, ForeignKey('users.username'), 
                         primary_key=True, nullable=False)
     meeting_id = db.Column(db.Integer, ForeignKey('meetings.meeting_id'), 
                             nullable=False, index=True)
@@ -216,7 +216,7 @@ class Report(db.Model):
     date = db.Column(Date, nullable=True) 
     book_id = db.Column(db.String(10), ForeignKey('books.isbn'), 
                         primary_key=True, nullable=False)
-    user_id = db.Column(db.Integer, ForeignKey('users.user_id'), 
+    username = db.Column(db.String, ForeignKey('users.user_id'), 
                         primary_key=True, nullable=False)
     
     book_report = db.relationship("Book", back_populates="report")

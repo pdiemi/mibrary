@@ -66,7 +66,7 @@ def user_detail_major(user_major):
     return users_schema.jsonify(user)
 
 # endpoint to create new user
-@app.route("/user/create-user", methods=["POST"])
+@app.route("/user/create-user", methods=["GET","POST"])
 def add_user():
     username = request.json['username']
     password = request.json['password']
@@ -115,7 +115,7 @@ def offer_detail_user(user_name):
     return offers_schema.jsonify(offer)
 
 # endpoint to add a new offer
-@app.route("/offered-book/add-offer", methods=["POST"])
+@app.route("/offered-book/add-offer", methods=["GET", "POST"])
 def add_offer():
     date = request.json['date']
     username = request.json['username']
@@ -172,7 +172,7 @@ def request_detail_user(user_name):
     return requests_schema.jsonify(my_request)
 
 # endpoint to add a new request
-@app.route("/requested-book/add-request", methods=["POST"])
+@app.route("/requested-book/add-request", methods=["GET", "POST"])
 def add_request():
     date = request.json['date']
     username = request.json['username']
@@ -184,6 +184,17 @@ def add_request():
     db.session.commit()
 
     return jsonify(new_request)
+
+
+# endpoint to delete an reqyest given its isbn and username
+@app.route("/requested-book/delete/<username>/<isbn>", methods=["GET", "DELETE"])
+def request_delete(username, isbn):
+    #offers = Offer.query.filter_by(user_id = user_id).all()
+    delete_request = Request.query.filter_by(username = username, book_id = isbn).first()
+    db.session.delete(delete_request)
+    db.session.commit()
+
+    return request_schema.jsonify(delete_request) 
 
 
 # --------------------------------------
@@ -220,7 +231,7 @@ def report_detail_user(user_name):
     return reports_schema.jsonify(report)
 
 # endpoint to add a new report
-@app.route("/reported-book/username/add-report", methods=["POST"])
+@app.route("/reported-book/username/add-report", methods=["GET", "POST"])
 def add_report():
     date = request.json['date']
     username = request.json['username']
@@ -232,6 +243,16 @@ def add_report():
     db.session.commit()
 
     return jsonify(new_report)
+
+# endpoint to delete a report given its isbn and username
+@app.route("/reported-book/delete/<username>/<isbn>", methods=["GET", "DELETE"])
+def report_delete(username, isbn):
+    #offers = Offer.query.filter_by(user_id = user_id).all()
+    delete_report = Report.query.filter_by(username = username, book_id = isbn).first()
+    db.session.delete(delete_report)
+    db.session.commit()
+
+    return report_schema.jsonify(delete_report) 
 
 
 # --------------------------------------
@@ -414,7 +435,7 @@ def book_detail_subject(subject):
     return books_schema.jsonify(book)
 
 # endpoint to add new book
-@app.route("/add-book", methods=["POST"])
+@app.route("/book/add-book", methods=["GET","POST"])
 def add_book():
 
     isbn = request.json['isbn']
