@@ -31,6 +31,7 @@ class MainSearchPage extends Model
 
   highlightText(model, searchValue)
   {
+    if(model.objName == null) {return;}
     return (
       <div id={model.objName}>
         {Model.highlightModelText(model.objName, searchValue)}
@@ -50,6 +51,33 @@ class MainSearchPage extends Model
   filterCondition(filter0, filter1, model)
   {
     return true;
+  }
+
+  PriorityCompare(queryText, a, b)
+  {
+    if(queryText.length == 0)
+    {
+      return 0;
+    }
+
+    queryText = queryText.toLowerCase();
+    const aTitleIndex = a.objName.toLowerCase().indexOf(queryText);
+    const bTitleIndex = b.objName.toLowerCase().indexOf(queryText);
+    if(aTitleIndex == 0) {
+      return -1;
+    } else if(bTitleIndex == 0) {
+      return 1;
+    } else if (aTitleIndex > 1 && a.objName[aTitleIndex - 1] == ' ') {
+      return -1;
+    } else if (bTitleIndex > 1 && b.objName[bTitleIndex - 1] == ' ') {
+      return 1;
+    } else if (aTitleIndex > 0) {
+      return -1;
+    } else if (bTitleIndex > 0) {
+      return 1;
+    } else {
+      return 0;
+    }
   }
 
   Model()
@@ -156,7 +184,7 @@ class MainSearchPage extends Model
           </div>
         );
         return({
-          objName : "Book: " + res.title,
+          objName : res.title,
           title : res.title,
           content : content,
           isbn : res.isbn,
@@ -176,7 +204,7 @@ class MainSearchPage extends Model
           </div>
         );
         return({
-          objName : "User: " + res.username,
+          objName : res.username,
           content : content,
           username : res.username,
           user_id : res.user_id,
@@ -192,7 +220,7 @@ class MainSearchPage extends Model
           </div>
         );
         return({
-          objName : "Course: " + res.course_name,
+          objName : res.course_name,
           content : content,
           course_name : res.course_name,
           course_id: res.course_id,
@@ -221,6 +249,7 @@ class MainSearchPage extends Model
         models={modelsList}
         searchModels={searchModelsList}
         searchValue={searchValue}
+        PriorityCompare={this.PriorityCompare}
         currentPage={currentPage}
         modelsPerPage={pageModelCount}
         filterOptions={[]}

@@ -21,8 +21,18 @@ class UnitTests(TestCase):
 		except TimeoutException as ex:
 			print("Timed out on finding topnav")
 			assert(False)
-		finally:
-			self.driver.quit()
+
+		def test_nav(self) :
+		self.driver.get("http://localhost:3000/")
+		try:
+			topnav = WebDriverWait(self.driver, 10).until(
+				EC.presence_of_element_located((By.CLASS_NAME, "topnav"))
+			)
+			links = topnav.find_elements_by_tag_name("a")
+			self.assertEquals(len(links), 5)
+		except TimeoutException as ex:
+			print("Timed out on finding topnav")
+			assert(False)
 
 if __name__ == '__main__':
     main()

@@ -41,6 +41,37 @@ class Book extends Model
     return false;
   }
 
+  PriorityCompare(queryText, a, b)
+  {
+    if(queryText.length == 0)
+    {
+      return 0;
+    }
+
+    queryText = queryText.toLowerCase();
+    const aTitleIndex = a.title.toLowerCase().indexOf(queryText);
+    const bTitleIndex = b.title.toLowerCase().indexOf(queryText);
+    if(aTitleIndex == 0) {
+      return -1;
+    } else if(bTitleIndex == 0) {
+      return 1;
+    } else if (a.isbn == queryText) {
+      return -1;
+    } else if (b.isbn == queryText) {
+      return 1;
+    } else if (aTitleIndex > 1 && a.title[aTitleIndex - 1] == ' ') {
+      return -1;
+    } else if (bTitleIndex > 1 && b.title[bTitleIndex - 1] == ' ') {
+      return 1;
+    } else if (aTitleIndex > 0) {
+      return -1;
+    } else if (bTitleIndex > 0) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
   Model()
   {
     console.log(this.apiURL+'books');
@@ -106,6 +137,7 @@ class Book extends Model
         models={modelsList}
         searchModels={searchModelsList}
         searchValue={searchValue}
+        PriorityCompare={this.PriorityCompare}
         currentPage={currentPage}
         modelsPerPage={pageModelCount}
         filterOptions={filterOptions}
