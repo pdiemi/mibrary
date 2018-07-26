@@ -128,6 +128,16 @@ def add_offer():
 
     return jsonify(new_offer)
 
+# endpoint to delete an offer given its isbn
+@app.route("/offered-book/delete/<username>/<isbn>", methods=["GET", "DELETE"])
+def offer_delete(username, isbn):
+    #offers = Offer.query.filter_by(user_id = user_id).all()
+    delete_offer = Offer.query.filter_by(username = username, book_id = isbn).first()
+    db.session.delete(delete_offer)
+    db.session.commit()
+
+    return offer_schema.jsonify(delete_offer) 
+
 # --------------------------------------
 # api for Request
 # --------------------------------------
