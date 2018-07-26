@@ -272,7 +272,7 @@ class About extends Component
                             <li>Mocha</li>
                             <li>unittest</li>
                             <li>Selenium</li>
-                            <li>PlantUML</li>
+                            <li>Visual Paradigm</li>
                         </ul>
                         <a href="https://gitlab.com/pdiemi/mibrary/blob/master/TechnicalReportPhase4.pdf">
                             <b>Checkout our documentation</b>

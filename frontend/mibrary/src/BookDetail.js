@@ -38,6 +38,7 @@ class BookDetail extends Component
       .then((response) => {
         return response.json();
       })
+      .catch((error) => {})
       .then((responseJson) => {
         this.setState({reviews : responseJson});
       })
@@ -47,6 +48,7 @@ class BookDetail extends Component
       .then((response) => {
         return response.json();
       })
+      .catch((error) => {})
       .then((responseJson) => {
         this.setState({offeringUsers : responseJson});
       })
@@ -56,6 +58,7 @@ class BookDetail extends Component
       .then((response) => {
         return response.json();
       })
+      .catch((error) => {})
       .then((responseJson) => {
         this.setState({requestingUsers : responseJson});
       })
@@ -66,41 +69,51 @@ class BookDetail extends Component
   {
     const { model, reviews, offeringUsers, requestingUsers } = this.state;
 
-    let reviewsList = reviews.map((res) => {
-      return({
-        date : res.date,
-        username: res.username,
-        content : res.content,
-      });
-    });
-    const renderReviews = reviewsList.map((model) => {
-      return (
-        <div id={model.username}>
-        <b>{model.username} {model.date}</b><br/>
-        <p>{model.content}</p>
-        </div>
-      );
-    });
+    var renderReviews = [];
+    var renderOffering = [];
+    var renderRequesting = [];
 
-    let offeringList = offeringUsers.map((res) => {
-      return({
-        username: res.username,
+    if(reviews != null) {
+      let reviewsList = reviews.map((res) => {
+        return({
+          date : res.date,
+          username: res.username,
+          content : res.content,
+        });
       });
-    });
-    const renderOffering = offeringList.map((model, index) => {
-      const link =  /user/ + model.userName;
-      return <a href={link}> <p key={index}>{model.userName}</p></a>;
-    });
+      renderReviews = reviewsList.map((model) => {
+        return (
+          <div id={model.username}>
+          <b>{model.username} {model.date}</b><br/>
+          <p>{model.content}</p>
+          </div>
+        );
+      });
+    }
 
-    let requestingList = requestingUsers.map((res) => {
-      return({
-        username: res.username,
+    if(offeringUsers != null) {
+      let offeringList = offeringUsers.map((res) => {
+        return({
+          username: res.username,
+        });
       });
-    });
-    const renderRequesting = requestingList.map((model, index) => {
-      const link =  /user/ + model.userName;
-      return <a href={link}> <p key={index}>{model.userName}</p></a>;
-    });
+      renderOffering = offeringList.map((model, index) => {
+        const link =  /user/ + model.userName;
+        return <a href={link}> <p key={index}>{model.userName}</p></a>;
+      });
+    }
+
+    if(requestingUsers != null) {
+      let requestingList = requestingUsers.map((res) => {
+        return({
+          username: res.username,
+        });
+      });
+      renderRequesting = requestingList.map((model, index) => {
+        const link =  /user/ + model.userName;
+        return <a href={link}> <p key={index}>{model.userName}</p></a>;
+      });
+    }
 
     const twitterShareLink = "https://twitter.com/share?url=http://www.mibrary.me/book/" + model.isbn + "&text=Look at this textbook!";
     const fbShareLink = "https://facebook.com/sharer/sharer.php?u=http://www.mibrary.me/book/" + model.isbn + "&t=Look at this textbook!";

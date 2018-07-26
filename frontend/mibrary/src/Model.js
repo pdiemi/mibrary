@@ -15,7 +15,8 @@ export class Model extends Component
         filterOptions : [],
         searchValue: "",
         currentPage : 1,
-        pageModelCount : 10
+        pageModelCount : 10,
+        sortMode: "Default"
     };
     this.handleClick = this.handleClick.bind(this);
     this.apiURL = apiURL;
@@ -32,15 +33,10 @@ export class Model extends Component
     if(searchValue.length < 1 | n < 0) {
       return searchString;
     }
-    console.log(n);
     var titleString = [];
     titleString[0] = searchString.substring(0, n);
     titleString[1] = searchString.substring(n, n+searchValue.length);
     titleString[2] = searchString.substring(n+searchValue.length);
-    console.log("------");
-    console.log(titleString[0]);
-    console.log(titleString[1]);
-    console.log(titleString[2]);
     return (
       <div>
         {titleString[0]}<b>{titleString[1]}</b>{titleString[2]}
@@ -69,50 +65,13 @@ export function PaginatedContainer(props)
   const filterCondition = props.filterCondition;
   const filterOptions = props.filterOptions;
   const extraContent = props.extraContent;
+  const PriorityCompare = props.PriorityCompare;
 
   const indexOfLast = currentPage * pageModelCount;
   const indexOfFirst = indexOfLast - pageModelCount;
 
-  // console.log(models);
-  const currentDisplayModels = searchModels.slice(indexOfFirst, indexOfLast);
-
-  const renderModels = currentDisplayModels.map((model, index) => {
-    const link = props.getModelIdentifier(model);
-    return <a href={link}> <p key={index}>{highlightModelText(model, pageThis.state.searchValue)}</p></a>;
-  });
-
-  const pageNumbers = [];
-  for(let i = 1; i <= Math.ceil(searchModels.length/pageModelCount); i++)
-  {
-    pageNumbers.push(i);
-  }
-
-  const renderPageNumbers = pageNumbers.map(number => 
-  {
-      return (<a href="#"><li key={number} id={number} onClick={props.handleClick}>{number}</li></a>);
-  });
-
-  const GetSortMode = function()
-  {
-    const query = document.querySelector('input[name=sortOrder]:checked')
-    var sortMode = "";
-    if(query !== null)
-    {
-      sortMode = query.value;
-    }
-    if(sortMode === "Ascending")
-    {
-      return 0;
-    }
-    else if(sortMode === "Descending")
-    {
-      return 1;
-    }
-    else
-    {
-      return 0;
-    }
-  }
+  var queryText = "\n";
+  var sortMode = "\n";
 
   const AscendingCompare = function(a, b)
   {
@@ -132,31 +91,48 @@ export function PaginatedContainer(props)
       return 0;
   }
 
+  const PriorityCompareFunc = function(a, b)
+  {
+      return PriorityCompare(queryText, a, b);
+  }
+
   const SortClicked = function(evt)
   {
+    pageThis.setState({sortMode : evt.target.value});
+    sortMode = evt.target.value;
     search();
   }
 
-  const SortModels = function(models)
+  const SortModels = function(theseModels)
   {
-    const sortOrder = GetSortMode();
-    var newModels = [];
-    if(sortOrder === 0)
+    if(sortMode == 'Ascending')
     {
-      newModels = models.sort(AscendingCompare);
+      return theseModels.sort(AscendingCompare);
     }
-    else if(sortOrder === 1)
+    else if(sortMode == 'Descending')
     {
-      newModels = models.sort(DescendingCompare);
+      return theseModels.sort(DescendingCompare);
     }
-    return newModels;
+    else
+    {
+      return theseModels.sort(PriorityCompareFunc);
+    }
   }
 
   const search = function () {
-
+    if (queryText == "\n") {queryText = pageThis.state.searchValue;}
+    if (sortMode == "\n") {sortMode = pageThis.state.sortMode;}
     let newModels = models.filter((model) => {
-      return searchCondition(pageThis.state.searchValue, model);
+      return searchCondition(queryText, model);
     });
+
+    console.log(models.length);
+    console.log(newModels.length);
+    console.log("sm:"+sortMode);
+    console.log(pageThis.state.sortMode);
+    console.log("q:"+queryText);
+    console.log(pageThis.state.searchValue);
+    console.log("---");
 
     newModels = SortModels(newModels);
 
@@ -165,6 +141,7 @@ export function PaginatedContainer(props)
 
   const handleChange = function (evt) {
     pageThis.setState({searchValue : evt.target.value});
+    queryText = evt.target.value;
     search();
   }
 
@@ -181,6 +158,24 @@ export function PaginatedContainer(props)
 
     pageThis.setState({searchModels : newModels, currentPage : 1});
   }
+
+  const currentDisplayModels = pageThis.state.searchModels.slice(indexOfFirst, indexOfLast);
+
+  const renderModels = currentDisplayModels.map((model, index) => {
+    const link = props.getModelIdentifier(model);
+    return <a href={link}> <p key={index}>{highlightModelText(model, pageThis.state.searchValue)}</p></a>;
+  });
+
+  const pageNumbers = [];
+  for(let i = 1; i <= Math.ceil(pageThis.state.searchModels.length/pageModelCount); i++)
+  {
+    pageNumbers.push(i);
+  }
+
+  const renderPageNumbers = pageNumbers.map(number => 
+  {
+      return (<a href="#"><li key={number} id={number} onClick={props.handleClick}>{number}</li></a>);
+  });
 
   var filtersRender = (<div></div>);
   if(filterOptions.length > 0)
@@ -206,6 +201,8 @@ export function PaginatedContainer(props)
         <input id="SearchBox" type="text" placeholder="Search" value={props.searchValue} onChange={handleChange}></input>
       </div>
       <div className="sort-box">
+        <input type="radio" name="sortOrder" value="Default" onClick={SortClicked}></input><label for="Default"> Default</label>
+        <br/>
         <input type="radio" name="sortOrder" value="Ascending" onClick={SortClicked}></input><label for="Ascending"> Ascending</label>
         <br/>
         <input type="radio" name="sortOrder" value="Descending" onClick={SortClicked}></input><label for="Descending"> Descending</label>

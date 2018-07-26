@@ -38,6 +38,7 @@ class UserDetail extends Component
       .then((response) => {
         return response.json();
       })
+      .catch((error) => {})
       .then((responseJson) => {
         this.setState({reviews : responseJson});
       })
@@ -47,6 +48,7 @@ class UserDetail extends Component
       .then((response) => {
         return response.json();
       })
+      .catch((error) => {})
       .then((responseJson) => {
         this.setState({offeredBooks : responseJson});
       })
@@ -56,6 +58,7 @@ class UserDetail extends Component
       .then((response) => {
         return response.json();
       })
+      .catch((error) => {})
       .then((responseJson) => {
         this.setState({requestedBooks : responseJson});
       })
@@ -66,40 +69,50 @@ class UserDetail extends Component
   {
     const { model, reviews, offeredBooks, requestedBooks } = this.state;
 
-    let reviewsList = reviews.map((res) => {
-      return({
-        date : res.date,
-        content : res.content,
-      });
-    });
-    const renderReviews = reviewsList.map((model) => {
-      return (
-        <div id={model.username}>
-        <b>{model.date}</b><br/>
-        <p>{model.content}</p>
-        </div>
-      );
-    });
+    var renderReviews = [];
+    var renderOffering = [];
+    var renderRequesting = [];
 
-    let offeringList = offeredBooks.map((res) => {
-      return({
-        isbn: res.book_id,
+    if(reviews != null) {
+      let reviewsList = reviews.map((res) => {
+        return({
+          date : res.date,
+          content : res.content,
+        });
       });
-    });
-    const renderOffering = offeringList.map((model, index) => {
-      const link =  /book/ + model.isbn;
-      return <a href={link}> <p key={index}>{model.isbn}</p></a>;
-    });
+      renderReviews = reviewsList.map((model) => {
+        return (
+          <div id={model.username}>
+          <b>{model.date}</b><br/>
+          <p>{model.content}</p>
+          </div>
+        );
+      });
+    }
 
-    let requestingList = requestedBooks.map((res) => {
-      return({
-        isbn: res.book_id,
+    if(offeredBooks != null) {
+      let offeringList = offeredBooks.map((res) => {
+        return({
+          isbn: res.book_id,
+        });
       });
-    });
-    const renderRequesting = requestingList.map((model, index) => {
-      const link =  /book/ + model.isbn;
-      return <a href={link}> <p key={index}>{model.isbn}</p></a>;
-    });
+      renderOffering = offeringList.map((model, index) => {
+        const link =  /book/ + model.isbn;
+        return <a href={link}> <p key={index}>{model.isbn}</p></a>;
+      });
+    }
+
+    if(requestedBooks != null) {
+      let requestingList = requestedBooks.map((res) => {
+        return({
+          isbn: res.book_id,
+        });
+      });
+      renderRequesting = requestingList.map((model, index) => {
+        const link =  /book/ + model.isbn;
+        return <a href={link}> <p key={index}>{model.isbn}</p></a>;
+      });
+    }
 
     var content = (
       <div name="page">
