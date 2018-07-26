@@ -27,6 +27,14 @@ export class Model extends Component
         this.Model();
   }
 
+  static splitQuery(queryText)
+  {
+    queryText = queryText.toLowerCase();
+    let queries = queryText.split(' ');
+    queries[queries.length] = queryText;
+    return queries;
+  }
+
   static highlightModelText(searchString, searchValue)
   {
     if(searchString == null | searchValue == null) {return;}
@@ -125,12 +133,16 @@ export function PaginatedContainer(props)
     if (queryText == "\n") {queryText = pageThis.state.searchValue;}
     if (sortMode == "\n") {sortMode = pageThis.state.sortMode;}
 
-    const filterText0 = document.getElementById('filter0Box').value;
-    const filterText1 = document.getElementById('filter1Box').value;
+    let newModels = models;
 
-    let newModels = models.filter((model) => {
-      return filterCondition(filterText0, filterText1, model);
-    });
+    if(document.getElementById('filter0Box') != null) {
+      const filterText0 = document.getElementById('filter0Box').value;
+      const filterText1 = document.getElementById('filter1Box').value;
+
+      newModels = models.filter((model) => {
+        return filterCondition(filterText0, filterText1, model);
+      });
+    }
 
     newModels = newModels.filter((model) => {
       return searchCondition(queryText, model);
@@ -151,14 +163,25 @@ export function PaginatedContainer(props)
 
   const renderModels = currentDisplayModels.map((model, index) => {
     const link = props.getModelIdentifier(model);
-    return (
-      <div key={index}>
-        <a href={link}>{highlightModelText(model, pageThis.state.searchValue)}</a>
-        <div class="card detailCard">
-          {highlightDetailCard(model, pageThis.state.searchValue)}
+    if(highlightDetailCard != null)
+    {
+      return (
+        <div key={index}>
+          <a href={link}>{highlightModelText(model, pageThis.state.searchValue)}</a>
+          <div class="card detailCard">
+            {highlightDetailCard(model, pageThis.state.searchValue)}
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else 
+    {
+      return (
+        <div key={index}>
+          <a href={link}>{highlightModelText(model, pageThis.state.searchValue)}</a>
+        </div>
+      );
+    }
+
   });
 
   const pageNumbers = [];
