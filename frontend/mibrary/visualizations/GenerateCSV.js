@@ -137,4 +137,50 @@ function LoadCourseData()
   return result;
 }
 
-LoadGitLabIssueData();
+function LoadTreeData()
+{
+    var models = [];
+    var treeTypeData = []
+    var result = "";
+
+    const apiURL = "http://api.societree.me/api/trees";
+    fetch(apiURL)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (responseJson)
+    {
+      models = responseJson.objects;
+      let modelsList = models.map((res) => 
+      {
+        return({
+          objName : res.name,
+          leaf_type: res.leaf_type
+        });
+      });
+
+      for(let model of modelsList)
+      {
+          if(treeTypeData[model.leaf_type] === undefined)
+          {
+            treeTypeData[model.leaf_type] = 1;
+          }
+          else
+          {
+            treeTypeData[model.leaf_type] = treeTypeData[model.leaf_type] + 1;
+          }
+      }
+  
+      for(var key in treeTypeData)
+      {
+          var value = treeTypeData[key];
+          result += (key + "," + value + "\n");
+      }
+
+      console.log(result);
+      return result;
+    });
+    return result;
+}
+
+LoadTreeData();
