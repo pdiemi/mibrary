@@ -106,13 +106,13 @@ def get_offer():
 @api_page.route("/offered-book/<isbn>", methods=["GET"])
 def offer_detail_isbn(isbn):
     offer = Offer.query.filter_by(book_id = isbn).all()
-    return offer_schema.jsonify(offer)
+    return offers_schema.jsonify(offer)
 
 # endpoint to get offer detail by username
 @api_page.route("/offered-book/<user_name>", methods=["GET"])
 def offer_detail_user(user_name):
     offer = Offer.query.filter_by(username = user_name).all()
-    return offer_schema.jsonify(offer)
+    return offers_schema.jsonify(offer)
 
 # endpoint to add a new offer
 @app.route("/offered-book/add-offer", methods=["POST"])
@@ -153,13 +153,13 @@ def get_request():
 @api_page.route("/requested-book/<isbn>", methods=["GET"])
 def request_detail_isbn(isbn):
     my_request = Request.query.filter_by(book_id = isbn).all()
-    return request_schema.jsonify(my_request)
+    return requests_schema.jsonify(my_request)
 
 # endpoint to get request detail by username
 @api_page.route("/requested-book/<user_name>", methods=["GET"])
 def request_detail_user(user_name):
     my_request = Request.query.filter_by(username = user_name).all()
-    return request_schema.jsonify(my_request)
+    return requests_schema.jsonify(my_request)
 
 # endpoint to add a new request
 @app.route("/requested-book/add-request", methods=["POST"])
@@ -201,13 +201,13 @@ def get_report():
 @api_page.route("/reported-book/<book_id>", methods=["GET"])
 def report_detail_isbn(isbn):
     report = Report.query.filter_by(book_id = isbn).all()
-    return report_schema.jsonify(report)
+    return reports_schema.jsonify(report)
 
 # endpoint to get report detail by username
 @api_page.route("/reported-book/<user_name>", methods=["GET"])
 def report_detail_user(user_name):
     report = Report.query.filter_by(username = user_name).all()
-    return report_schema.jsonify(report)
+    return reports_schema.jsonify(report)
 
 # endpoint to add a new report
 @app.route("/reported-book/add-report", methods=["POST"])
@@ -259,7 +259,7 @@ def course_detail(coursenumber):
 @api_page.route("/course/department/<department>", methods=["GET"])
 def get_course_department(department):
     course = Course.query.filter_by(department =department).all()
-    return user_schema.jsonify(course)
+    return courses_schema.jsonify(course)
 
 # --------------------------------------
 # api for Review 
@@ -279,13 +279,13 @@ reviews_schema = ReviewSchema(many=True)
 @api_page.route("/reviews/<isbn>", methods=["GET"])
 def review_detail_isbn(isbn):
     review = Review.query.filter_by(book_id = isbn).all()
-    return review_schema.jsonify(review)
+    return reviews_schema.jsonify(review)
 
 # endpoint to get review detail by username
 @api_page.route("/reviews/<user_name>", methods=["GET"])
 def review_detail_user(user_name):
     review = Review.query.filter_by(username = user_name).all()
-    return review_schema.jsonify(review)
+    return reviews_schema.jsonify(review)
 
 # --------------------------------------
 # api for Meeting
@@ -332,7 +332,7 @@ def get_work():
 @api_page.route("/work/<isbn>", methods=["GET"])
 def work_detail_isbn(isbn):
     work = Work.query.filter_by(book_id = isbn).all()
-    return work_schema.jsonify(work)
+    return works_schema.jsonify(work)
 
 
 # --------------------------------------
@@ -388,20 +388,20 @@ def book_detail_isbn(isbn):
 @api_page.route("/book/title/<title>", methods=["GET"])
 def book_detail_title(title):
     book = Book.query.filter_by(title = title).all()
-    return book_schema.jsonify(book)
+    return books_schema.jsonify(book)
 
 # endpoint to get book detail by author
 #   or by the first author if there are many
 @api_page.route("/book/author/<author>", methods=["GET"])
 def book_detail_author(author):
     book = Book.query.filter_by(authors = author).all()
-    return book_schema.jsonify(book)
+    return books_schema.jsonify(book)
 
 # endpoint to get book detail by subject
 @api_page.route("/book/subject/<subject>", methods=["GET"])
 def book_detail_subject(subject):
     book = Book.query.filter_by(subjects = subject).all()
-    return book_schema.jsonify(book)
+    return books_schema.jsonify(book)
 
 # endpoint to add new book
 @app.route("/add-book", methods=["POST"])
@@ -435,7 +435,7 @@ def book_delete(isbn):
     db.session.delete(book)
     db.session.commit()
 
-    return user_schema.jsonify(book)   
+    return book_schema.jsonify(book)   
 
 # endpoint to sort books by title
 @api_page.route("/books/sorted-title", methods=["GET"])
