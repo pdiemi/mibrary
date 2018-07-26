@@ -69,10 +69,10 @@ def user_detail_major(user_major):
 @app.route("/user/create-user", methods=["GET","POST"])
 def add_user():
     username = request.json['username']
-    password = request.json['password']
+    #password = request.json['password']
+    password = "NULL"
     email = request.json['email']  
     major = request.json['major']
-    #major = request.json['major']
     
     new_user = User(username, password, email, major)
 
