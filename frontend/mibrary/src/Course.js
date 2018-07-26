@@ -16,9 +16,18 @@ class Course extends Model
 
   searchCondition(queryText, model)
   {
-    if(queryText.length == 0 || model.course_name.toLowerCase().includes(queryText.toLowerCase()))
+    const queries = Model.splitQuery(queryText);
+
+    const searchWord = function(queryText, model)
+      {
+        return queryText.length == 0 || model.course_name.toLowerCase().includes(queryText)
+        | model.department.toLowerCase().includes(queryText)
+        | model.course_id == queryText;
+      }
+
+    for(let query of queries)
     {
-      return true;
+      if(searchWord(query, model)) {return true;}
     }
     return false;
   }
@@ -41,6 +50,18 @@ class Course extends Model
     );
   }
 
+  highlightDetailCard(model, searchValue)
+  {
+    const id = model.course_id + "-card";
+
+    return (
+      <div id={id}>
+        Department: {Model.highlightModelText(model.department, searchValue)}<br/>
+        Course number: {model.course_number}
+      </div>
+    );
+  }
+
   PriorityCompare(queryText, a, b)
   {
     if(queryText.length == 0)
@@ -51,13 +72,23 @@ class Course extends Model
     queryText = queryText.toLowerCase();
     const aTitleIndex = a.course_name.toLowerCase().indexOf(queryText);
     const bTitleIndex = b.course_name.toLowerCase().indexOf(queryText);
+    const aDeptIndex = a.department.toLowerCase().indexOf(queryText);
+    const bDeptIndex = b.department.toLowerCase().indexOf(queryText);
     if(aTitleIndex == 0) {
-      return -1;
+      return -2;
     } else if(bTitleIndex == 0) {
-      return 1;
+      return 2;
     } else if (aTitleIndex > 1 && a.course_name[aTitleIndex - 1] == ' ') {
-      return -1;
+      return -2;
+    } else if (a.course_number == queryText) {
+      return -2;
+    } else if (b.course_number == queryText) {
+      return 2;
     } else if (bTitleIndex > 1 && b.course_name[bTitleIndex - 1] == ' ') {
+      return 2;
+    } else if (aDeptIndex > 1 && a.course_name[aDeptIndex - 1] == ' ') {
+      return -1;
+    } else if (bDeptIndex > 1 && b.course_name[bDeptIndex - 1] == ' ') {
       return 1;
     } else if (aTitleIndex > 0) {
       return -1;
@@ -132,6 +163,7 @@ class Course extends Model
         handleClick={this.handleClick}
         searchCondition={this.searchCondition}
         highlightModelText={this.highlightCourseText}
+        highlightDetailCard={this.highlightDetailCard}
         this={this}
       />
     );

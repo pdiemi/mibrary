@@ -16,21 +16,20 @@ class Book extends Model
 
   highlightBookText(model, searchValue)
   {
-    let queries = Model.splitQuery(searchValue);
-    var modelText = model.title;
-    for(let query in queries)
-    {
-      let q = Model.highlightModelText(model.title, query);
-      console.log(q);
-      if(q != model.title)
-      {
-        modelText = q;
-      }
-    }
+    // let queries = Model.splitQuery(searchValue);
+    // var modelText = model.title;
+    // for(let query in queries)
+    // {
+    //   let q = Model.highlightModelText(model.title, query);
+    //   if(q != model.title)
+    //   {
+    //     modelText = q;
+    //   }
+    // }
 
     return (
       <div id={model.isbn}>
-        {modelText}
+        {Model.highlightModelText(model.title, searchValue)}
       </div>
     );
   }
