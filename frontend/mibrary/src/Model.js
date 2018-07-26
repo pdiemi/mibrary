@@ -15,7 +15,7 @@ export class Model extends Component
         filterOptions : [],
         searchValue: "",
         currentPage : 1,
-        pageModelCount : 10,
+        pageModelCount : 7,
         sortMode: "Default"
     };
     this.handleClick = this.handleClick.bind(this);
@@ -66,6 +66,7 @@ export function PaginatedContainer(props)
   const filterOptions = props.filterOptions;
   const extraContent = props.extraContent;
   const PriorityCompare = props.PriorityCompare;
+  const highlightDetailCard = props.highlightDetailCard;
 
   const indexOfLast = currentPage * pageModelCount;
   const indexOfFirst = indexOfLast - pageModelCount;
@@ -149,7 +150,14 @@ export function PaginatedContainer(props)
 
   const renderModels = currentDisplayModels.map((model, index) => {
     const link = props.getModelIdentifier(model);
-    return <a href={link}> <p key={index}>{highlightModelText(model, pageThis.state.searchValue)}</p></a>;
+    return (
+      <div key={index}>
+        <a href={link}>{highlightModelText(model, pageThis.state.searchValue)}</a>
+        <div class="card detailCard">
+          {highlightDetailCard(model, pageThis.state.searchValue)}
+        </div>
+      </div>
+    );
   });
 
   const pageNumbers = [];

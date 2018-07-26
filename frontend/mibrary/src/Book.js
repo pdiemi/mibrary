@@ -23,6 +23,16 @@ class Book extends Model
     );
   }
 
+  highlightDetailCard(model, searchValue)
+  {
+    const id = model.isbn + "-card";
+    return (
+      <div id={id}>
+        Test card
+      </div>
+    );
+  }
+
   searchCondition(queryText, model)
   {
     if(queryText.length == 0 || model.title.toLowerCase().includes(queryText.toLowerCase()))
@@ -146,6 +156,7 @@ class Book extends Model
         filterCondition={this.filterCondition}
         searchCondition={this.searchCondition}
         highlightModelText={this.highlightBookText}
+        highlightDetailCard={this.highlightDetailCard}
         this={this}
       />
     );
