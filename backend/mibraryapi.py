@@ -299,7 +299,7 @@ def get_course_department(department):
 class ReviewSchema(ma.Schema):
     class Meta:
         # Fields to expose
-        fields = ('date', 'content', 'book_id', 'username')
+        fields = ('review_id', 'content', 'book_id', 'username')
 
 
 review_schema = ReviewSchema()

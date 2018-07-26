@@ -140,10 +140,10 @@ class Review(db.Model):
     review_id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
     content = db.Column(db.String(1000), nullable=False)
     book_id = db.Column(db.String(10), ForeignKey('books.isbn'), nullable=False, index=True)
-    user_id = db.Column(db.Integer, ForeignKey('users.user_id'), nullable=False, index=True)
+    username = db.Column(db.Integer, ForeignKey('users.user_id'), nullable=False, index=True)
     
     book = db.relationship("Book", backref="review_book", foreign_keys=[book_id])
-    user = db.relationship("User", backref="review_user", foreign_keys=[user_id])
+    user = db.relationship("User", backref="review_user", foreign_keys=[username])
 
 
 #---------- User ----------
