@@ -140,7 +140,7 @@ function LoadCourseData()
 function LoadTreeData()
 {
     var models = [];
-    var treeTypeData = []
+    var parkRatingData = []
     var result = "";
 
     const apiURL = "http://api.societree.me/api/trees";
@@ -161,19 +161,19 @@ function LoadTreeData()
 
       for(let model of modelsList)
       {
-          if(treeTypeData[model.leaf_type] === undefined)
+          if(parkRatingData[model.leaf_type] === undefined)
           {
-            treeTypeData[model.leaf_type] = 1;
+            parkRatingData[model.leaf_type] = 1;
           }
           else
           {
-            treeTypeData[model.leaf_type] = treeTypeData[model.leaf_type] + 1;
+            parkRatingData[model.leaf_type] = parkRatingData[model.leaf_type] + 1;
           }
       }
   
-      for(var key in treeTypeData)
+      for(var key in parkRatingData)
       {
-          var value = treeTypeData[key];
+          var value = parkRatingData[key];
           result += (key + "," + value + "\n");
       }
 
@@ -183,4 +183,95 @@ function LoadTreeData()
     return result;
 }
 
-LoadTreeData();
+function LoadTreeRatings()
+{
+    var models = [];
+    var parkRatingData = []
+    var result = "";
+
+    const apiURL = "http://api.societree.me/api/trees";
+    fetch(apiURL)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (responseJson)
+    {
+      models = responseJson.objects;
+      let modelsList = models.map((res) => 
+      {
+        return({
+          objName : res.name,
+          water_needs: res.water_needs
+        });
+      });
+
+      for(let model of modelsList)
+      {
+          if(parkRatingData[model.water_needs] === undefined)
+          {
+            parkRatingData[model.water_needs] = 1;
+          }
+          else
+          {
+            parkRatingData[model.water_needs] = parkRatingData[model.water_needs] + 1;
+          }
+      }
+  
+      for(var key in parkRatingData)
+      {
+          var value = parkRatingData[key];
+          result += (key + "," + value + "\n");
+      }
+
+      console.log(result);
+      return result;
+    });
+    return result;
+}
+
+function LoadParkRatings()
+{
+    var models = [];
+    var parkRatingData = []
+    var result = "";
+
+    const apiURL = "http://api.societree.me/api/parks";
+    fetch(apiURL)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (responseJson)
+    {
+      models = responseJson.objects;
+      let modelsList = models.map((res) => 
+      {
+        return({
+          objName : res.name,
+          rating: res.rating
+        });
+      });
+
+      for(let model of modelsList)
+      {
+          if(parkRatingData[model.rating] === undefined)
+          {
+            parkRatingData[model.rating] = 1;
+          }
+          else
+          {
+            parkRatingData[model.rating] = parkRatingData[model.rating] + 1;
+          }
+      }
+  
+      for(var key in parkRatingData)
+      {
+          var value = parkRatingData[key];
+          result += (key + "," + value + "\n");
+      }
+
+      console.log(result);
+      return result;
+    });
+    return result;
+}
+LoadParkRatings();
