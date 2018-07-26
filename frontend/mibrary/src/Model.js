@@ -122,17 +122,17 @@ export function PaginatedContainer(props)
   const search = function () {
     if (queryText == "\n") {queryText = pageThis.state.searchValue;}
     if (sortMode == "\n") {sortMode = pageThis.state.sortMode;}
+
+    const filterText0 = document.getElementById('filter0Box').value;
+    const filterText1 = document.getElementById('filter1Box').value;
+
     let newModels = models.filter((model) => {
-      return searchCondition(queryText, model);
+      return filterCondition(filterText0, filterText1, model);
     });
 
-    console.log(models.length);
-    console.log(newModels.length);
-    console.log("sm:"+sortMode);
-    console.log(pageThis.state.sortMode);
-    console.log("q:"+queryText);
-    console.log(pageThis.state.searchValue);
-    console.log("---");
+    newModels = newModels.filter((model) => {
+      return searchCondition(queryText, model);
+    });
 
     newModels = SortModels(newModels);
 
@@ -143,20 +143,6 @@ export function PaginatedContainer(props)
     pageThis.setState({searchValue : evt.target.value});
     queryText = evt.target.value;
     search();
-  }
-
-  const onClickFilter = function()
-  {
-    const filterText0 = document.getElementById('filter0Box').value;
-    const filterText1 = document.getElementById('filter1Box').value;
-
-    let newModels = models.filter((model) => {
-      return filterCondition(filterText0, filterText1, model);
-    });
-
-    newModels = SortModels(newModels);
-
-    pageThis.setState({searchModels : newModels, currentPage : 1});
   }
 
   const currentDisplayModels = pageThis.state.searchModels.slice(indexOfFirst, indexOfLast);
@@ -189,7 +175,7 @@ export function PaginatedContainer(props)
         <div className="filterDiv">
           <input id="filter1Box" name="filter1Box" type="text" placeholder={filterOptions[1]}></input>
         </div>
-        <input type="button" height="50" width="50" value="Filter" id="filterButton" onClick={onClickFilter}></input>
+        <input type="button" height="50" width="50" value="Filter" id="filterButton" onClick={search}></input>
       </div>
     );   
   }
