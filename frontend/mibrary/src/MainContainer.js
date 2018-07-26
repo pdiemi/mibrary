@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Link } from 'react-router-dom';
 import './MainPage.css';
 
-export const apiURL = "http://ec2-18-191-216-158.us-east-2.compute.amazonaws.com:5000/api/";
+export const apiURL = "http://localhost:5000/";
 
 function Navbar() {
 	return (
