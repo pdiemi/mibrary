@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <style>
-
+.h1{
+    justify-content: center;
+}
 .arc text {
   text-anchor: middle;
 }
@@ -11,6 +13,7 @@
 }
 
 </style>
+<h1>Trees By Type</h1>
 <svg width="960" height="500"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
@@ -32,8 +35,8 @@ var path = d3.arc()
     .innerRadius(0);
 
 var label = d3.arc()
-    .outerRadius(radius - 40)
-    .innerRadius(radius - 40);
+    .outerRadius(radius - 100)
+    .innerRadius(radius - 100);
 
 d3.csv("leafdata.csv", function(d) {
   d.count = +d.count;
@@ -53,8 +56,10 @@ d3.csv("leafdata.csv", function(d) {
   arc.append("text")
       .attr("transform", function(d) { return "translate(" + label.centroid(d) + ")"; })
       .attr("dy", "0.10em")
-      .style("font-size", "18px")
+      .style("font-size", "24px")
+      .style("font-weight","bold")
       .text(function(d) { return d.data.type + " " + d.data.count; });
+
 });
 
 </script>

@@ -32,9 +32,14 @@ class MainSearchPage extends Model
   highlightText(model, searchValue)
   {
     if(model.objName == null) {return;}
+    let prefix = "";
+    if(model.isbn != null) {prefix = "Book: ";}
+    else if(model.username != null) {prefix = "User: ";}
+    else if(model.course_id != null) {prefix = "Course: ";}
     return (
       <div id={model.objName}>
-        {Model.highlightModelText(model.objName, searchValue)}
+        {prefix}{Model.highlightModelText(model.objName, searchValue)}
+        <br/>
       </div>
     );
   }
@@ -127,7 +132,7 @@ class MainSearchPage extends Model
           </div>
         );
         return({
-          objName : "Book: " +  res.title,
+          objName : res.title,
           title : res.title,
           content : content,
           isbn : res.isbn,
@@ -147,7 +152,7 @@ class MainSearchPage extends Model
           </div>
         );
         return({
-          objName : "User: " + res.username,
+          objName : res.username,
           content : content,
           username : res.username,
           user_id : res.user_id,
@@ -163,7 +168,7 @@ class MainSearchPage extends Model
           </div>
         );
         return({
-          objName : "Course: " + res.course_name,
+          objName : res.course_name,
           content : content,
           course_name : res.course_name,
           course_id: res.course_id,
@@ -184,7 +189,7 @@ class MainSearchPage extends Model
           </div>
         );
         return({
-          objName : "Book: " + res.title,
+          objName : res.title,
           title : res.title,
           content : content,
           isbn : res.isbn,
@@ -204,7 +209,7 @@ class MainSearchPage extends Model
           </div>
         );
         return({
-          objName : "User: " + res.username,
+          objName : res.username,
           content : content,
           username : res.username,
           user_id : res.user_id,
@@ -220,7 +225,7 @@ class MainSearchPage extends Model
           </div>
         );
         return({
-          objName : "Course: " + res.course_name,
+          objName : res.course_name,
           content : content,
           course_name : res.course_name,
           course_id: res.course_id,
@@ -232,16 +237,18 @@ class MainSearchPage extends Model
     });
 
     const card = (
-      <div class="card">
-              <a target="blank" href="index.html">
-                <img class="card-img" src="images/covers/cover1.jpg" alt="Card image"></img>
-                </a>
-                <div class="card-img-overlay">
-                    <h1 class="card-title">Choose one,
-                        <br />and go!
-                    </h1>
-                </div>
+      <div class="col">
+        <div class="card">
+                <a target="blank" href="index.html">
+                  <img class="card-img" src="images/covers/cover1.jpg" alt="Card image"></img>
+                  </a>
+                  <div class="card-img-overlay">
+                      <h1 class="card-title">Choose one,
+                          <br />and go!
+                      </h1>
+                  </div>
         </div>
+      </div>
     );
 
     return (

@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  /*text-align: center;*/
 }
 
 #ShareButton{
@@ -66,6 +66,11 @@
 
 .topnav .icon {
 	display: none;
+}
+
+.card {
+	padding: 5px;
+	margin-bottom: 10px;
 }
 
 /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */

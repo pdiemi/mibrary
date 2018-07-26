@@ -306,6 +306,22 @@ class About extends Component
                 </div>
             </div>
 
+              <div class="card" >
+                <h2>
+                    <b>Visualizations:</b>
+                </h2>
+                <div>
+                    <ul>
+                        <a href="visualizations/coursevis.html">Course Count by Department</a><br/>
+                        <a href="visualizations/gitlabvis.html">Git Lab Statistics by Developer</a><br/>
+                        <a href="visualizations/treemap.html">Book Count by Subject</a><br/>
+                        <a href="visualizations/societree_leaf_pie.html">Societree: Tree Count by Leaf Type</a><br/>
+                        <a href="visualizations/societree_ratings.html">Societree: Park Count by Ratings</a><br/>
+                        <a href="visualizations/societree_waterneeds.html">Societree: Tree Count by Water Needs</a><br/>
+                    </ul>
+                </div>
+            </div>
+
         </div>
 
     </div>
