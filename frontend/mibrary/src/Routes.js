@@ -8,7 +8,6 @@ import About from './About'
 import BookDetail from './BookDetail'
 import UserDetail from './UserDetail'
 import CourseDetail from './CourseDetail'
-import AddUser from './AddUser'
 
 const Routes = () => (
     <main>
@@ -20,7 +19,6 @@ const Routes = () => (
             <Route path='/about' component={About}/>
             <Route path='/book/:isbn' component={BookDetail}/>
             <Route path='/user/:user_id' component={UserDetail}/>
-            <Route path='/add-user' component={AddUser}/>
             <Route path='/course/:course_id' component={CourseDetail}/>
         </Switch>
     </main>

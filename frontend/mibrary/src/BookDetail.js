@@ -98,8 +98,8 @@ class BookDetail extends Component
         });
       });
       renderOffering = offeringList.map((model, index) => {
-        const link =  /user/ + model.username;
-        return <a href={link}> <p key={index}>{model.username}</p></a>;
+        const link =  /user/ + model.userName;
+        return <a href={link}> <p key={index}>{model.userName}</p></a>;
       });
     }
 
@@ -110,8 +110,8 @@ class BookDetail extends Component
         });
       });
       renderRequesting = requestingList.map((model, index) => {
-        const link =  /user/ + model.username;
-        return <a href={link}> <p key={index}>{model.username}</p></a>;
+        const link =  /user/ + model.userName;
+        return <a href={link}> <p key={index}>{model.userName}</p></a>;
       });
     }
 
@@ -131,16 +131,16 @@ class BookDetail extends Component
         <p>External URL: {model.url}</p>
       </div>
       <div className="card">
+      <h5>Reviews:</h5>
+        {renderReviews}
+      </div>
+      <div className="card">
       <h5>Users Requesting <i>{model.title}</i>:</h5>
         {renderRequesting}
       </div>
       <div className="card">
       <h5>Users Offering <i>{model.title}</i>:</h5>
         {renderOffering}
-      </div>
-      <div className="card">
-      <h5>Reviews:</h5>
-        {renderReviews}
       </div>
       <br/>
       <div className="card" id="ShareButton" >
