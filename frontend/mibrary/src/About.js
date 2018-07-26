@@ -272,7 +272,7 @@ class About extends Component
                             <li>Mocha</li>
                             <li>unittest</li>
                             <li>Selenium</li>
-                            <li>PlantUML</li>
+                            <li>Visual Paradigm</li>
                         </ul>
                         <a href="https://gitlab.com/pdiemi/mibrary/blob/master/TechnicalReportPhase4.pdf">
                             <b>Checkout our documentation</b>
@@ -303,6 +303,22 @@ class About extends Component
                     <a href="https://documenter.getpostman.com/view/4703640/RWEjqJFc">
                         <b>Checkout our Postman API</b>
                     </a>
+                </div>
+            </div>
+
+              <div class="card" >
+                <h2>
+                    <b>Visualizations:</b>
+                </h2>
+                <div>
+                    <ul>
+                        <a href="visualizations/coursevis.html">Course Count by Department</a><br/>
+                        <a href="visualizations/gitlabvis.html">Git Lab Statistics by Developer</a><br/>
+                        <a href="visualizations/treemap.html">Book Count by Subject</a><br/>
+                        <a href="visualizations/societree_leaf_pie.html">Societree: Tree Count by Leaf Type</a><br/>
+                        <a href="visualizations/societree_ratings.html">Societree: Park Count by Ratings</a><br/>
+                        <a href="visualizations/societree_waterneeds.html">Societree: Tree Count by Water Needs</a><br/>
+                    </ul>
                 </div>
             </div>
 
