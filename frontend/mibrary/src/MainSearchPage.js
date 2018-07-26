@@ -31,6 +31,7 @@ class MainSearchPage extends Model
 
   highlightText(model, searchValue)
   {
+    if(model.objName == null) {return;}
     return (
       <div id={model.objName}>
         {Model.highlightModelText(model.objName, searchValue)}
@@ -183,7 +184,7 @@ class MainSearchPage extends Model
           </div>
         );
         return({
-          objName : "Book: " + res.title,
+          objName : res.title,
           title : res.title,
           content : content,
           isbn : res.isbn,
@@ -203,7 +204,7 @@ class MainSearchPage extends Model
           </div>
         );
         return({
-          objName : "User: " + res.username,
+          objName : res.username,
           content : content,
           username : res.username,
           user_id : res.user_id,
@@ -219,7 +220,7 @@ class MainSearchPage extends Model
           </div>
         );
         return({
-          objName : "Course: " + res.course_name,
+          objName : res.course_name,
           content : content,
           course_name : res.course_name,
           course_id: res.course_id,

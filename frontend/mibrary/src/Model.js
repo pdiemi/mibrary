@@ -56,7 +56,6 @@ export class Model extends Component
 export function PaginatedContainer(props)
 {
   const models = props.models;
-  const searchModels = props.searchModels;
   var currentPage = props.currentPage;
   const pageModelCount = props.modelsPerPage;
   const searchCondition = props.searchCondition;
@@ -70,24 +69,8 @@ export function PaginatedContainer(props)
   const indexOfLast = currentPage * pageModelCount;
   const indexOfFirst = indexOfLast - pageModelCount;
 
-  // console.log(models);
-  const currentDisplayModels = searchModels.slice(indexOfFirst, indexOfLast);
-
-  const renderModels = currentDisplayModels.map((model, index) => {
-    const link = props.getModelIdentifier(model);
-    return <a href={link}> <p key={index}>{highlightModelText(model, pageThis.state.searchValue)}</p></a>;
-  });
-
-  const pageNumbers = [];
-  for(let i = 1; i <= Math.ceil(searchModels.length/pageModelCount); i++)
-  {
-    pageNumbers.push(i);
-  }
-
-  const renderPageNumbers = pageNumbers.map(number => 
-  {
-      return (<a href="#"><li key={number} id={number} onClick={props.handleClick}>{number}</li></a>);
-  });
+  var queryText = "\n";
+  var sortMode = "\n";
 
   const AscendingCompare = function(a, b)
   {
@@ -109,11 +92,8 @@ export function PaginatedContainer(props)
 
   const PriorityCompareFunc = function(a, b)
   {
-      return PriorityCompare(pageThis.state.searchValue, a, b);
+      return PriorityCompare(queryText, a, b);
   }
-
-  var sortMode = "";
-  var queryText = "";
 
   const SortClicked = function(evt)
   {
@@ -139,18 +119,19 @@ export function PaginatedContainer(props)
   }
 
   const search = function () {
-    if (queryText.length == 0) {queryText = pageThis.state.searchValue;}
-    if (sortMode.length == 0) {sortMode = pageThis.state.sortMode;}
+    if (queryText == "\n") {queryText = pageThis.state.searchValue;}
+    if (sortMode == "\n") {sortMode = pageThis.state.sortMode;}
     let newModels = models.filter((model) => {
       return searchCondition(queryText, model);
     });
 
-    // console.log(models.length);
-    // console.log(newModels.length);
-    // console.log("sm:"+sortMode);
-    // console.log(pageThis.state.sortMode);
-    // console.log(pageThis.state.searchValue);
-    // console.log("---");
+    console.log(models.length);
+    console.log(newModels.length);
+    console.log("sm:"+sortMode);
+    console.log(pageThis.state.sortMode);
+    console.log("q:"+queryText);
+    console.log(pageThis.state.searchValue);
+    console.log("---");
 
     newModels = SortModels(newModels);
 
@@ -176,6 +157,24 @@ export function PaginatedContainer(props)
 
     pageThis.setState({searchModels : newModels, currentPage : 1});
   }
+
+  const currentDisplayModels = pageThis.state.searchModels.slice(indexOfFirst, indexOfLast);
+
+  const renderModels = currentDisplayModels.map((model, index) => {
+    const link = props.getModelIdentifier(model);
+    return <a href={link}> <p key={index}>{highlightModelText(model, pageThis.state.searchValue)}</p></a>;
+  });
+
+  const pageNumbers = [];
+  for(let i = 1; i <= Math.ceil(pageThis.state.searchModels.length/pageModelCount); i++)
+  {
+    pageNumbers.push(i);
+  }
+
+  const renderPageNumbers = pageNumbers.map(number => 
+  {
+      return (<a href="#"><li key={number} id={number} onClick={props.handleClick}>{number}</li></a>);
+  });
 
   var filtersRender = (<div></div>);
   if(filterOptions.length > 0)
