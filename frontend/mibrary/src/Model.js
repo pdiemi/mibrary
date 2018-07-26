@@ -112,19 +112,23 @@ export function PaginatedContainer(props)
       return PriorityCompare(pageThis.state.searchValue, a, b);
   }
 
+  var sortMode = "";
+  var queryText = "";
+
   const SortClicked = function(evt)
   {
     pageThis.setState({sortMode : evt.target.value});
+    sortMode = evt.target.value;
     search();
   }
 
   const SortModels = function(theseModels)
   {
-    if(pageThis.state.sortMode == 'Ascending')
+    if(sortMode == 'Ascending')
     {
       return theseModels.sort(AscendingCompare);
     }
-    else if(pageThis.state.sortMode == 'Descending')
+    else if(sortMode == 'Descending')
     {
       return theseModels.sort(DescendingCompare);
     }
@@ -135,10 +139,18 @@ export function PaginatedContainer(props)
   }
 
   const search = function () {
-
+    if (queryText.length == 0) {queryText = pageThis.state.searchValue;}
+    if (sortMode.length == 0) {sortMode = pageThis.state.sortMode;}
     let newModels = models.filter((model) => {
-      return searchCondition(pageThis.state.searchValue, model);
+      return searchCondition(queryText, model);
     });
+
+    // console.log(models.length);
+    // console.log(newModels.length);
+    // console.log("sm:"+sortMode);
+    // console.log(pageThis.state.sortMode);
+    // console.log(pageThis.state.searchValue);
+    // console.log("---");
 
     newModels = SortModels(newModels);
 
@@ -147,6 +159,7 @@ export function PaginatedContainer(props)
 
   const handleChange = function (evt) {
     pageThis.setState({searchValue : evt.target.value});
+    queryText = evt.target.value;
     search();
   }
 
