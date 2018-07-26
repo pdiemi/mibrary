@@ -137,9 +137,16 @@ class User extends Model
       });
     });
 
+    const addUserButton = (
+      <form action="/add-user">
+          <input type="submit" value="Add User" />
+      </form>
+    );
+
     return (
       <PaginatedContainer
         models={modelsList}
+        extraContent={addUserButton}
         searchModels={searchModelsList}
         searchValue={searchValue}
         PriorityCompare={this.PriorityCompare}

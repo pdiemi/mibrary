@@ -15,17 +15,6 @@
   zoom:1;
   width:25px
 }
-
-/* Style the header */
-
-.header {
-	background-color: rgb(252, 220, 41);
-	padding-top: 20px;
-	text-align: center;
-	top: 0;
-	width: 100%;
-}
-
 /* The navbar container */
 
 .topnav {

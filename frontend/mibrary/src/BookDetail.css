@@ -2,23 +2,6 @@
     box-sizing: border-box;
 }
 
-/* Style the body */
-
-body {
-    /*background-image: url("../../images/backgrounds/bg1.jpg");*/
-    background-attachment: fixed;
-}
-
-/* Style the header */
-
-.header {
-    background-color: rgb(252, 220, 41);
-    padding-top: 20px;
-    text-align: center;
-    top: 0;
-    width: 100%;
-}
-
 /* The navbar container */
 
 .topnav {
@@ -89,16 +72,6 @@ body {
         display: block;
         text-align: left;
     }
-}
-
-/* Style the footer */
-
-.footer {
-    background-color: rgb(252, 220, 41);
-    text-align: center;
-    padding: 10px;
-    bottom: 0;
-    font-weight:bold;
 }
 
 .clearfix {
