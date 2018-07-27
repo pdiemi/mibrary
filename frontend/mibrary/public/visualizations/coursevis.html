@@ -5,8 +5,7 @@
 <script>
     var models = [];
     var departmentData = {};
-
-    const apiURL = "http://ec2-18-191-216-158.us-east-2.compute.amazonaws.com:5000/api/";
+    const apiURL = "http://ec2-18-191-216-158.us-east-2.compute.amazonaws.com:5000/";
     fetch(apiURL+'course/institution/3658')
     .then(function (response) {
       return response.json();
