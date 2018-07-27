@@ -219,7 +219,7 @@ def get_report():
     return jsonify(result.data)
 
 # endpoint to get report detail by book_id
-@api_page.route("/reported-book/<book_id>", methods=["GET"])
+@api_page.route("/reported-book/<isbn>", methods=["GET"])
 def report_detail_isbn(isbn):
     report = Report.query.filter_by(book_id = isbn).all()
     return reports_schema.jsonify(report)
