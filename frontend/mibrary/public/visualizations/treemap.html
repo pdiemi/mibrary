@@ -23,7 +23,7 @@ var treemap = d3.treemap()
     .round(true)
     .paddingInner(1);
 
-d3.json("http://ec2-18-191-216-158.us-east-2.compute.amazonaws.com/visualizations/booksubject.json", function(error, data) 
+d3.json("./booksubject.json", function(error, data) 
 {
   if (error) throw error;
 

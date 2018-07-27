@@ -24,7 +24,7 @@ var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
 var g = svg.append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.csv("http://ec2-18-191-216-158.us-east-2.compute.amazonaws.com/visualizations/gitcommit.csv", function(d) {
+d3.csv("./gitcommit.csv", function(d) {
   d.commits = +d.commits;
   return d;
 }, function(error, data) {

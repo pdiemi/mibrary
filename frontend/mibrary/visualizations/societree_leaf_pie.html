@@ -38,7 +38,7 @@ var label = d3.arc()
     .outerRadius(radius - 100)
     .innerRadius(radius - 100);
 
-d3.csv("leafdata.csv", function(d) {
+d3.csv("./leafdata.csv", function(d) {
   d.count = +d.count;
   return d;
 }, function(error, data) {
